@@ -1,0 +1,86 @@
+<html><head><title>R: Wrappers for calling C routines in the R-ggobi library.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for .GGobiCall {rggobi}"><tr><td>.GGobiCall {rggobi}</td><td align="right">R Documentation</td></tr></table>
+<h2>Wrappers for calling C routines in the R-ggobi library.</h2>
+
+
+<h3>Description</h3>
+
+
+
+
+<h3>Usage</h3>
+
+<pre>.GGobiCall(.name, ..., .gobi = ggobi_get(), .test=TRUE)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>.name</code></td>
+<td>
+the simple name of the C routine to be resolved</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+the arguments that to be passed to the <code><a href="../../base/html/Foreign.html">.C</a></code> or <code><a href="../../base/html/Foreign.html">.Call</a></code></td></tr>
+<tr valign="top"><td><code>.gobi</code></td>
+<td>
+the ggobi instance identifier that is to be passed to the C routine as its last argument</td></tr>
+<tr valign="top"><td><code>.test</code></td>
+<td>
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>.GGobiC</code> and <code>.GGobiCall</code> convert the name and then call
+their C invocation counterparts.
+</p>
+<p>
+These functions map the simple name of a C routine into the
+package-specific version of that name.  These allow use to hide the
+use a name textit{mangling} scheme of our choosing for the C level
+routines in the shared library/DLL that provides the glue between R
+and ggobi.  This is useful for avoiding name conflicts with other C
+code in R or other packages.  These are only of relevance to the
+developers of this package and those working with its C code.
+</p>
+<p>
+The mapping of the name to its corresponding C routine name
+is done in conjunction with the pre-processor macro
+<code>RS_GGOBI</code>. These  must be synchronized.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+the same result as the corresponding <code>.C</code> and <code>.Call</code></p>
+
+<h3>Author(s)</h3>
+
+<p>
+Hadley Wickham &lt;h.wickham@gmail.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="../../base/html/Foreign.html">.C</a></code>, <code><a href="../../base/html/Foreign.html">.Call</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre></pre>
+
+
+
+<hr><div align="center">[Package <em>rggobi</em> version 2.1.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

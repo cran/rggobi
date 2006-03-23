@@ -1,0 +1,28 @@
+ggobi.find.file            package:rggobi            R Documentation
+
+_F_i_n_d _G_G_o_b_i _f_i_l_e.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Finds a file stored somewhere in the ggobi installation.
+
+_U_s_a_g_e:
+
+     ggobi.find.file(..., check = F)
+
+_A_r_g_u_m_e_n_t_s:
+
+     ...: bits of the path to join together
+
+   check: 
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
+     ggobi.find.file("data","tips.xml")
+

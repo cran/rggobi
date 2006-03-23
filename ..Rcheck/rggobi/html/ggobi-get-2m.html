@@ -1,0 +1,64 @@
+<html><head><title>R: Get GGobi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for ggobi_get {rggobi}"><tr><td>ggobi_get {rggobi}</td><td align="right">R Documentation</td></tr></table>
+<h2>Get GGobi</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Returns a ggobi reference
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>ggobi_get(id = ggobi_count(), drop=TRUE)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>id</code></td>
+<td>
+numeric vector indicating which ggobi instances to retrieve.  Use default if none specified</td></tr>
+<tr valign="top"><td><code>drop</code></td>
+<td>
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This allows one to get a list of all the ggobi instances currently
+in existence in the R session.  Also, one can fetch particular instances.
+</p>
+<p>
+@arguments numeric vector indicating which ggobi instances to retrieve.  Use default if none specified
+@returns list of ggobi instances
+@keyword dynamic
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Hadley Wickham &lt;h.wickham@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>ggobi(mtcars)
+ggobi(Nile)
+ggobi_get(1)
+ggobi_get(1:2)</pre>
+
+
+
+<hr><div align="center">[Package <em>rggobi</em> version 2.1.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

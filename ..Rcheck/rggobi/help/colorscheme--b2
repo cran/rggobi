@@ -1,0 +1,38 @@
+"colorscheme<-"            package:rggobi            R Documentation
+
+_S_e_t _a_c_t_i_v_e _c_o_l_o_u_r _s_c_h_e_m_e.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Specify the active color scheme in a GGobi instance or the 
+     session options.
+
+_U_s_a_g_e:
+
+     "colorscheme<-"(x, value)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: GGobi object
+
+   value: colour scheme to make active
+
+_D_e_t_a_i_l_s:
+
+     This makes a particular color scheme active within a GGobi
+     instance.
+
+_V_a_l_u_e:
+
+     The name of the previously active color scheme.
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
+     g <- ggobi(mtcars)
+     colorscheme(g) <- "Set1 8"
+     colorscheme(g) <- 1
+

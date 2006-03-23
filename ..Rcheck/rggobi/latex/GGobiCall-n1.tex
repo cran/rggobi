@@ -1,0 +1,46 @@
+\HeaderA{.GGobiCall}{Wrappers for calling C routines in the R-ggobi library.}{.GGobiCall}
+\aliasA{.GGobiC}{.GGobiCall}{.GGobiC}
+\keyword{dynamic}{.GGobiCall}
+\keyword{internal}{.GGobiCall}
+\begin{Description}\relax
+\end{Description}
+\begin{Usage}
+\begin{verbatim}.GGobiCall(.name, ..., .gobi = ggobi_get(), .test=TRUE)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{.name}] the simple name of the C routine to be resolved
+\item[\code{...}] the arguments that to be passed to the \code{\LinkA{.C}{.C}} or \code{\LinkA{.Call}{.Call}}
+\item[\code{.gobi}] the ggobi instance identifier that is to be passed to the C routine as its last argument
+\item[\code{.test}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\code{.GGobiC} and \code{.GGobiCall} convert the name and then call
+their C invocation counterparts.
+
+These functions map the simple name of a C routine into the
+package-specific version of that name.  These allow use to hide the
+use a name \textit{mangling} scheme of our choosing for the C level
+routines in the shared library/DLL that provides the glue between R
+and ggobi.  This is useful for avoiding name conflicts with other C
+code in R or other packages.  These are only of relevance to the
+developers of this package and those working with its C code.
+
+The mapping of the name to its corresponding C routine name
+is done in conjunction with the pre-processor macro
+\code{RS\_GGOBI}. These  must be synchronized.
+\end{Details}
+\begin{Value}
+the same result as the corresponding \code{.C} and \code{.Call}
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{.C}{.C}}, \code{\LinkA{.Call}{.Call}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+

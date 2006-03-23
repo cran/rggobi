@@ -1,0 +1,30 @@
+addVariable.ggobiDataset       package:rggobi       R Documentation
+
+_A_d_d _v_a_r_i_a_b_l_e
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Add variable to a ggobiDataset
+
+_U_s_a_g_e:
+
+     addVariable.ggobiDataset(x, vals, name, ...)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: ggobiDataset
+
+    vals: values to add
+
+    name: name of column to add
+
+     ...: 
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+

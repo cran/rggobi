@@ -1,0 +1,40 @@
+dataset                package:rggobi                R Documentation
+
+_G_e_t _g_g_o_b_i _d_a_t_a_s_e_t.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Get an object representing an internal ggobi dataset
+
+_U_s_a_g_e:
+
+     dataset(which, .gobi = ggobi_get())
+
+_A_r_g_u_m_e_n_t_s:
+
+   which: which dataset to retrieve, an integer for positional matching
+          or a character to match by name
+
+   .gobi: GGobi instance
+
+_D_e_t_a_i_l_s:
+
+     It is convenient to be able to refer to and operate on a ggobi
+     dataset as if it were a regular R dataset.  This function allows
+     one to get an 'ggobiDataset' object that represents a particular
+     dataset.
+
+_V_a_l_u_e:
+
+     A list of 'ggobiDataset' objects
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_S_e_e _A_l_s_o:
+
+     'link{.ggobi}'
+
+_E_x_a_m_p_l_e_s:
+

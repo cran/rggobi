@@ -1,0 +1,24 @@
+dim.ggobiDataset           package:rggobi           R Documentation
+
+_g_g_o_b_i_D_a_t_a_s_e_t _d_i_m_e_n_s_i_o_n_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Retrieve the dimension of an ggobi dataset
+
+_U_s_a_g_e:
+
+     dim.ggobiDataset(x)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: dataset
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+

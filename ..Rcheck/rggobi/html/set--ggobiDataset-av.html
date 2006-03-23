@@ -1,0 +1,76 @@
+<html><head><title>R: Assignments for ggobi datasets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for "[<-.ggobiDataset" {rggobi}"><tr><td>"[<-.ggobiDataset" {rggobi}</td><td align="right">R Documentation</td></tr></table>
+<h2>Assignments for ggobi datasets</h2>
+
+
+<h3>Description</h3>
+
+
+
+
+<h3>Usage</h3>
+
+<pre>"[&lt;-.ggobiDataset"(x, i, j, value)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+row indices</td></tr>
+<tr valign="top"><td><code>i</code></td>
+<td>
+column indices</td></tr>
+<tr valign="top"><td><code>j</code></td>
+<td>
+new values</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This functions allow one to treat a ggobi dataset as if it were a local
+data.frame.  One can extract and assign elements within the dataset.
+</p>
+<p>
+This method works by retrieving the entire dataset into
+R, subsetting that copy, and then returning any changes.
+</p>
+<p>
+@argument ggobi dataset
+@arguments row indices
+@arguments column indices
+@arguments new values
+@keyword manip
+@keyword internal
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Hadley Wickham &lt;h.wickham@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>g &lt;- ggobi(mtcars)
+x &lt;- g["mtcars"]
+x[1:5, 1:5]
+x[1:5, 1] &lt;- 1:5
+x[1:5, 1:5]</pre>
+
+
+
+<hr><div align="center">[Package <em>rggobi</em> version 2.1.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

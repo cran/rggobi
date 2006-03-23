@@ -1,0 +1,69 @@
+<html><head><title>R: Determines whether a reference to an internal ggobi object is valid</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for valid_ggobi {rggobi}"><tr><td>valid_ggobi {rggobi}</td><td align="right">R Documentation</td></tr></table>
+<h2>Determines whether a reference to an internal ggobi object is valid</h2>
+
+
+<h3>Description</h3>
+
+
+
+
+<h3>Usage</h3>
+
+<pre>valid_ggobi(.gobi)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>.gobi</code></td>
+<td>
+an object of class <code>ggobi</code> which refers to an internal ggobi instance.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+One can create multiple, independent ggobi instances within a single
+R session and one can also remove them either programmatically or
+via the GUI.  To be able to refer to these objects which are
+actually C-level internal objects, one has a reference or handle
+from an S object. Since the C level object can be destroyed while the S
+object still refers to them, this function allows one to check whether the
+internal object to which R refers is still in existence.
+</p>
+<p>
+@arguments an object of class <code>ggobi</code> which refers to an internal ggobi instance.
+@value <code>TRUE</code> if real object still exist, <code>FALSE</code> otherwise
+@keyword dynamic
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code>TRUE</code> if real object still exist, <code>FALSE</code> otherwise</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Hadley Wickham &lt;h.wickham@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>g &lt;- ggobi(mtcars)
+valid_ggobi(g)
+close(g)
+valid_ggobi(g) </pre>
+
+
+
+<hr><div align="center">[Package <em>rggobi</em> version 2.1.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,26 @@
+create_time_edges_for_unit      package:rggobi      R Documentation
+
+_C_r_e_a_t_e _t_i_m_e _e_d_g_e_s _f_o_r _a _u_n_i_t
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Create time edges for a unit
+
+_U_s_a_g_e:
+
+     create_time_edges_for_unit(d, time)
+
+_A_r_g_u_m_e_n_t_s:
+
+       d: data frame of observations from one unit
+
+    time: time variable
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+

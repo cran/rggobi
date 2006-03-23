@@ -1,0 +1,35 @@
+\HeaderA{close.ggobi}{Close GGobi instance}{close.ggobi}
+\keyword{dynamic}{close.ggobi}
+\begin{Description}\relax
+Terminates and discards a ggobi instance
+\end{Description}
+\begin{Usage}
+\begin{verbatim}close.ggobi(con, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{con}] ggobi object to close
+\item[\code{...}] ignored and for compatability generic function.
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This allows the caller to close a ggobi instance and discard the
+resources it uses. The function closes the display windows and
+variable panel window associated with this ggobi instance.
+It also resets the default ggobi instance to be the last
+one created.
+
+@arguments ggobi object to close
+@arguments ignored and for compatability generic function.
+@keyword dynamic
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g1 <- ggobi(mtcars)
+g2 <- ggobi(mtcars)
+close(g2)
+close(ggobi_get())\end{ExampleCode}
+\end{Examples}
+

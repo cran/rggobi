@@ -1,0 +1,1650 @@
+\documentclass{article}
+\usepackage[ae,hyper]{Rd}
+\begin{document}
+\HeaderA{addVariable.ggobiDataset}{Add variable}{addVariable.ggobiDataset}
+\aliasA{addVariable}{addVariable.ggobiDataset}{addVariable}
+\keyword{manip}{addVariable.ggobiDataset}
+\begin{Description}\relax
+Add variable to a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}addVariable.ggobiDataset(x, vals, name, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{vals}] values to add
+\item[\code{name}] name of column to add
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"as.data.frame.ggobiDataset"}{Conversion methods}{"as.data.frame.ggobiDataset"}
+\aliasA{as.data.frame.ggobiDataset}{"as.data.frame.ggobiDataset"}{as.data.frame.ggobiDataset}
+\aliasA{as.matrix.ggobiDataset}{"as.data.frame.ggobiDataset"}{as.matrix.ggobiDataset}
+\keyword{manip}{"as.data.frame.ggobiDataset"}
+\keyword{internal}{"as.data.frame.ggobiDataset"}
+\begin{Description}\relax
+Convert a ggobiDataset to a regular R data.frame or matrix
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"as.data.frame.ggobiDataset"(x, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{clean.ggobi}{Clean ggobi}{clean.ggobi}
+\keyword{dynamic}{clean.ggobi}
+\keyword{internal}{clean.ggobi}
+\begin{Description}\relax
+Clean arguments for ggobi
+\end{Description}
+\begin{Usage}
+\begin{verbatim}clean.ggobi(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] vector
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+Arguments for ggobi need to be in specific format.
+This function helps ensure that.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{close.ggobi}{Close GGobi instance}{close.ggobi}
+\keyword{dynamic}{close.ggobi}
+\begin{Description}\relax
+Terminates and discards a ggobi instance
+\end{Description}
+\begin{Usage}
+\begin{verbatim}close.ggobi(con, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{con}] ggobi object to close
+\item[\code{...}] ignored and for compatability generic function.
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This allows the caller to close a ggobi instance and discard the
+resources it uses. The function closes the display windows and
+variable panel window associated with this ggobi instance.
+It also resets the default ggobi instance to be the last
+one created.
+
+@arguments ggobi object to close
+@arguments ignored and for compatability generic function.
+@keyword dynamic
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g1 <- ggobi(mtcars)
+g2 <- ggobi(mtcars)
+close(g2)
+close(ggobi_get())\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"colorscheme<-"}{Set active colour scheme.}{"colorscheme<.Rdash."}
+\aliasA{colorscheme<\Rdash}{"colorscheme<-"}{colorscheme<.Rdash.}
+\keyword{color}{"colorscheme<-"}
+\begin{Description}\relax
+Specify the active color scheme in a GGobi instance or the  session options.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"colorscheme<-"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] GGobi object
+\item[\code{value}] colour scheme to make active
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This makes a particular color scheme active within a GGobi instance.
+\end{Details}
+\begin{Value}
+The name of the previously active color scheme.
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+colorscheme(g) <- "Set1 8"
+colorscheme(g) <- 1\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{colorscheme}{Get active colour scheme}{colorscheme}
+\keyword{color}{colorscheme}
+\begin{Description}\relax
+Get name of the active colour scheme
+\end{Description}
+\begin{Usage}
+\begin{verbatim}colorscheme(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] GGobi object
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+colorscheme(g)\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{connecting\_edges}{Get connecting edges}{connecting.Rul.edges}
+\keyword{manip}{connecting\_edges}
+\begin{Description}\relax
+Get actual edges from application of edges dataset to target dataset.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}connecting_edges(x, y)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] target ggobi dataset
+\item[\code{y}] ggobi dataset containing edges
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{create\_time\_edges\_for\_unit}{Create time edges for a unit}{create.Rul.time.Rul.edges.Rul.for.Rul.unit}
+\keyword{dynamic}{create\_time\_edges\_for\_unit}
+\keyword{internal}{create\_time\_edges\_for\_unit}
+\begin{Description}\relax
+Create time edges for a unit
+\end{Description}
+\begin{Usage}
+\begin{verbatim}create_time_edges_for_unit(d, time)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{d}] data frame of observations from one unit
+\item[\code{time}] time variable
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{create\_time\_edges}{Create time edges}{create.Rul.time.Rul.edges}
+\keyword{dynamic}{create\_time\_edges}
+\keyword{internal}{create\_time\_edges}
+\begin{Description}\relax
+Generate the connecting edges for longitudinal data
+\end{Description}
+\begin{Usage}
+\begin{verbatim}create_time_edges(data, time = "Time", obsUnit = "ID")\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] the dataset from which to compute the edge connections.
+\item[\code{time}] name/index of time variable
+\item[\code{obsUnit}] name/index of ID variable
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This function takes a data frame containing records with repeated
+measurements for a given observational unit and generates the
+appropriate edge information so that consecutive time
+points can be connected in a GGobi display. The output of this
+function can be given to setEdges to enable
+viewing these time series plots for individuals.
+
+Currently this only works if the data are sorted by ID.
+This will be fixed in the future as it requires re-ordering
+the records from the original dataset.
+\end{Details}
+\begin{Value}
+A matrix with 2 columns and as many rows as in original data.  Each row in this matrix gives a directed line segment connecting one point in time to the next point in time
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{dataset}{Get ggobi dataset.}{dataset}
+\keyword{manip}{dataset}
+\keyword{internal}{dataset}
+\begin{Description}\relax
+Get an object representing an internal ggobi dataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}dataset(which, .gobi = ggobi_get())\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{which}] which dataset to retrieve, an integer for positional matching or a character to match by name
+\item[\code{.gobi}] GGobi instance
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+It is convenient to be able to refer to and operate on a ggobi
+dataset as if it were a regular R dataset.  This function allows one to
+get an \code{ggobiDataset} object that represents a particular
+dataset.
+\end{Details}
+\begin{Value}
+A list of \code{ggobiDataset} objects
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{link\{.ggobi\}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{dim.ggobiDataset}{ggobiDataset dimensions}{dim.ggobiDataset}
+\keyword{attribute}{dim.ggobiDataset}
+\keyword{internal}{dim.ggobiDataset}
+\begin{Description}\relax
+Retrieve the dimension of an ggobi dataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}dim.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] dataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{dimnames.ggobiDataset}{Get dimension names}{dimnames.ggobiDataset}
+\keyword{attribute}{dimnames.ggobiDataset}
+\keyword{internal}{dimnames.ggobiDataset}
+\begin{Description}\relax
+Get row and column names for a ggobiDataget
+\end{Description}
+\begin{Usage}
+\begin{verbatim}dimnames.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataget
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"edges<-"}{Set edges}{"edges<.Rdash."}
+\aliasA{edges<\Rdash}{"edges<-"}{edges<.Rdash.}
+\keyword{manip}{"edges<-"}
+\begin{Description}\relax
+Set edges for a dataset.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"edges<-"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] matrix or data frame of edges.  First column should be from edge, second column to edge.
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+To remove edges, set edges to NULL.
+
+@arguments ggobiDataset
+@arguments matrix or data frame of edges.  First column should be from edge, second column to edge.
+@keyword manip
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}cc<-cor(t(swiss),use="p", method="s") 
+ccd<-sqrt(2*(1-cc)) 
+a <- which(lower.tri(ccd), arr.ind=TRUE)
+src <- row.names(swiss)[a[,2]]
+dest <- row.names(swiss)[a[,1]] 
+weight <- as.vector(as.dist(ccd))
+gg <- ggobi(swiss)
+gg$cor <- data.frame(weight)
+edges(gg$cor) <- cbind(src, dest)
+edges(gg$cor)
+edges(gg$cor) <- NULL\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{edges}{Get edges}{edges}
+\keyword{manip}{edges}
+\begin{Description}\relax
+Get edges for a dataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}edges(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobi dataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Value}
+A matrix of edge pairs
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"excluded<-.ggobiDataset"}{Set excluded status}{"excluded<.Rdash..ggobiDataset"}
+\aliasA{excluded<\Rdash}{"excluded<-.ggobiDataset"}{excluded<.Rdash.}
+\methaliasA{excluded<\Rdash.ggobiDataset}{"excluded<-.ggobiDataset"}{excluded<.Rdash..ggobiDataset}
+\keyword{dynamic}{"excluded<-.ggobiDataset"}
+\begin{Description}\relax
+Set the exclusion status of points.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"excluded<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] logical vector
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+If a point is excluded it is not drawn.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{excluded}{excluded}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{excluded.ggobiDataset}{Get excluded status}{excluded.ggobiDataset}
+\aliasA{excluded}{excluded.ggobiDataset}{excluded}
+\keyword{dynamic}{excluded.ggobiDataset}
+\begin{Description}\relax
+Get the exclusion status of points.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}excluded.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataget
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+If a point is excluded it is not drawn.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{excluded<\Rdash}{excluded<.Rdash.}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"[.ggobiDataset"}{Subsettting}{"[.ggobiDataset"}
+\aliasA{\$.ggobiDataset}{"[.ggobiDataset"}{.Rdol..ggobiDataset}
+\aliasA{[.ggobiDataset}{"[.ggobiDataset"}{[.ggobiDataset}
+\aliasA{[[.ggobiDataset}{"[.ggobiDataset"}{[[.ggobiDataset}
+\keyword{manip}{"[.ggobiDataset"}
+\begin{Description}\relax
+Subsetting for ggobi datasets
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"[.ggobiDataset"(x, i, j, drop=FALSE)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] arguments for generic data.frame subset function
+\item[\code{i}] drop dimensions?
+\item[\code{j}] 
+\item[\code{drop}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This functions allow one to treat a ggobi dataset as if it were a local
+data.frame.  One can extract and assign elements within the dataset.
+
+This method works by retrieving the entire dataset into
+R, and then subsetting with R.
+\end{Details}
+\begin{Value}
+desired subset from data.frame
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+x <- g$mtcars
+x[1:5, 1:5]
+x[[1]]
+x$cyl\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"\$.ggobi"}{Get ggobi data.}{".Rdol..ggobi"}
+\aliasA{\$.ggobi}{"\$.ggobi"}{.Rdol..ggobi}
+\aliasA{[.ggobi}{"\$.ggobi"}{[.ggobi}
+\keyword{manip}{"\$.ggobi"}
+\begin{Description}\relax
+Conveniently retrieve ggobi dataset.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"$.ggobi"(x, i)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] GGobi object
+\item[\code{i}] name of dataset to retrive
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+It is convenient to be able to refer to and operate on a ggobi
+dataset as if it were a regular R dataset.  This function allows one to
+get an \code{ggobiDataset} object that represents a particular
+dataset.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(ChickWeight)
+g["cars"] <- mtcars
+g[1:2]
+g["ChickWeight"]
+g["cars"]
+g$cars\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_check\_structs}{Check structs}{ggobi.Rul.check.Rul.structs}
+\keyword{programming}{ggobi\_check\_structs}
+\keyword{internal}{ggobi\_check\_structs}
+\begin{Description}\relax
+Validates GGobi and Rggobi views of internal data structures
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_check_structs()\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\end{Arguments}
+\begin{Details}\relax
+This function is called when the Rggobi library is loaded and it verifies
+that the sizes of the different internal data structures for GGobi are the
+same for both the GGobi shared library/DLL and the Rggobi package. This is
+important as the two shared libraries are compiled separately and may have
+different compilation flags, etc. that make them incompatible. This
+function simply compares the sizes of the two views of the structures and
+raises a warning if they do not agree.
+
+Essentially, you should never notice this function. A warning implies that
+you need to re-install Rggobi against the version of GGobi you are using.
+
+@value TRUE if the sizes in the two libraries are the same, otherwise a named logical vector indicating which structures are different
+\end{Details}
+\begin{Value}
+TRUE if the sizes in the two libraries are the same, otherwise a named logical vector indicating which structures are different
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_count}{Get number of GGobis}{ggobi.Rul.count}
+\keyword{dynamic}{ggobi\_count}
+\begin{Description}\relax
+Retrieves the number of ggobi instances within this session
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_count()\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\end{Arguments}
+\begin{Details}\relax
+One or more ggobi instances can be created within an R session so that one
+can simultaneously look at different datasets or have different views
+of the same dataset.  This function returns the number of ggobis in existence.
+
+The different ggobi instances are maintained as C  level structures.
+This function accesses a variable that stores how many are in existence
+when the function is invoked.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}ggobi_count()\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_data\_set\_variables}{Set variable values}{ggobi.Rul.data.Rul.set.Rul.variables}
+\keyword{manip}{ggobi\_data\_set\_variables}
+\keyword{internal}{ggobi\_data\_set\_variables}
+\begin{Description}\relax
+Set the variable values for a column in a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_data_set_variables(x, values, var, update = TRUE)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{values}] values of new variable
+\item[\code{var}] variable name
+\item[\code{update}] update?
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi.find.file}{Find GGobi file.}{ggobi.find.file}
+\keyword{dynamic}{ggobi.find.file}
+\keyword{internal}{ggobi.find.file}
+\begin{Description}\relax
+Finds a file stored somewhere in the ggobi installation.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi.find.file(..., check = F)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{...}] bits of the path to join together
+\item[\code{check}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}ggobi.find.file("data","tips.xml")\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi}{New ggobi}{ggobi}
+\keyword{dynamic}{ggobi}
+\begin{Description}\relax
+Creates a new ggobi instance
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi(data, args=character(0), mode=character(0), name = deparse(sys.call()[[2]]), ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] the name of a file containing the data, or a data frame or matrix containing the values
+\item[\code{args}] a character vector of command-line arguments
+\item[\code{mode}] data format GGobi should expect to read the data from, if reading from a file.
+\item[\code{name}] the name to use in GGobi for the dataset, if one is specified
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+Create a new instance of GGobi with or without new data.  Use
+function whenever you want to create a new GGobi indepdent of the
+others---they will not share linked plots.  If you want to add
+another dataset to an existing ggobi, please see \code{\LinkA{[<\Rdash.ggobi}{[<.Rdash..ggobi}}
+
+There are currently three basic types of functions that you
+can use with rggobi:
+
+\Itemize{
+\item Data getting and setting: see \code{\LinkA{[.ggobi}{[.ggobi}}, and \code{\LinkA{[.ggobiDataset}{[.ggobiDataset}}
+\item "Automatic" brushing: see \code{\LinkA{glyph\_colour}{glyph.Rul.colour}},
+\code{\LinkA{glyph\_size}{glyph.Rul.size}},  \code{\LinkA{glyph\_type}{glyph.Rul.type}},
+\code{\LinkA{shadowed}{shadowed}},    \code{\LinkA{excluded}{excluded}}, and the associated
+setter functions.
+\item Edge modifcation: see \code{\LinkA{edges}{edges}}, \code{\LinkA{edges<\Rdash}{edges<.Rdash.}},
+\code{\LinkA{ggobi\_longitudinal}{ggobi.Rul.longitudinal}}
+}
+
+You will generally spend most of your time working with
+\code{ggobDataset}s, you retrieve using \code{\LinkA{\$.ggobiDataset}{.Rdol..ggobiDataset}},
+\code{\LinkA{[.ggobiDataset}{[.ggobiDataset}}, or \code{\LinkA{[[.ggobiDataset}{[[.ggobiDataset}}.
+Most of the time these will operate like normal R datasets while
+pointing to the data in GGobi so that all changes are kept in sync.
+If you need to force a ggobiDaataset to be an R \code{data.frame} use
+\code{\LinkA{as.data.frame}{as.data.frame}}.
+\end{Details}
+\begin{Value}
+A ggobi object
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}ggobi(ggobi.find.file("data", "flea.csv"))
+ggobi(ggobi.find.file("data", "flea.xml"))
+ggobi(mtcars)
+mtcarsg <- ggobi_get()$mtcars
+glyph_colour(mtcarsg)
+glyph_colour(mtcarsg) <- ifelse(mtcarsg$cyl < 4, 1, 2)
+glyph_size(mtcarsg) <- mtcarsg$cyl\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_get}{Get GGobi}{ggobi.Rul.get}
+\keyword{dynamic}{ggobi\_get}
+\begin{Description}\relax
+Returns a ggobi reference
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_get(id = ggobi_count(), drop=TRUE)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{id}] numeric vector indicating which ggobi instances to retrieve.  Use default if none specified
+\item[\code{drop}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This allows one to get a list of all the ggobi instances currently
+in existence in the R session.  Also, one can fetch particular instances.
+
+@arguments numeric vector indicating which ggobi instances to retrieve.  Use default if none specified
+@returns list of ggobi instances
+@keyword dynamic
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}ggobi(mtcars)
+ggobi(Nile)
+ggobi_get(1)
+ggobi_get(1:2)\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_longitudinal}{Create longitudinal dataset.}{ggobi.Rul.longitudinal}
+\keyword{dynamic}{ggobi\_longitudinal}
+\begin{Description}\relax
+Instantiate new ggobi with a longitudinal data set.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_longitudinal(data, time = "Time", obsUnit = "ID")\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] data frame
+\item[\code{time}] time variable
+\item[\code{obsUnit}] id variable
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+@arguments data frame
+@arguments time variable
+@arguments id variable
+@keyword dynamic
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}data(Oxboys, package="nlme")
+ggobi_longitudinal(Oxboys, "Occasion", "Subject")\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_set\_data\_file}{Set data file.}{ggobi.Rul.set.Rul.data.Rul.file}
+\keyword{manip}{ggobi\_set\_data\_file}
+\keyword{internal}{ggobi\_set\_data\_file}
+\begin{Description}\relax
+Open data file and add to ggobi datasets.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_set_data_file(file, mode = "unknown", add = TRUE, .gobi = ggobi_get())\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{file}] path to file
+\item[\code{mode}] mode of file
+\item[\code{add}] add?
+\item[\code{.gobi}] ggobi instance
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_set\_data\_frame}{Set data frame.}{ggobi.Rul.set.Rul.data.Rul.frame}
+\keyword{manip}{ggobi\_set\_data\_frame}
+\keyword{internal}{ggobi\_set\_data\_frame}
+\begin{Description}\relax
+Add data.frame to ggobi instance.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_set_data_frame(data, name = deparse(sys.call()[[2]]), description = paste("R data frame", name), id = rownames(data), .gobi = ggobi_get())\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] data frame to add
+\item[\code{name}] data set name (appears on tabs in ggobi)
+\item[\code{description}] description of data frame
+\item[\code{id}] rownames
+\item[\code{.gobi}] ggobi instance
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{.ggobi.symbol}{Ggobi symbol}{.ggobi.symbol}
+\keyword{dynamic}{.ggobi.symbol}
+\keyword{internal}{.ggobi.symbol}
+\begin{Description}\relax
+\end{Description}
+\begin{Usage}
+\begin{verbatim}.ggobi.symbol(name)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{name}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+Used entirely within R to map the given name to the name of the
+corresponding C routine.
+
+A simple way of generating the prefix for a symbol
+used in this package/library so that we can hide
+it from other packages and avoid conflicts.
+\end{Details}
+\begin{Value}
+the name of the C routine corresponding to its argument
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ggobi\_version}{Get version}{ggobi.Rul.version}
+\keyword{dynamic}{ggobi\_version}
+\begin{Description}\relax
+GGobi version information
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_version()\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\end{Arguments}
+\begin{Details}\relax
+Return an object that describes the version of the ggobi
+library being used. This allows code to execute
+conditionally on certain version numbers, etc.
+
+@value the release date of the ggobi library
+@value a vector of 3 integers containing the major, minor and patch-level numbers.
+@value a string version of the major, minor and patch-level numbers,
+@keyword dynamic
+\end{Details}
+\begin{Value}
+\begin{ldescription}
+\item[\code{the release date of the ggobi library}] 
+\item[\code{a vector of 3 integers containing the major, minor and patch-level numbers.}] 
+\item[\code{a string version of the major, minor and patch-level numbers,}] 
+\end{ldescription}
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}ggobi_version()\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{.GGobiCall}{Wrappers for calling C routines in the R-ggobi library.}{.GGobiCall}
+\aliasA{.GGobiC}{.GGobiCall}{.GGobiC}
+\keyword{dynamic}{.GGobiCall}
+\keyword{internal}{.GGobiCall}
+\begin{Description}\relax
+\end{Description}
+\begin{Usage}
+\begin{verbatim}.GGobiCall(.name, ..., .gobi = ggobi_get(), .test=TRUE)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{.name}] the simple name of the C routine to be resolved
+\item[\code{...}] the arguments that to be passed to the \code{\LinkA{.C}{.C}} or \code{\LinkA{.Call}{.Call}}
+\item[\code{.gobi}] the ggobi instance identifier that is to be passed to the C routine as its last argument
+\item[\code{.test}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\code{.GGobiC} and \code{.GGobiCall} convert the name and then call
+their C invocation counterparts.
+
+These functions map the simple name of a C routine into the
+package-specific version of that name.  These allow use to hide the
+use a name \textit{mangling} scheme of our choosing for the C level
+routines in the shared library/DLL that provides the glue between R
+and ggobi.  This is useful for avoiding name conflicts with other C
+code in R or other packages.  These are only of relevance to the
+developers of this package and those working with its C code.
+
+The mapping of the name to its corresponding C routine name
+is done in conjunction with the pre-processor macro
+\code{RS\_GGOBI}. These  must be synchronized.
+\end{Details}
+\begin{Value}
+the same result as the corresponding \code{.C} and \code{.Call}
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{.C}{.C}}, \code{\LinkA{.Call}{.Call}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"glyph\_colour<-.ggobiDataset"}{Set glyph colour}{"glyph.Rul.colour<.Rdash..ggobiDataset"}
+\aliasA{glyph\_color<\Rdash}{"glyph\_colour<-.ggobiDataset"}{glyph.Rul.color<.Rdash.}
+\aliasA{glyph\_colour<\Rdash}{"glyph\_colour<-.ggobiDataset"}{glyph.Rul.colour<.Rdash.}
+\methaliasA{glyph\_colour<\Rdash.ggobiDataset}{"glyph\_colour<-.ggobiDataset"}{glyph.Rul.colour<.Rdash..ggobiDataset}
+\keyword{dynamic}{"glyph\_colour<-.ggobiDataset"}
+\begin{Description}\relax
+Set glyph colour
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"glyph_colour<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] vector of new colours
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{glyph\_colour}{glyph.Rul.colour}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{glyph\_colour.ggobiDataset}{Get glyph colour}{glyph.Rul.colour.ggobiDataset}
+\aliasA{glyph\_color}{glyph\_colour.ggobiDataset}{glyph.Rul.color}
+\aliasA{glyph\_colour}{glyph\_colour.ggobiDataset}{glyph.Rul.colour}
+\keyword{dynamic}{glyph\_colour.ggobiDataset}
+\begin{Description}\relax
+Get glyph colour
+\end{Description}
+\begin{Usage}
+\begin{verbatim}glyph_colour.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{glyph\_colour<\Rdash}{glyph.Rul.colour<.Rdash.}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"glyph\_size<-.ggobiDataset"}{Set glyph size}{"glyph.Rul.size<.Rdash..ggobiDataset"}
+\aliasA{glyph\_size<\Rdash}{"glyph\_size<-.ggobiDataset"}{glyph.Rul.size<.Rdash.}
+\methaliasA{glyph\_size<\Rdash.ggobiDataset}{"glyph\_size<-.ggobiDataset"}{glyph.Rul.size<.Rdash..ggobiDataset}
+\keyword{dynamic}{"glyph\_size<-.ggobiDataset"}
+\begin{Description}\relax
+Set glyph size
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"glyph_size<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] vector of new sizes
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{glyph\_size}{glyph.Rul.size}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{glyph\_size.ggobiDataset}{Get glyph size}{glyph.Rul.size.ggobiDataset}
+\aliasA{glyph\_size}{glyph\_size.ggobiDataset}{glyph.Rul.size}
+\keyword{dynamic}{glyph\_size.ggobiDataset}
+\begin{Description}\relax
+Get glyph size
+\end{Description}
+\begin{Usage}
+\begin{verbatim}glyph_size.ggobiDataset(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{glyph\_size<\Rdash}{glyph.Rul.size<.Rdash.}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"glyph\_type<-.ggobiDataset"}{Set glyph type}{"glyph.Rul.type<.Rdash..ggobiDataset"}
+\aliasA{glyph\_type<\Rdash}{"glyph\_type<-.ggobiDataset"}{glyph.Rul.type<.Rdash.}
+\methaliasA{glyph\_type<\Rdash.ggobiDataset}{"glyph\_type<-.ggobiDataset"}{glyph.Rul.type<.Rdash..ggobiDataset}
+\keyword{dynamic}{"glyph\_type<-.ggobiDataset"}
+\begin{Description}\relax
+Set glyph type
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"glyph_type<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] vector of new types
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{glyph\_type}{glyph.Rul.type}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{glyph\_type.ggobiDataset}{Get glyph type.}{glyph.Rul.type.ggobiDataset}
+\aliasA{glyph\_type}{glyph\_type.ggobiDataset}{glyph.Rul.type}
+\keyword{dynamic}{glyph\_type.ggobiDataset}
+\begin{Description}\relax
+Get glyph type.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}glyph_type.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{glyph\_type<\Rdash}{glyph.Rul.type<.Rdash.}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"ids<-.ggobiDataset"}{Set row ids}{"ids<.Rdash..ggobiDataset"}
+\aliasA{ids<\Rdash}{"ids<-.ggobiDataset"}{ids<.Rdash.}
+\methaliasA{ids<\Rdash.ggobiDataset}{"ids<-.ggobiDataset"}{ids<.Rdash..ggobiDataset}
+\keyword{manip}{"ids<-.ggobiDataset"}
+\begin{Description}\relax
+Set row ids from a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"ids<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] new values
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{ids}{ids}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ids.ggobiDataset}{Row ids}{ids.ggobiDataset}
+\aliasA{ids}{ids.ggobiDataset}{ids}
+\keyword{manip}{ids.ggobiDataset}
+\begin{Description}\relax
+Retrive row ids from a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ids.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{ids<\Rdash}{ids<.Rdash.}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{mapGlyphType}{Map glyph type.}{mapGlyphType}
+\keyword{dynamic}{mapGlyphType}
+\keyword{internal}{mapGlyphType}
+\begin{Description}\relax
+Map glyph character code to number
+\end{Description}
+\begin{Usage}
+\begin{verbatim}mapGlyphType(types)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{types}] vector of glyph character codes
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"names<-.ggobiDataset"}{Set column names}{"names<.Rdash..ggobiDataset"}
+\aliasA{names<\Rdash.ggobiDataset}{"names<-.ggobiDataset"}{names<.Rdash..ggobiDataset}
+\keyword{attribute}{"names<-.ggobiDataset"}
+\keyword{internal}{"names<-.ggobiDataset"}
+\begin{Description}\relax
+Set column names for a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"names<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] new names
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{names.ggobi}{GGobi names}{names.ggobi}
+\keyword{dynamic}{names.ggobi}
+\begin{Description}\relax
+Get dataset names
+\end{Description}
+\begin{Usage}
+\begin{verbatim}names.ggobi(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+names(g)\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{names.ggobiDataset}{ggobiDataset column names}{names.ggobiDataset}
+\keyword{attribute}{names.ggobiDataset}
+\keyword{internal}{names.ggobiDataset}
+\begin{Description}\relax
+Get column names for a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}names.ggobiDataset(x, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] dataset
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{ncol.ggobiDataset}{ggobiDataset columns}{ncol.ggobiDataset}
+\keyword{attribute}{ncol.ggobiDataset}
+\keyword{internal}{ncol.ggobiDataset}
+\begin{Description}\relax
+Retrieve the number of columns in an ggobi dataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ncol.ggobiDataset(d)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{d}] dataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{nrow.ggobiDataset}{ggobiDataset rows}{nrow.ggobiDataset}
+\keyword{attribute}{nrow.ggobiDataset}
+\keyword{internal}{nrow.ggobiDataset}
+\begin{Description}\relax
+Retrieve the number of row in an ggobi dataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}nrow.ggobiDataset(d)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{d}] dataset
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{print.ggobi}{Print ggobi}{print.ggobi}
+\keyword{dynamic}{print.ggobi}
+\keyword{internal}{print.ggobi}
+\begin{Description}\relax
+Prints summary of ggobi object by instance
+\end{Description}
+\begin{Usage}
+\begin{verbatim}print.ggobi(x, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobi object
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{summary.ggobi}{summary.ggobi}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{print.ggobiDataset}{Print ggobiDataset}{print.ggobiDataset}
+\keyword{attribute}{print.ggobiDataset}
+\keyword{internal}{print.ggobiDataset}
+\begin{Description}\relax
+Print ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}print.ggobiDataset(x, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] GGobi dataset to retrieve
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+By default printing a ggobiDataset acts like
+printing an R data.frame - ie. show all the data
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"rownames<-.ggobiDataset"}{Set row names}{"rownames<.Rdash..ggobiDataset"}
+\aliasA{rownames<\Rdash.ggobiDataset}{"rownames<-.ggobiDataset"}{rownames<.Rdash..ggobiDataset}
+\keyword{attribute}{"rownames<-.ggobiDataset"}
+\keyword{internal}{"rownames<-.ggobiDataset"}
+\begin{Description}\relax
+Set row names for a ggobiDataset
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"rownames<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] new names
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{rownames.ggobiDataset}{Get row names}{rownames.ggobiDataset}
+\keyword{attribute}{rownames.ggobiDataset}
+\keyword{internal}{rownames.ggobiDataset}
+\begin{Description}\relax
+Get row names for a ggobiDataget
+\end{Description}
+\begin{Usage}
+\begin{verbatim}rownames.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataget
+\item[\code{}] 
+\end{ldescription}
+{new names}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{selected.ggobiDataset}{Get selection status}{selected.ggobiDataset}
+\aliasA{selected}{selected.ggobiDataset}{selected}
+\keyword{dynamic}{selected.ggobiDataset}
+\begin{Description}\relax
+Returns logical vector indicating if each point is under the brush
+\end{Description}
+\begin{Usage}
+\begin{verbatim}selected.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{}] 
+\end{ldescription}
+{logical vector}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"[<-.ggobi"}{[<-.ggobi}{"[<.Rdash..ggobi"}
+\aliasA{\$<\Rdash.ggobi}{"[<-.ggobi"}{.Rdol.<.Rdash..ggobi}
+\aliasA{[<\Rdash.ggobi}{"[<-.ggobi"}{[<.Rdash..ggobi}
+\keyword{manip}{"[<-.ggobi"}
+\begin{Description}\relax
+Add data to ggobi instance.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"[<-.ggobi"(x, i, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobi instance
+\item[\code{i}] name of data frame
+\item[\code{value}] data.frame, or string to path of file to load
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This function allows you to add (and eventually) replace
+ggobi to a ggobi instance.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi()
+g["a"] <- mtcars
+g$b <- mtcars\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"[<-.ggobiDataset"}{Assignments for ggobi datasets}{"[<.Rdash..ggobiDataset"}
+\aliasA{[<\Rdash.ggobiDataset}{"[<-.ggobiDataset"}{[<.Rdash..ggobiDataset}
+\keyword{manip}{"[<-.ggobiDataset"}
+\keyword{internal}{"[<-.ggobiDataset"}
+\begin{Description}\relax
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"[<-.ggobiDataset"(x, i, j, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] row indices
+\item[\code{i}] column indices
+\item[\code{j}] new values
+\item[\code{value}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This functions allow one to treat a ggobi dataset as if it were a local
+data.frame.  One can extract and assign elements within the dataset.
+
+This method works by retrieving the entire dataset into
+R, subsetting that copy, and then returning any changes.
+
+@argument ggobi dataset
+@arguments row indices
+@arguments column indices
+@arguments new values
+@keyword manip
+@keyword internal
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+x <- g["mtcars"]
+x[1:5, 1:5]
+x[1:5, 1] <- 1:5
+x[1:5, 1:5]\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{"shadowed<-.ggobiDataset"}{Set shadowed status}{"shadowed<.Rdash..ggobiDataset"}
+\aliasA{shadowed<\Rdash}{"shadowed<-.ggobiDataset"}{shadowed<.Rdash.}
+\methaliasA{shadowed<\Rdash.ggobiDataset}{"shadowed<-.ggobiDataset"}{shadowed<.Rdash..ggobiDataset}
+\keyword{dynamic}{"shadowed<-.ggobiDataset"}
+\begin{Description}\relax
+Set the exclusion status of points.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"shadowed<-.ggobiDataset"(x, value)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{value}] logical vector
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+If a point is shadowed it is drawn in a dark gray colour.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{shadowed}{shadowed}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{shadowed.ggobiDataset}{Get shadowed status}{shadowed.ggobiDataset}
+\aliasA{shadowed}{shadowed.ggobiDataset}{shadowed}
+\keyword{dynamic}{shadowed.ggobiDataset}
+\begin{Description}\relax
+Get the exclusion status of points.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}shadowed.ggobiDataset(x)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataget
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+If a point is shadowed it is drawn in a dark gray colour.
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{shadowed<\Rdash}{shadowed<.Rdash.}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{summary.ggobi}{GGobi summary}{summary.ggobi}
+\keyword{dynamic}{summary.ggobi}
+\begin{Description}\relax
+Get a description of the global state of the GGobi session.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}summary.ggobi(object, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] ggobi object
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+summary(g)\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{summary.ggobiDataset}{Summarise ggobiDataset.}{summary.ggobiDataset}
+\keyword{attribute}{summary.ggobiDataset}
+\begin{Description}\relax
+Summarise a ggobiDataset with dimensions, mode and variable names.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}summary.ggobiDataset(object, ...)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{object}] ggobiDataset
+\item[\code{...}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\HeaderA{valid\_ggobi}{Determines whether a reference to an internal ggobi object is valid}{valid.Rul.ggobi}
+\keyword{dynamic}{valid\_ggobi}
+\keyword{internal}{valid\_ggobi}
+\begin{Description}\relax
+\end{Description}
+\begin{Usage}
+\begin{verbatim}valid_ggobi(.gobi)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{.gobi}] an object of class \code{ggobi} which refers to an internal ggobi instance.
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+One can create multiple, independent ggobi instances within a single
+R session and one can also remove them either programmatically or
+via the GUI.  To be able to refer to these objects which are
+actually C-level internal objects, one has a reference or handle
+from an S object. Since the C level object can be destroyed while the S
+object still refers to them, this function allows one to check whether the
+internal object to which R refers is still in existence.
+
+@arguments an object of class \code{ggobi} which refers to an internal ggobi instance.
+@value \code{TRUE} if real object still exist, \code{FALSE} otherwise
+@keyword dynamic
+\end{Details}
+\begin{Value}
+\code{TRUE} if real object still exist, \code{FALSE} otherwise
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+valid_ggobi(g)
+close(g)
+valid_ggobi(g) \end{ExampleCode}
+\end{Examples}
+
+\HeaderA{variable\_index}{Variable index}{variable.Rul.index}
+\keyword{attribute}{variable\_index}
+\keyword{internal}{variable\_index}
+\begin{Description}\relax
+Return indices corresponding to variable names
+\end{Description}
+\begin{Usage}
+\begin{verbatim}variable_index(x, names)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] ggobiDataset
+\item[\code{names}] variable names
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}\end{ExampleCode}
+\end{Examples}
+
+\end{document}

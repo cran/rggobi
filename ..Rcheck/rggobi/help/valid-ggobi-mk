@@ -1,0 +1,45 @@
+valid_ggobi              package:rggobi              R Documentation
+
+_D_e_t_e_r_m_i_n_e_s _w_h_e_t_h_e_r _a _r_e_f_e_r_e_n_c_e _t_o _a_n _i_n_t_e_r_n_a_l _g_g_o_b_i _o_b_j_e_c_t _i_s _v_a_l_i_d
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+_U_s_a_g_e:
+
+     valid_ggobi(.gobi)
+
+_A_r_g_u_m_e_n_t_s:
+
+   .gobi: an object of class 'ggobi' which refers to an internal ggobi
+          instance.
+
+_D_e_t_a_i_l_s:
+
+     One can create multiple, independent ggobi instances within a
+     single R session and one can also remove them either
+     programmatically or via the GUI.  To be able to refer to these
+     objects which are actually C-level internal objects, one has a
+     reference or handle from an S object. Since the C level object can
+     be destroyed while the S object still refers to them, this
+     function allows one to check whether the internal object to which
+     R refers is still in existence.
+
+     @arguments an object of class 'ggobi' which refers to an internal
+     ggobi instance. @value 'TRUE' if real object still exist, 'FALSE'
+     otherwise @keyword dynamic
+
+_V_a_l_u_e:
+
+     'TRUE' if real object still exist, 'FALSE' otherwise
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
+     g <- ggobi(mtcars)
+     valid_ggobi(g)
+     close(g)
+     valid_ggobi(g) 
+

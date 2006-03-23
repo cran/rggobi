@@ -1,0 +1,40 @@
+\HeaderA{"[.ggobiDataset"}{Subsettting}{"[.ggobiDataset"}
+\aliasA{\$.ggobiDataset}{"[.ggobiDataset"}{.Rdol..ggobiDataset}
+\aliasA{[.ggobiDataset}{"[.ggobiDataset"}{[.ggobiDataset}
+\aliasA{[[.ggobiDataset}{"[.ggobiDataset"}{[[.ggobiDataset}
+\keyword{manip}{"[.ggobiDataset"}
+\begin{Description}\relax
+Subsetting for ggobi datasets
+\end{Description}
+\begin{Usage}
+\begin{verbatim}"[.ggobiDataset"(x, i, j, drop=FALSE)\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] arguments for generic data.frame subset function
+\item[\code{i}] drop dimensions?
+\item[\code{j}] 
+\item[\code{drop}] 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+This functions allow one to treat a ggobi dataset as if it were a local
+data.frame.  One can extract and assign elements within the dataset.
+
+This method works by retrieving the entire dataset into
+R, and then subsetting with R.
+\end{Details}
+\begin{Value}
+desired subset from data.frame
+\end{Value}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}g <- ggobi(mtcars)
+x <- g$mtcars
+x[1:5, 1:5]
+x[[1]]
+x$cyl\end{ExampleCode}
+\end{Examples}
+

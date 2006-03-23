@@ -1,0 +1,62 @@
+<html><head><title>R: Set active colour scheme.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for "colorscheme<-" {rggobi}"><tr><td>"colorscheme<-" {rggobi}</td><td align="right">R Documentation</td></tr></table>
+<h2>Set active colour scheme.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Specify the active color scheme in a GGobi instance or the  session options.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>"colorscheme&lt;-"(x, value)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+GGobi object</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+colour scheme to make active</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This makes a particular color scheme active within a GGobi instance.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The name of the previously active color scheme.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Hadley Wickham &lt;h.wickham@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>g &lt;- ggobi(mtcars)
+colorscheme(g) &lt;- "Set1 8"
+colorscheme(g) &lt;- 1</pre>
+
+
+
+<hr><div align="center">[Package <em>rggobi</em> version 2.1.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

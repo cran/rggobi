@@ -1,0 +1,28 @@
+ids.ggobiDataset           package:rggobi           R Documentation
+
+_R_o_w _i_d_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Retrive row ids from a ggobiDataset
+
+_U_s_a_g_e:
+
+     ids.ggobiDataset(x)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: ggobiDataset
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_S_e_e _A_l_s_o:
+
+     'ids<-'
+
+_E_x_a_m_p_l_e_s:
+

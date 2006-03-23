@@ -1,0 +1,40 @@
+$.ggobi                 Get ggobi data.
+[.ggobiDataset          Subsettting
+[<-.ggobi               [<-.ggobi
+addVariable.ggobiDataset
+                        Add variable
+close.ggobi             Close GGobi instance
+colorscheme             Get active colour scheme
+colorscheme<-           Set active colour scheme.
+connecting_edges        Get connecting edges
+edges                   Get edges
+edges<-                 Set edges
+excluded.ggobiDataset   Get excluded status
+excluded<-.ggobiDataset
+                        Set excluded status
+ggobi                   New ggobi
+ggobi_count             Get number of GGobis
+ggobi_get               Get GGobi
+ggobi_longitudinal      Create longitudinal dataset.
+ggobi_version           Get version
+glyph_colour.ggobiDataset
+                        Get glyph colour
+glyph_colour<-.ggobiDataset
+                        Set glyph colour
+glyph_size.ggobiDataset
+                        Get glyph size
+glyph_size<-.ggobiDataset
+                        Set glyph size
+glyph_type.ggobiDataset
+                        Get glyph type.
+glyph_type<-.ggobiDataset
+                        Set glyph type
+ids.ggobiDataset        Row ids
+ids<-.ggobiDataset      Set row ids
+names.ggobi             GGobi names
+selected.ggobiDataset   Get selection status
+shadowed.ggobiDataset   Get shadowed status
+shadowed<-.ggobiDataset
+                        Set shadowed status
+summary.ggobi           GGobi summary
+summary.ggobiDataset    Summarise ggobiDataset.

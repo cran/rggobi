@@ -1,0 +1,341 @@
+Entry: .GGobiCall
+Aliases: .GGobiCall .GGobiC
+Keywords: dynamic internal
+Description: Wrappers for calling C routines in the R-ggobi library.
+URL: ../../../library/rggobi/html/GGobiCall-n1.html
+
+Entry: addVariable.ggobiDataset
+Aliases: addVariable.ggobiDataset addVariable
+Keywords: manip
+Description: Add variable
+URL: ../../../library/rggobi/html/addVariable-ggobiDataset-u7.html
+
+Entry: "as.data.frame.ggobiDataset"
+Aliases: as.data.frame.ggobiDataset as.matrix.ggobiDataset
+Keywords: manip internal
+Description: Conversion methods
+URL: ../../../library/rggobi/html/as-data-frame-ggobiDataset-8q.html
+
+Entry: clean.ggobi
+Aliases: clean.ggobi
+Keywords: dynamic internal
+Description: Clean ggobi
+URL: ../../../library/rggobi/html/clean-ggobi-bw.html
+
+Entry: close.ggobi
+Aliases: close.ggobi
+Keywords: dynamic
+Description: Close GGobi instance
+URL: ../../../library/rggobi/html/close-ggobi-gk.html
+
+Entry: "colorscheme<-"
+Aliases: colorscheme<-
+Keywords: color
+Description: Set active colour scheme.
+URL: ../../../library/rggobi/html/colorscheme--b2.html
+
+Entry: colorscheme
+Aliases: colorscheme
+Keywords: color
+Description: Get active colour scheme
+URL: ../../../library/rggobi/html/colorscheme-6n.html
+
+Entry: connecting_edges
+Aliases: connecting_edges
+Keywords: manip
+Description: Get connecting edges
+URL: ../../../library/rggobi/html/connecting-edges-cn.html
+
+Entry: create_time_edges_for_unit
+Aliases: create_time_edges_for_unit
+Keywords: dynamic internal
+Description: Create time edges for a unit
+URL: ../../../library/rggobi/html/create-time-edges-for-unit-fp.html
+
+Entry: create_time_edges
+Aliases: create_time_edges
+Keywords: dynamic internal
+Description: Create time edges
+URL: ../../../library/rggobi/html/create-time-edges-ha.html
+
+Entry: dataset
+Aliases: dataset
+Keywords: manip internal
+Description: Get ggobi dataset.
+URL: ../../../library/rggobi/html/dataset-up.html
+
+Entry: dim.ggobiDataset
+Aliases: dim.ggobiDataset
+Keywords: attribute internal
+Description: ggobiDataset dimensions
+URL: ../../../library/rggobi/html/dim-ggobiDataset-yy.html
+
+Entry: dimnames.ggobiDataset
+Aliases: dimnames.ggobiDataset
+Keywords: attribute internal
+Description: Get dimension names
+URL: ../../../library/rggobi/html/dimnames-ggobiDataset-1n.html
+
+Entry: "edges<-"
+Aliases: edges<-
+Keywords: manip
+Description: Set edges
+URL: ../../../library/rggobi/html/edges--p8.html
+
+Entry: edges
+Aliases: edges
+Keywords: manip
+Description: Get edges
+URL: ../../../library/rggobi/html/edges-lk.html
+
+Entry: "excluded<-.ggobiDataset"
+Aliases: excluded<-.ggobiDataset excluded<-
+Keywords: dynamic
+Description: Set excluded status
+URL: ../../../library/rggobi/html/excluded---ggobiDataset-gu.html
+
+Entry: excluded.ggobiDataset
+Aliases: excluded.ggobiDataset excluded
+Keywords: dynamic
+Description: Get excluded status
+URL: ../../../library/rggobi/html/excluded-ggobiDataset-3e.html
+
+Entry: "[.ggobiDataset"
+Aliases: [.ggobiDataset [[.ggobiDataset $.ggobiDataset
+Keywords: manip
+Description: Subsettting
+URL: ../../../library/rggobi/html/get--ggobiDataset-1f.html
+
+Entry: "$.ggobi"
+Aliases: $.ggobi [.ggobi
+Keywords: manip
+Description: Get ggobi data.
+URL: ../../../library/rggobi/html/ggobi-8s.html
+
+Entry: ggobi_check_structs
+Aliases: ggobi_check_structs
+Keywords: programming internal
+Description: Check structs
+URL: ../../../library/rggobi/html/ggobi-check-structs-qq.html
+
+Entry: ggobi_count
+Aliases: ggobi_count
+Keywords: dynamic
+Description: Get number of GGobis
+URL: ../../../library/rggobi/html/ggobi-count-bo.html
+
+Entry: ggobi_data_set_variables
+Aliases: ggobi_data_set_variables
+Keywords: manip internal
+Description: Set variable values
+URL: ../../../library/rggobi/html/ggobi-data-set-variables-ad.html
+
+Entry: ggobi.find.file
+Aliases: ggobi.find.file
+Keywords: dynamic internal
+Description: Find GGobi file.
+URL: ../../../library/rggobi/html/ggobi-find-file-bc.html
+
+Entry: ggobi
+Aliases: ggobi
+Keywords: dynamic
+Description: New ggobi
+URL: ../../../library/rggobi/html/ggobi-g8.html
+
+Entry: ggobi_get
+Aliases: ggobi_get
+Keywords: dynamic
+Description: Get GGobi
+URL: ../../../library/rggobi/html/ggobi-get-2m.html
+
+Entry: ggobi_longitudinal
+Aliases: ggobi_longitudinal
+Keywords: dynamic
+Description: Create longitudinal dataset.
+URL: ../../../library/rggobi/html/ggobi-longitudinal-2e.html
+
+Entry: ggobi_set_data_file
+Aliases: ggobi_set_data_file
+Keywords: manip internal
+Description: Set data file.
+URL: ../../../library/rggobi/html/ggobi-set-data-file-be.html
+
+Entry: ggobi_set_data_frame
+Aliases: ggobi_set_data_frame
+Keywords: manip internal
+Description: Set data frame.
+URL: ../../../library/rggobi/html/ggobi-set-data-frame-k0.html
+
+Entry: .ggobi.symbol
+Aliases: .ggobi.symbol
+Keywords: dynamic internal
+Description: Ggobi symbol
+URL: ../../../library/rggobi/html/ggobi-symbol-34.html
+
+Entry: ggobi_version
+Aliases: ggobi_version
+Keywords: dynamic
+Description: Get version
+URL: ../../../library/rggobi/html/ggobi-version-ao.html
+
+Entry: "glyph_colour<-.ggobiDataset"
+Aliases: glyph_colour<-.ggobiDataset glyph_colour<- glyph_color<-
+Keywords: dynamic
+Description: Set glyph colour
+URL: ../../../library/rggobi/html/glyph-colour---ggobiDataset-nv.html
+
+Entry: glyph_colour.ggobiDataset
+Aliases: glyph_colour.ggobiDataset glyph_colour glyph_color
+Keywords: dynamic
+Description: Get glyph colour
+URL: ../../../library/rggobi/html/glyph-colour-ggobiDataset-bd.html
+
+Entry: "glyph_size<-.ggobiDataset"
+Aliases: glyph_size<-.ggobiDataset glyph_size<-
+Keywords: dynamic
+Description: Set glyph size
+URL: ../../../library/rggobi/html/glyph-size---ggobiDataset-9g.html
+
+Entry: glyph_size.ggobiDataset
+Aliases: glyph_size.ggobiDataset glyph_size
+Keywords: dynamic
+Description: Get glyph size
+URL: ../../../library/rggobi/html/glyph-size-ggobiDataset-kk.html
+
+Entry: "glyph_type<-.ggobiDataset"
+Aliases: glyph_type<-.ggobiDataset glyph_type<-
+Keywords: dynamic
+Description: Set glyph type
+URL: ../../../library/rggobi/html/glyph-type---ggobiDataset-5b.html
+
+Entry: glyph_type.ggobiDataset
+Aliases: glyph_type.ggobiDataset glyph_type
+Keywords: dynamic
+Description: Get glyph type.
+URL: ../../../library/rggobi/html/glyph-type-ggobiDataset-21.html
+
+Entry: "ids<-.ggobiDataset"
+Aliases: ids<-.ggobiDataset ids<-
+Keywords: manip
+Description: Set row ids
+URL: ../../../library/rggobi/html/ids---ggobiDataset-gv.html
+
+Entry: ids.ggobiDataset
+Aliases: ids.ggobiDataset ids
+Keywords: manip
+Description: Row ids
+URL: ../../../library/rggobi/html/ids-ggobiDataset-7d.html
+
+Entry: mapGlyphType
+Aliases: mapGlyphType
+Keywords: dynamic internal
+Description: Map glyph type.
+URL: ../../../library/rggobi/html/mapGlyphType-5p.html
+
+Entry: "names<-.ggobiDataset"
+Aliases: names<-.ggobiDataset
+Keywords: attribute internal
+Description: Set column names
+URL: ../../../library/rggobi/html/names---ggobiDataset-1c.html
+
+Entry: names.ggobi
+Aliases: names.ggobi
+Keywords: dynamic
+Description: GGobi names
+URL: ../../../library/rggobi/html/names-ggobi-3e.html
+
+Entry: names.ggobiDataset
+Aliases: names.ggobiDataset
+Keywords: attribute internal
+Description: ggobiDataset column names
+URL: ../../../library/rggobi/html/names-ggobiDataset-va.html
+
+Entry: ncol.ggobiDataset
+Aliases: ncol.ggobiDataset
+Keywords: attribute internal
+Description: ggobiDataset columns
+URL: ../../../library/rggobi/html/ncol-ggobiDataset-32.html
+
+Entry: nrow.ggobiDataset
+Aliases: nrow.ggobiDataset
+Keywords: attribute internal
+Description: ggobiDataset rows
+URL: ../../../library/rggobi/html/nrow-ggobiDataset-zq.html
+
+Entry: print.ggobi
+Aliases: print.ggobi
+Keywords: dynamic internal
+Description: Print ggobi
+URL: ../../../library/rggobi/html/print-ggobi-eg.html
+
+Entry: print.ggobiDataset
+Aliases: print.ggobiDataset
+Keywords: attribute internal
+Description: Print ggobiDataset
+URL: ../../../library/rggobi/html/print-ggobiDataset-37.html
+
+Entry: "rownames<-.ggobiDataset"
+Aliases: rownames<-.ggobiDataset
+Keywords: attribute internal
+Description: Set row names
+URL: ../../../library/rggobi/html/rownames---ggobiDataset-f9.html
+
+Entry: rownames.ggobiDataset
+Aliases: rownames.ggobiDataset
+Keywords: attribute internal
+Description: Get row names
+URL: ../../../library/rggobi/html/rownames-ggobiDataset-ex.html
+
+Entry: selected.ggobiDataset
+Aliases: selected.ggobiDataset selected
+Keywords: dynamic
+Description: Get selection status
+URL: ../../../library/rggobi/html/selected-ggobiDataset-dj.html
+
+Entry: "[<-.ggobi"
+Aliases: [<-.ggobi $<-.ggobi
+Keywords: manip
+Description: [<-.ggobi
+URL: ../../../library/rggobi/html/set--ggobi-7u.html
+
+Entry: "[<-.ggobiDataset"
+Aliases: [<-.ggobiDataset
+Keywords: manip internal
+Description: Assignments for ggobi datasets
+URL: ../../../library/rggobi/html/set--ggobiDataset-av.html
+
+Entry: "shadowed<-.ggobiDataset"
+Aliases: shadowed<-.ggobiDataset shadowed<-
+Keywords: dynamic
+Description: Set shadowed status
+URL: ../../../library/rggobi/html/shadowed---ggobiDataset-04.html
+
+Entry: shadowed.ggobiDataset
+Aliases: shadowed.ggobiDataset shadowed
+Keywords: dynamic
+Description: Get shadowed status
+URL: ../../../library/rggobi/html/shadowed-ggobiDataset-ee.html
+
+Entry: summary.ggobi
+Aliases: summary.ggobi
+Keywords: dynamic
+Description: GGobi summary
+URL: ../../../library/rggobi/html/summary-ggobi-b6.html
+
+Entry: summary.ggobiDataset
+Aliases: summary.ggobiDataset
+Keywords: attribute
+Description: Summarise ggobiDataset.
+URL: ../../../library/rggobi/html/summary-ggobiDataset-2o.html
+
+Entry: valid_ggobi
+Aliases: valid_ggobi
+Keywords: dynamic internal
+Description: Determines whether a reference to an internal ggobi object is valid
+URL: ../../../library/rggobi/html/valid-ggobi-mk.html
+
+Entry: variable_index
+Aliases: variable_index
+Keywords: attribute internal
+Description: Variable index
+URL: ../../../library/rggobi/html/variable-index-h9.html

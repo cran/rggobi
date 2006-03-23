@@ -1,0 +1,61 @@
+<html><head><title>R: [<-.ggobi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for "[<-.ggobi" {rggobi}"><tr><td>"[<-.ggobi" {rggobi}</td><td align="right">R Documentation</td></tr></table>
+<h2>[<-.ggobi</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Add data to ggobi instance.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>"[&lt;-.ggobi"(x, i, value)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+ggobi instance</td></tr>
+<tr valign="top"><td><code>i</code></td>
+<td>
+name of data frame</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+data.frame, or string to path of file to load</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function allows you to add (and eventually) replace
+ggobi to a ggobi instance.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Hadley Wickham &lt;h.wickham@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>g &lt;- ggobi()
+g["a"] &lt;- mtcars
+g$b &lt;- mtcars</pre>
+
+
+
+<hr><div align="center">[Package <em>rggobi</em> version 2.1.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

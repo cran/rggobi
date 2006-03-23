@@ -1,0 +1,71 @@
+ggobi                 package:rggobi                 R Documentation
+
+_N_e_w _g_g_o_b_i
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Creates a new ggobi instance
+
+_U_s_a_g_e:
+
+     ggobi(data, args=character(0), mode=character(0), name = deparse(sys.call()[[2]]), ...)
+
+_A_r_g_u_m_e_n_t_s:
+
+    data: the name of a file containing the data, or a data frame or
+          matrix containing the values
+
+    args: a character vector of command-line arguments
+
+    mode: data format GGobi should expect to read the data from, if
+          reading from a file.
+
+    name: the name to use in GGobi for the dataset, if one is specified
+
+     ...: 
+
+_D_e_t_a_i_l_s:
+
+     Create a new instance of GGobi with or without new data.  Use
+     function whenever you want to create a new GGobi indepdent of the
+     others-they will not share linked plots.  If you want to add
+     another dataset to an existing ggobi, please see '[<-.ggobi'
+
+     There are currently three basic types of functions that you can
+     use with rggobi:
+
+        *  Data getting and setting: see '[.ggobi', and
+           '[.ggobiDataset'
+
+        *  "Automatic" brushing: see 'glyph_colour', 'glyph_size', 
+           'glyph_type', 'shadowed',    'excluded', and the associated
+           setter functions.
+
+        *  Edge modifcation: see 'edges', 'edges<-',
+           'ggobi_longitudinal'
+
+     You will generally spend most of your time working with
+     'ggobDataset's, you retrieve using '$.ggobiDataset',
+     '[.ggobiDataset', or '[[.ggobiDataset'. Most of the time these
+     will operate like normal R datasets while pointing to the data in
+     GGobi so that all changes are kept in sync. If you need to force a
+     ggobiDaataset to be an R 'data.frame' use 'as.data.frame'.
+
+_V_a_l_u_e:
+
+     A ggobi object
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
+     ggobi(ggobi.find.file("data", "flea.csv"))
+     ggobi(ggobi.find.file("data", "flea.xml"))
+     ggobi(mtcars)
+     mtcarsg <- ggobi_get()$mtcars
+     glyph_colour(mtcarsg)
+     glyph_colour(mtcarsg) <- ifelse(mtcarsg$cyl < 4, 1, 2)
+     glyph_size(mtcarsg) <- mtcarsg$cyl
+

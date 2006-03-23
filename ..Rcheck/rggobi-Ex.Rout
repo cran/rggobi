@@ -1,0 +1,3457 @@
+
+R : Copyright 2005, The R Foundation for Statistical Computing
+Version 2.2.0  (2005-10-06 r35749)
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for a HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ### * <HEADER>
+> ###
+> attach(NULL, name = "CheckExEnv")
+> assign(".CheckExEnv", as.environment(2), pos = length(search())) # base
+> ## add some hooks to label plot pages for base and grid graphics
+> setHook("plot.new", ".newplot.hook")
+> setHook("persp", ".newplot.hook")
+> setHook("grid.newpage", ".gridplot.hook")
+> 
+> assign("cleanEx",
++        function(env = .GlobalEnv) {
++ 	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
++            RNGkind("default", "default")
++ 	   set.seed(1)
++    	   options(warn = 1)
++ 	   delayedAssign("T", stop("T used instead of TRUE"),
++ 		  assign.env = .CheckExEnv)
++ 	   delayedAssign("F", stop("F used instead of FALSE"),
++ 		  assign.env = .CheckExEnv)
++ 	   sch <- search()
++ 	   newitems <- sch[! sch %in% .oldSearch]
++ 	   for(item in rev(newitems))
++                eval(substitute(detach(item), list(item=item)))
++ 	   missitems <- .oldSearch[! .oldSearch %in% sch]
++ 	   if(length(missitems))
++ 	       warning("items ", paste(missitems, collapse=", "),
++ 		       " have been removed from the search path")
++        },
++        env = .CheckExEnv)
+> assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) # for now
+> assign("ptime", proc.time(), env = .CheckExEnv)
+> grDevices::postscript("rggobi-Ex.ps")
+> assign("par.postscript", graphics::par(no.readonly = TRUE), env = .CheckExEnv)
+> options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
+> options(warn = 1)    
+> library('rggobi')
+> 
+> assign(".oldSearch", search(), env = .CheckExEnv)
+> assign(".oldNS", loadedNamespaces(), env = .CheckExEnv)
+> cleanEx(); ..nameEx <- "GGobiCall-n1"
+> 
+> ### * GGobiCall-n1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .GGobiCall
+> ### Title: Wrappers for calling C routines in the R-ggobi library.
+> ### Aliases: .GGobiCall .GGobiC
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "addVariable-ggobiDataset-u7"
+> 
+> ### * addVariable-ggobiDataset-u7
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: addVariable.ggobiDataset
+> ### Title: Add variable
+> ### Aliases: addVariable.ggobiDataset addVariable
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "as-data-frame-ggobiDataset-8q"
+> 
+> ### * as-data-frame-ggobiDataset-8q
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "as.data.frame.ggobiDataset"
+> ### Title: Conversion methods
+> ### Aliases: as.data.frame.ggobiDataset as.matrix.ggobiDataset
+> ### Keywords: manip internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "clean-ggobi-bw"
+> 
+> ### * clean-ggobi-bw
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean.ggobi
+> ### Title: Clean ggobi
+> ### Aliases: clean.ggobi
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "close-ggobi-gk"
+> 
+> ### * close-ggobi-gk
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: close.ggobi
+> ### Title: Close GGobi instance
+> ### Aliases: close.ggobi
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> g1 <- ggobi(mtcars)
+> g2 <- ggobi(mtcars)
+> close(g2)
+> close(ggobi_get())
+> 
+> 
+> cleanEx(); ..nameEx <- "colorscheme--b2"
+> 
+> ### * colorscheme--b2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "colorscheme<-"
+> ### Title: Set active colour scheme.
+> ### Aliases: colorscheme<-
+> ### Keywords: color
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> colorscheme(g) <- "Set1 8"
+> colorscheme(g) <- 1
+> 
+> 
+> cleanEx(); ..nameEx <- "colorscheme-6n"
+> 
+> ### * colorscheme-6n
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: colorscheme
+> ### Title: Get active colour scheme
+> ### Aliases: colorscheme
+> ### Keywords: color
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> colorscheme(g)
+$colors
+$colors$D
+[1] 0.5961 0.3059 0.6392
+
+$colors$H
+[1] 0.9686 0.5059 0.7490
+
+$colors$A
+[1] 0.8941 0.1020 0.1098
+
+$colors$B
+[1] 0.2157 0.4941 0.7216
+
+$colors$C
+[1] 0.3020 0.6863 0.2902
+
+$colors$E
+[1] 1.000 0.498 0.000
+
+$colors$G
+[1] 0.6510 0.3373 0.1569
+
+$colors$I
+[1] 0.6 0.6 0.6
+
+$colors$F
+[1] 1.0 1.0 0.2
+
+
+$background
+[1] 0.2 0.2 0.2
+
+$annotations
+[1] 1 1 1
+
+$criticalvalue
+[1] 0
+
+$description
+[1] "From Cindy Brewer; one of the schemes in the ColorBrewer software\n (The sequence of colors has been modified to improve its default\n behavior in ggobi.)"
+
+$type
+qualitative 
+          3 
+
+$system
+rgb 
+  0 
+
+$name
+[1] "Set1 9"
+
+> 
+> 
+> cleanEx(); ..nameEx <- "connecting-edges-cn"
+> 
+> ### * connecting-edges-cn
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: connecting_edges
+> ### Title: Get connecting edges
+> ### Aliases: connecting_edges
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "create-time-edges-for-unit-fp"
+> 
+> ### * create-time-edges-for-unit-fp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: create_time_edges_for_unit
+> ### Title: Create time edges for a unit
+> ### Aliases: create_time_edges_for_unit
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "create-time-edges-ha"
+> 
+> ### * create-time-edges-ha
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: create_time_edges
+> ### Title: Create time edges
+> ### Aliases: create_time_edges
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "dataset-up"
+> 
+> ### * dataset-up
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dataset
+> ### Title: Get ggobi dataset.
+> ### Aliases: dataset
+> ### Keywords: manip internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "dim-ggobiDataset-yy"
+> 
+> ### * dim-ggobiDataset-yy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dim.ggobiDataset
+> ### Title: ggobiDataset dimensions
+> ### Aliases: dim.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "dimnames-ggobiDataset-1n"
+> 
+> ### * dimnames-ggobiDataset-1n
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dimnames.ggobiDataset
+> ### Title: Get dimension names
+> ### Aliases: dimnames.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "edges--p8"
+> 
+> ### * edges--p8
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "edges<-"
+> ### Title: Set edges
+> ### Aliases: edges<-
+> ### Keywords: manip
+> 
+> ### ** Examples
+> cc<-cor(t(swiss),use="p", method="s") 
+> ccd<-sqrt(2*(1-cc)) 
+> a <- which(lower.tri(ccd), arr.ind=TRUE)
+> src <- row.names(swiss)[a[,2]]
+> dest <- row.names(swiss)[a[,1]] 
+> weight <- as.vector(as.dist(ccd))
+> gg <- ggobi(swiss)
+> gg$cor <- data.frame(weight)
+> edges(gg$cor) <- cbind(src, dest)
+> edges(gg$cor)
+        source         destination   
+   [1,] "Courtelary"   "Delemont"    
+   [2,] "Courtelary"   "Franches-Mnt"
+   [3,] "Courtelary"   "Moutier"     
+   [4,] "Courtelary"   "Neuveville"  
+   [5,] "Courtelary"   "Porrentruy"  
+   [6,] "Courtelary"   "Broye"       
+   [7,] "Courtelary"   "Glane"       
+   [8,] "Courtelary"   "Gruyere"     
+   [9,] "Courtelary"   "Sarine"      
+  [10,] "Courtelary"   "Veveyse"     
+  [11,] "Courtelary"   "Aigle"       
+  [12,] "Courtelary"   "Aubonne"     
+  [13,] "Courtelary"   "Avenches"    
+  [14,] "Courtelary"   "Cossonay"    
+  [15,] "Courtelary"   "Echallens"   
+  [16,] "Courtelary"   "Grandson"    
+  [17,] "Courtelary"   "Lausanne"    
+  [18,] "Courtelary"   "La Vallee"   
+  [19,] "Courtelary"   "Lavaux"      
+  [20,] "Courtelary"   "Morges"      
+  [21,] "Courtelary"   "Moudon"      
+  [22,] "Courtelary"   "Nyone"       
+  [23,] "Courtelary"   "Orbe"        
+  [24,] "Courtelary"   "Oron"        
+  [25,] "Courtelary"   "Payerne"     
+  [26,] "Courtelary"   "Paysd'enhaut"
+  [27,] "Courtelary"   "Rolle"       
+  [28,] "Courtelary"   "Vevey"       
+  [29,] "Courtelary"   "Yverdon"     
+  [30,] "Courtelary"   "Conthey"     
+  [31,] "Courtelary"   "Entremont"   
+  [32,] "Courtelary"   "Herens"      
+  [33,] "Courtelary"   "Martigwy"    
+  [34,] "Courtelary"   "Monthey"     
+  [35,] "Courtelary"   "St Maurice"  
+  [36,] "Courtelary"   "Sierre"      
+  [37,] "Courtelary"   "Sion"        
+  [38,] "Courtelary"   "Boudry"      
+  [39,] "Courtelary"   "La Chauxdfnd"
+  [40,] "Courtelary"   "Le Locle"    
+  [41,] "Courtelary"   "Neuchatel"   
+  [42,] "Courtelary"   "Val de Ruz"  
+  [43,] "Courtelary"   "ValdeTravers"
+  [44,] "Courtelary"   "V. De Geneve"
+  [45,] "Courtelary"   "Rive Droite" 
+  [46,] "Courtelary"   "Rive Gauche" 
+  [47,] "Delemont"     "Franches-Mnt"
+  [48,] "Delemont"     "Moutier"     
+  [49,] "Delemont"     "Neuveville"  
+  [50,] "Delemont"     "Porrentruy"  
+  [51,] "Delemont"     "Broye"       
+  [52,] "Delemont"     "Glane"       
+  [53,] "Delemont"     "Gruyere"     
+  [54,] "Delemont"     "Sarine"      
+  [55,] "Delemont"     "Veveyse"     
+  [56,] "Delemont"     "Aigle"       
+  [57,] "Delemont"     "Aubonne"     
+  [58,] "Delemont"     "Avenches"    
+  [59,] "Delemont"     "Cossonay"    
+  [60,] "Delemont"     "Echallens"   
+  [61,] "Delemont"     "Grandson"    
+  [62,] "Delemont"     "Lausanne"    
+  [63,] "Delemont"     "La Vallee"   
+  [64,] "Delemont"     "Lavaux"      
+  [65,] "Delemont"     "Morges"      
+  [66,] "Delemont"     "Moudon"      
+  [67,] "Delemont"     "Nyone"       
+  [68,] "Delemont"     "Orbe"        
+  [69,] "Delemont"     "Oron"        
+  [70,] "Delemont"     "Payerne"     
+  [71,] "Delemont"     "Paysd'enhaut"
+  [72,] "Delemont"     "Rolle"       
+  [73,] "Delemont"     "Vevey"       
+  [74,] "Delemont"     "Yverdon"     
+  [75,] "Delemont"     "Conthey"     
+  [76,] "Delemont"     "Entremont"   
+  [77,] "Delemont"     "Herens"      
+  [78,] "Delemont"     "Martigwy"    
+  [79,] "Delemont"     "Monthey"     
+  [80,] "Delemont"     "St Maurice"  
+  [81,] "Delemont"     "Sierre"      
+  [82,] "Delemont"     "Sion"        
+  [83,] "Delemont"     "Boudry"      
+  [84,] "Delemont"     "La Chauxdfnd"
+  [85,] "Delemont"     "Le Locle"    
+  [86,] "Delemont"     "Neuchatel"   
+  [87,] "Delemont"     "Val de Ruz"  
+  [88,] "Delemont"     "ValdeTravers"
+  [89,] "Delemont"     "V. De Geneve"
+  [90,] "Delemont"     "Rive Droite" 
+  [91,] "Delemont"     "Rive Gauche" 
+  [92,] "Franches-Mnt" "Moutier"     
+  [93,] "Franches-Mnt" "Neuveville"  
+  [94,] "Franches-Mnt" "Porrentruy"  
+  [95,] "Franches-Mnt" "Broye"       
+  [96,] "Franches-Mnt" "Glane"       
+  [97,] "Franches-Mnt" "Gruyere"     
+  [98,] "Franches-Mnt" "Sarine"      
+  [99,] "Franches-Mnt" "Veveyse"     
+ [100,] "Franches-Mnt" "Aigle"       
+ [101,] "Franches-Mnt" "Aubonne"     
+ [102,] "Franches-Mnt" "Avenches"    
+ [103,] "Franches-Mnt" "Cossonay"    
+ [104,] "Franches-Mnt" "Echallens"   
+ [105,] "Franches-Mnt" "Grandson"    
+ [106,] "Franches-Mnt" "Lausanne"    
+ [107,] "Franches-Mnt" "La Vallee"   
+ [108,] "Franches-Mnt" "Lavaux"      
+ [109,] "Franches-Mnt" "Morges"      
+ [110,] "Franches-Mnt" "Moudon"      
+ [111,] "Franches-Mnt" "Nyone"       
+ [112,] "Franches-Mnt" "Orbe"        
+ [113,] "Franches-Mnt" "Oron"        
+ [114,] "Franches-Mnt" "Payerne"     
+ [115,] "Franches-Mnt" "Paysd'enhaut"
+ [116,] "Franches-Mnt" "Rolle"       
+ [117,] "Franches-Mnt" "Vevey"       
+ [118,] "Franches-Mnt" "Yverdon"     
+ [119,] "Franches-Mnt" "Conthey"     
+ [120,] "Franches-Mnt" "Entremont"   
+ [121,] "Franches-Mnt" "Herens"      
+ [122,] "Franches-Mnt" "Martigwy"    
+ [123,] "Franches-Mnt" "Monthey"     
+ [124,] "Franches-Mnt" "St Maurice"  
+ [125,] "Franches-Mnt" "Sierre"      
+ [126,] "Franches-Mnt" "Sion"        
+ [127,] "Franches-Mnt" "Boudry"      
+ [128,] "Franches-Mnt" "La Chauxdfnd"
+ [129,] "Franches-Mnt" "Le Locle"    
+ [130,] "Franches-Mnt" "Neuchatel"   
+ [131,] "Franches-Mnt" "Val de Ruz"  
+ [132,] "Franches-Mnt" "ValdeTravers"
+ [133,] "Franches-Mnt" "V. De Geneve"
+ [134,] "Franches-Mnt" "Rive Droite" 
+ [135,] "Franches-Mnt" "Rive Gauche" 
+ [136,] "Moutier"      "Neuveville"  
+ [137,] "Moutier"      "Porrentruy"  
+ [138,] "Moutier"      "Broye"       
+ [139,] "Moutier"      "Glane"       
+ [140,] "Moutier"      "Gruyere"     
+ [141,] "Moutier"      "Sarine"      
+ [142,] "Moutier"      "Veveyse"     
+ [143,] "Moutier"      "Aigle"       
+ [144,] "Moutier"      "Aubonne"     
+ [145,] "Moutier"      "Avenches"    
+ [146,] "Moutier"      "Cossonay"    
+ [147,] "Moutier"      "Echallens"   
+ [148,] "Moutier"      "Grandson"    
+ [149,] "Moutier"      "Lausanne"    
+ [150,] "Moutier"      "La Vallee"   
+ [151,] "Moutier"      "Lavaux"      
+ [152,] "Moutier"      "Morges"      
+ [153,] "Moutier"      "Moudon"      
+ [154,] "Moutier"      "Nyone"       
+ [155,] "Moutier"      "Orbe"        
+ [156,] "Moutier"      "Oron"        
+ [157,] "Moutier"      "Payerne"     
+ [158,] "Moutier"      "Paysd'enhaut"
+ [159,] "Moutier"      "Rolle"       
+ [160,] "Moutier"      "Vevey"       
+ [161,] "Moutier"      "Yverdon"     
+ [162,] "Moutier"      "Conthey"     
+ [163,] "Moutier"      "Entremont"   
+ [164,] "Moutier"      "Herens"      
+ [165,] "Moutier"      "Martigwy"    
+ [166,] "Moutier"      "Monthey"     
+ [167,] "Moutier"      "St Maurice"  
+ [168,] "Moutier"      "Sierre"      
+ [169,] "Moutier"      "Sion"        
+ [170,] "Moutier"      "Boudry"      
+ [171,] "Moutier"      "La Chauxdfnd"
+ [172,] "Moutier"      "Le Locle"    
+ [173,] "Moutier"      "Neuchatel"   
+ [174,] "Moutier"      "Val de Ruz"  
+ [175,] "Moutier"      "ValdeTravers"
+ [176,] "Moutier"      "V. De Geneve"
+ [177,] "Moutier"      "Rive Droite" 
+ [178,] "Moutier"      "Rive Gauche" 
+ [179,] "Neuveville"   "Porrentruy"  
+ [180,] "Neuveville"   "Broye"       
+ [181,] "Neuveville"   "Glane"       
+ [182,] "Neuveville"   "Gruyere"     
+ [183,] "Neuveville"   "Sarine"      
+ [184,] "Neuveville"   "Veveyse"     
+ [185,] "Neuveville"   "Aigle"       
+ [186,] "Neuveville"   "Aubonne"     
+ [187,] "Neuveville"   "Avenches"    
+ [188,] "Neuveville"   "Cossonay"    
+ [189,] "Neuveville"   "Echallens"   
+ [190,] "Neuveville"   "Grandson"    
+ [191,] "Neuveville"   "Lausanne"    
+ [192,] "Neuveville"   "La Vallee"   
+ [193,] "Neuveville"   "Lavaux"      
+ [194,] "Neuveville"   "Morges"      
+ [195,] "Neuveville"   "Moudon"      
+ [196,] "Neuveville"   "Nyone"       
+ [197,] "Neuveville"   "Orbe"        
+ [198,] "Neuveville"   "Oron"        
+ [199,] "Neuveville"   "Payerne"     
+ [200,] "Neuveville"   "Paysd'enhaut"
+ [201,] "Neuveville"   "Rolle"       
+ [202,] "Neuveville"   "Vevey"       
+ [203,] "Neuveville"   "Yverdon"     
+ [204,] "Neuveville"   "Conthey"     
+ [205,] "Neuveville"   "Entremont"   
+ [206,] "Neuveville"   "Herens"      
+ [207,] "Neuveville"   "Martigwy"    
+ [208,] "Neuveville"   "Monthey"     
+ [209,] "Neuveville"   "St Maurice"  
+ [210,] "Neuveville"   "Sierre"      
+ [211,] "Neuveville"   "Sion"        
+ [212,] "Neuveville"   "Boudry"      
+ [213,] "Neuveville"   "La Chauxdfnd"
+ [214,] "Neuveville"   "Le Locle"    
+ [215,] "Neuveville"   "Neuchatel"   
+ [216,] "Neuveville"   "Val de Ruz"  
+ [217,] "Neuveville"   "ValdeTravers"
+ [218,] "Neuveville"   "V. De Geneve"
+ [219,] "Neuveville"   "Rive Droite" 
+ [220,] "Neuveville"   "Rive Gauche" 
+ [221,] "Porrentruy"   "Broye"       
+ [222,] "Porrentruy"   "Glane"       
+ [223,] "Porrentruy"   "Gruyere"     
+ [224,] "Porrentruy"   "Sarine"      
+ [225,] "Porrentruy"   "Veveyse"     
+ [226,] "Porrentruy"   "Aigle"       
+ [227,] "Porrentruy"   "Aubonne"     
+ [228,] "Porrentruy"   "Avenches"    
+ [229,] "Porrentruy"   "Cossonay"    
+ [230,] "Porrentruy"   "Echallens"   
+ [231,] "Porrentruy"   "Grandson"    
+ [232,] "Porrentruy"   "Lausanne"    
+ [233,] "Porrentruy"   "La Vallee"   
+ [234,] "Porrentruy"   "Lavaux"      
+ [235,] "Porrentruy"   "Morges"      
+ [236,] "Porrentruy"   "Moudon"      
+ [237,] "Porrentruy"   "Nyone"       
+ [238,] "Porrentruy"   "Orbe"        
+ [239,] "Porrentruy"   "Oron"        
+ [240,] "Porrentruy"   "Payerne"     
+ [241,] "Porrentruy"   "Paysd'enhaut"
+ [242,] "Porrentruy"   "Rolle"       
+ [243,] "Porrentruy"   "Vevey"       
+ [244,] "Porrentruy"   "Yverdon"     
+ [245,] "Porrentruy"   "Conthey"     
+ [246,] "Porrentruy"   "Entremont"   
+ [247,] "Porrentruy"   "Herens"      
+ [248,] "Porrentruy"   "Martigwy"    
+ [249,] "Porrentruy"   "Monthey"     
+ [250,] "Porrentruy"   "St Maurice"  
+ [251,] "Porrentruy"   "Sierre"      
+ [252,] "Porrentruy"   "Sion"        
+ [253,] "Porrentruy"   "Boudry"      
+ [254,] "Porrentruy"   "La Chauxdfnd"
+ [255,] "Porrentruy"   "Le Locle"    
+ [256,] "Porrentruy"   "Neuchatel"   
+ [257,] "Porrentruy"   "Val de Ruz"  
+ [258,] "Porrentruy"   "ValdeTravers"
+ [259,] "Porrentruy"   "V. De Geneve"
+ [260,] "Porrentruy"   "Rive Droite" 
+ [261,] "Porrentruy"   "Rive Gauche" 
+ [262,] "Broye"        "Glane"       
+ [263,] "Broye"        "Gruyere"     
+ [264,] "Broye"        "Sarine"      
+ [265,] "Broye"        "Veveyse"     
+ [266,] "Broye"        "Aigle"       
+ [267,] "Broye"        "Aubonne"     
+ [268,] "Broye"        "Avenches"    
+ [269,] "Broye"        "Cossonay"    
+ [270,] "Broye"        "Echallens"   
+ [271,] "Broye"        "Grandson"    
+ [272,] "Broye"        "Lausanne"    
+ [273,] "Broye"        "La Vallee"   
+ [274,] "Broye"        "Lavaux"      
+ [275,] "Broye"        "Morges"      
+ [276,] "Broye"        "Moudon"      
+ [277,] "Broye"        "Nyone"       
+ [278,] "Broye"        "Orbe"        
+ [279,] "Broye"        "Oron"        
+ [280,] "Broye"        "Payerne"     
+ [281,] "Broye"        "Paysd'enhaut"
+ [282,] "Broye"        "Rolle"       
+ [283,] "Broye"        "Vevey"       
+ [284,] "Broye"        "Yverdon"     
+ [285,] "Broye"        "Conthey"     
+ [286,] "Broye"        "Entremont"   
+ [287,] "Broye"        "Herens"      
+ [288,] "Broye"        "Martigwy"    
+ [289,] "Broye"        "Monthey"     
+ [290,] "Broye"        "St Maurice"  
+ [291,] "Broye"        "Sierre"      
+ [292,] "Broye"        "Sion"        
+ [293,] "Broye"        "Boudry"      
+ [294,] "Broye"        "La Chauxdfnd"
+ [295,] "Broye"        "Le Locle"    
+ [296,] "Broye"        "Neuchatel"   
+ [297,] "Broye"        "Val de Ruz"  
+ [298,] "Broye"        "ValdeTravers"
+ [299,] "Broye"        "V. De Geneve"
+ [300,] "Broye"        "Rive Droite" 
+ [301,] "Broye"        "Rive Gauche" 
+ [302,] "Glane"        "Gruyere"     
+ [303,] "Glane"        "Sarine"      
+ [304,] "Glane"        "Veveyse"     
+ [305,] "Glane"        "Aigle"       
+ [306,] "Glane"        "Aubonne"     
+ [307,] "Glane"        "Avenches"    
+ [308,] "Glane"        "Cossonay"    
+ [309,] "Glane"        "Echallens"   
+ [310,] "Glane"        "Grandson"    
+ [311,] "Glane"        "Lausanne"    
+ [312,] "Glane"        "La Vallee"   
+ [313,] "Glane"        "Lavaux"      
+ [314,] "Glane"        "Morges"      
+ [315,] "Glane"        "Moudon"      
+ [316,] "Glane"        "Nyone"       
+ [317,] "Glane"        "Orbe"        
+ [318,] "Glane"        "Oron"        
+ [319,] "Glane"        "Payerne"     
+ [320,] "Glane"        "Paysd'enhaut"
+ [321,] "Glane"        "Rolle"       
+ [322,] "Glane"        "Vevey"       
+ [323,] "Glane"        "Yverdon"     
+ [324,] "Glane"        "Conthey"     
+ [325,] "Glane"        "Entremont"   
+ [326,] "Glane"        "Herens"      
+ [327,] "Glane"        "Martigwy"    
+ [328,] "Glane"        "Monthey"     
+ [329,] "Glane"        "St Maurice"  
+ [330,] "Glane"        "Sierre"      
+ [331,] "Glane"        "Sion"        
+ [332,] "Glane"        "Boudry"      
+ [333,] "Glane"        "La Chauxdfnd"
+ [334,] "Glane"        "Le Locle"    
+ [335,] "Glane"        "Neuchatel"   
+ [336,] "Glane"        "Val de Ruz"  
+ [337,] "Glane"        "ValdeTravers"
+ [338,] "Glane"        "V. De Geneve"
+ [339,] "Glane"        "Rive Droite" 
+ [340,] "Glane"        "Rive Gauche" 
+ [341,] "Gruyere"      "Sarine"      
+ [342,] "Gruyere"      "Veveyse"     
+ [343,] "Gruyere"      "Aigle"       
+ [344,] "Gruyere"      "Aubonne"     
+ [345,] "Gruyere"      "Avenches"    
+ [346,] "Gruyere"      "Cossonay"    
+ [347,] "Gruyere"      "Echallens"   
+ [348,] "Gruyere"      "Grandson"    
+ [349,] "Gruyere"      "Lausanne"    
+ [350,] "Gruyere"      "La Vallee"   
+ [351,] "Gruyere"      "Lavaux"      
+ [352,] "Gruyere"      "Morges"      
+ [353,] "Gruyere"      "Moudon"      
+ [354,] "Gruyere"      "Nyone"       
+ [355,] "Gruyere"      "Orbe"        
+ [356,] "Gruyere"      "Oron"        
+ [357,] "Gruyere"      "Payerne"     
+ [358,] "Gruyere"      "Paysd'enhaut"
+ [359,] "Gruyere"      "Rolle"       
+ [360,] "Gruyere"      "Vevey"       
+ [361,] "Gruyere"      "Yverdon"     
+ [362,] "Gruyere"      "Conthey"     
+ [363,] "Gruyere"      "Entremont"   
+ [364,] "Gruyere"      "Herens"      
+ [365,] "Gruyere"      "Martigwy"    
+ [366,] "Gruyere"      "Monthey"     
+ [367,] "Gruyere"      "St Maurice"  
+ [368,] "Gruyere"      "Sierre"      
+ [369,] "Gruyere"      "Sion"        
+ [370,] "Gruyere"      "Boudry"      
+ [371,] "Gruyere"      "La Chauxdfnd"
+ [372,] "Gruyere"      "Le Locle"    
+ [373,] "Gruyere"      "Neuchatel"   
+ [374,] "Gruyere"      "Val de Ruz"  
+ [375,] "Gruyere"      "ValdeTravers"
+ [376,] "Gruyere"      "V. De Geneve"
+ [377,] "Gruyere"      "Rive Droite" 
+ [378,] "Gruyere"      "Rive Gauche" 
+ [379,] "Sarine"       "Veveyse"     
+ [380,] "Sarine"       "Aigle"       
+ [381,] "Sarine"       "Aubonne"     
+ [382,] "Sarine"       "Avenches"    
+ [383,] "Sarine"       "Cossonay"    
+ [384,] "Sarine"       "Echallens"   
+ [385,] "Sarine"       "Grandson"    
+ [386,] "Sarine"       "Lausanne"    
+ [387,] "Sarine"       "La Vallee"   
+ [388,] "Sarine"       "Lavaux"      
+ [389,] "Sarine"       "Morges"      
+ [390,] "Sarine"       "Moudon"      
+ [391,] "Sarine"       "Nyone"       
+ [392,] "Sarine"       "Orbe"        
+ [393,] "Sarine"       "Oron"        
+ [394,] "Sarine"       "Payerne"     
+ [395,] "Sarine"       "Paysd'enhaut"
+ [396,] "Sarine"       "Rolle"       
+ [397,] "Sarine"       "Vevey"       
+ [398,] "Sarine"       "Yverdon"     
+ [399,] "Sarine"       "Conthey"     
+ [400,] "Sarine"       "Entremont"   
+ [401,] "Sarine"       "Herens"      
+ [402,] "Sarine"       "Martigwy"    
+ [403,] "Sarine"       "Monthey"     
+ [404,] "Sarine"       "St Maurice"  
+ [405,] "Sarine"       "Sierre"      
+ [406,] "Sarine"       "Sion"        
+ [407,] "Sarine"       "Boudry"      
+ [408,] "Sarine"       "La Chauxdfnd"
+ [409,] "Sarine"       "Le Locle"    
+ [410,] "Sarine"       "Neuchatel"   
+ [411,] "Sarine"       "Val de Ruz"  
+ [412,] "Sarine"       "ValdeTravers"
+ [413,] "Sarine"       "V. De Geneve"
+ [414,] "Sarine"       "Rive Droite" 
+ [415,] "Sarine"       "Rive Gauche" 
+ [416,] "Veveyse"      "Aigle"       
+ [417,] "Veveyse"      "Aubonne"     
+ [418,] "Veveyse"      "Avenches"    
+ [419,] "Veveyse"      "Cossonay"    
+ [420,] "Veveyse"      "Echallens"   
+ [421,] "Veveyse"      "Grandson"    
+ [422,] "Veveyse"      "Lausanne"    
+ [423,] "Veveyse"      "La Vallee"   
+ [424,] "Veveyse"      "Lavaux"      
+ [425,] "Veveyse"      "Morges"      
+ [426,] "Veveyse"      "Moudon"      
+ [427,] "Veveyse"      "Nyone"       
+ [428,] "Veveyse"      "Orbe"        
+ [429,] "Veveyse"      "Oron"        
+ [430,] "Veveyse"      "Payerne"     
+ [431,] "Veveyse"      "Paysd'enhaut"
+ [432,] "Veveyse"      "Rolle"       
+ [433,] "Veveyse"      "Vevey"       
+ [434,] "Veveyse"      "Yverdon"     
+ [435,] "Veveyse"      "Conthey"     
+ [436,] "Veveyse"      "Entremont"   
+ [437,] "Veveyse"      "Herens"      
+ [438,] "Veveyse"      "Martigwy"    
+ [439,] "Veveyse"      "Monthey"     
+ [440,] "Veveyse"      "St Maurice"  
+ [441,] "Veveyse"      "Sierre"      
+ [442,] "Veveyse"      "Sion"        
+ [443,] "Veveyse"      "Boudry"      
+ [444,] "Veveyse"      "La Chauxdfnd"
+ [445,] "Veveyse"      "Le Locle"    
+ [446,] "Veveyse"      "Neuchatel"   
+ [447,] "Veveyse"      "Val de Ruz"  
+ [448,] "Veveyse"      "ValdeTravers"
+ [449,] "Veveyse"      "V. De Geneve"
+ [450,] "Veveyse"      "Rive Droite" 
+ [451,] "Veveyse"      "Rive Gauche" 
+ [452,] "Aigle"        "Aubonne"     
+ [453,] "Aigle"        "Avenches"    
+ [454,] "Aigle"        "Cossonay"    
+ [455,] "Aigle"        "Echallens"   
+ [456,] "Aigle"        "Grandson"    
+ [457,] "Aigle"        "Lausanne"    
+ [458,] "Aigle"        "La Vallee"   
+ [459,] "Aigle"        "Lavaux"      
+ [460,] "Aigle"        "Morges"      
+ [461,] "Aigle"        "Moudon"      
+ [462,] "Aigle"        "Nyone"       
+ [463,] "Aigle"        "Orbe"        
+ [464,] "Aigle"        "Oron"        
+ [465,] "Aigle"        "Payerne"     
+ [466,] "Aigle"        "Paysd'enhaut"
+ [467,] "Aigle"        "Rolle"       
+ [468,] "Aigle"        "Vevey"       
+ [469,] "Aigle"        "Yverdon"     
+ [470,] "Aigle"        "Conthey"     
+ [471,] "Aigle"        "Entremont"   
+ [472,] "Aigle"        "Herens"      
+ [473,] "Aigle"        "Martigwy"    
+ [474,] "Aigle"        "Monthey"     
+ [475,] "Aigle"        "St Maurice"  
+ [476,] "Aigle"        "Sierre"      
+ [477,] "Aigle"        "Sion"        
+ [478,] "Aigle"        "Boudry"      
+ [479,] "Aigle"        "La Chauxdfnd"
+ [480,] "Aigle"        "Le Locle"    
+ [481,] "Aigle"        "Neuchatel"   
+ [482,] "Aigle"        "Val de Ruz"  
+ [483,] "Aigle"        "ValdeTravers"
+ [484,] "Aigle"        "V. De Geneve"
+ [485,] "Aigle"        "Rive Droite" 
+ [486,] "Aigle"        "Rive Gauche" 
+ [487,] "Aubonne"      "Avenches"    
+ [488,] "Aubonne"      "Cossonay"    
+ [489,] "Aubonne"      "Echallens"   
+ [490,] "Aubonne"      "Grandson"    
+ [491,] "Aubonne"      "Lausanne"    
+ [492,] "Aubonne"      "La Vallee"   
+ [493,] "Aubonne"      "Lavaux"      
+ [494,] "Aubonne"      "Morges"      
+ [495,] "Aubonne"      "Moudon"      
+ [496,] "Aubonne"      "Nyone"       
+ [497,] "Aubonne"      "Orbe"        
+ [498,] "Aubonne"      "Oron"        
+ [499,] "Aubonne"      "Payerne"     
+ [500,] "Aubonne"      "Paysd'enhaut"
+ [501,] "Aubonne"      "Rolle"       
+ [502,] "Aubonne"      "Vevey"       
+ [503,] "Aubonne"      "Yverdon"     
+ [504,] "Aubonne"      "Conthey"     
+ [505,] "Aubonne"      "Entremont"   
+ [506,] "Aubonne"      "Herens"      
+ [507,] "Aubonne"      "Martigwy"    
+ [508,] "Aubonne"      "Monthey"     
+ [509,] "Aubonne"      "St Maurice"  
+ [510,] "Aubonne"      "Sierre"      
+ [511,] "Aubonne"      "Sion"        
+ [512,] "Aubonne"      "Boudry"      
+ [513,] "Aubonne"      "La Chauxdfnd"
+ [514,] "Aubonne"      "Le Locle"    
+ [515,] "Aubonne"      "Neuchatel"   
+ [516,] "Aubonne"      "Val de Ruz"  
+ [517,] "Aubonne"      "ValdeTravers"
+ [518,] "Aubonne"      "V. De Geneve"
+ [519,] "Aubonne"      "Rive Droite" 
+ [520,] "Aubonne"      "Rive Gauche" 
+ [521,] "Avenches"     "Cossonay"    
+ [522,] "Avenches"     "Echallens"   
+ [523,] "Avenches"     "Grandson"    
+ [524,] "Avenches"     "Lausanne"    
+ [525,] "Avenches"     "La Vallee"   
+ [526,] "Avenches"     "Lavaux"      
+ [527,] "Avenches"     "Morges"      
+ [528,] "Avenches"     "Moudon"      
+ [529,] "Avenches"     "Nyone"       
+ [530,] "Avenches"     "Orbe"        
+ [531,] "Avenches"     "Oron"        
+ [532,] "Avenches"     "Payerne"     
+ [533,] "Avenches"     "Paysd'enhaut"
+ [534,] "Avenches"     "Rolle"       
+ [535,] "Avenches"     "Vevey"       
+ [536,] "Avenches"     "Yverdon"     
+ [537,] "Avenches"     "Conthey"     
+ [538,] "Avenches"     "Entremont"   
+ [539,] "Avenches"     "Herens"      
+ [540,] "Avenches"     "Martigwy"    
+ [541,] "Avenches"     "Monthey"     
+ [542,] "Avenches"     "St Maurice"  
+ [543,] "Avenches"     "Sierre"      
+ [544,] "Avenches"     "Sion"        
+ [545,] "Avenches"     "Boudry"      
+ [546,] "Avenches"     "La Chauxdfnd"
+ [547,] "Avenches"     "Le Locle"    
+ [548,] "Avenches"     "Neuchatel"   
+ [549,] "Avenches"     "Val de Ruz"  
+ [550,] "Avenches"     "ValdeTravers"
+ [551,] "Avenches"     "V. De Geneve"
+ [552,] "Avenches"     "Rive Droite" 
+ [553,] "Avenches"     "Rive Gauche" 
+ [554,] "Cossonay"     "Echallens"   
+ [555,] "Cossonay"     "Grandson"    
+ [556,] "Cossonay"     "Lausanne"    
+ [557,] "Cossonay"     "La Vallee"   
+ [558,] "Cossonay"     "Lavaux"      
+ [559,] "Cossonay"     "Morges"      
+ [560,] "Cossonay"     "Moudon"      
+ [561,] "Cossonay"     "Nyone"       
+ [562,] "Cossonay"     "Orbe"        
+ [563,] "Cossonay"     "Oron"        
+ [564,] "Cossonay"     "Payerne"     
+ [565,] "Cossonay"     "Paysd'enhaut"
+ [566,] "Cossonay"     "Rolle"       
+ [567,] "Cossonay"     "Vevey"       
+ [568,] "Cossonay"     "Yverdon"     
+ [569,] "Cossonay"     "Conthey"     
+ [570,] "Cossonay"     "Entremont"   
+ [571,] "Cossonay"     "Herens"      
+ [572,] "Cossonay"     "Martigwy"    
+ [573,] "Cossonay"     "Monthey"     
+ [574,] "Cossonay"     "St Maurice"  
+ [575,] "Cossonay"     "Sierre"      
+ [576,] "Cossonay"     "Sion"        
+ [577,] "Cossonay"     "Boudry"      
+ [578,] "Cossonay"     "La Chauxdfnd"
+ [579,] "Cossonay"     "Le Locle"    
+ [580,] "Cossonay"     "Neuchatel"   
+ [581,] "Cossonay"     "Val de Ruz"  
+ [582,] "Cossonay"     "ValdeTravers"
+ [583,] "Cossonay"     "V. De Geneve"
+ [584,] "Cossonay"     "Rive Droite" 
+ [585,] "Cossonay"     "Rive Gauche" 
+ [586,] "Echallens"    "Grandson"    
+ [587,] "Echallens"    "Lausanne"    
+ [588,] "Echallens"    "La Vallee"   
+ [589,] "Echallens"    "Lavaux"      
+ [590,] "Echallens"    "Morges"      
+ [591,] "Echallens"    "Moudon"      
+ [592,] "Echallens"    "Nyone"       
+ [593,] "Echallens"    "Orbe"        
+ [594,] "Echallens"    "Oron"        
+ [595,] "Echallens"    "Payerne"     
+ [596,] "Echallens"    "Paysd'enhaut"
+ [597,] "Echallens"    "Rolle"       
+ [598,] "Echallens"    "Vevey"       
+ [599,] "Echallens"    "Yverdon"     
+ [600,] "Echallens"    "Conthey"     
+ [601,] "Echallens"    "Entremont"   
+ [602,] "Echallens"    "Herens"      
+ [603,] "Echallens"    "Martigwy"    
+ [604,] "Echallens"    "Monthey"     
+ [605,] "Echallens"    "St Maurice"  
+ [606,] "Echallens"    "Sierre"      
+ [607,] "Echallens"    "Sion"        
+ [608,] "Echallens"    "Boudry"      
+ [609,] "Echallens"    "La Chauxdfnd"
+ [610,] "Echallens"    "Le Locle"    
+ [611,] "Echallens"    "Neuchatel"   
+ [612,] "Echallens"    "Val de Ruz"  
+ [613,] "Echallens"    "ValdeTravers"
+ [614,] "Echallens"    "V. De Geneve"
+ [615,] "Echallens"    "Rive Droite" 
+ [616,] "Echallens"    "Rive Gauche" 
+ [617,] "Grandson"     "Lausanne"    
+ [618,] "Grandson"     "La Vallee"   
+ [619,] "Grandson"     "Lavaux"      
+ [620,] "Grandson"     "Morges"      
+ [621,] "Grandson"     "Moudon"      
+ [622,] "Grandson"     "Nyone"       
+ [623,] "Grandson"     "Orbe"        
+ [624,] "Grandson"     "Oron"        
+ [625,] "Grandson"     "Payerne"     
+ [626,] "Grandson"     "Paysd'enhaut"
+ [627,] "Grandson"     "Rolle"       
+ [628,] "Grandson"     "Vevey"       
+ [629,] "Grandson"     "Yverdon"     
+ [630,] "Grandson"     "Conthey"     
+ [631,] "Grandson"     "Entremont"   
+ [632,] "Grandson"     "Herens"      
+ [633,] "Grandson"     "Martigwy"    
+ [634,] "Grandson"     "Monthey"     
+ [635,] "Grandson"     "St Maurice"  
+ [636,] "Grandson"     "Sierre"      
+ [637,] "Grandson"     "Sion"        
+ [638,] "Grandson"     "Boudry"      
+ [639,] "Grandson"     "La Chauxdfnd"
+ [640,] "Grandson"     "Le Locle"    
+ [641,] "Grandson"     "Neuchatel"   
+ [642,] "Grandson"     "Val de Ruz"  
+ [643,] "Grandson"     "ValdeTravers"
+ [644,] "Grandson"     "V. De Geneve"
+ [645,] "Grandson"     "Rive Droite" 
+ [646,] "Grandson"     "Rive Gauche" 
+ [647,] "Lausanne"     "La Vallee"   
+ [648,] "Lausanne"     "Lavaux"      
+ [649,] "Lausanne"     "Morges"      
+ [650,] "Lausanne"     "Moudon"      
+ [651,] "Lausanne"     "Nyone"       
+ [652,] "Lausanne"     "Orbe"        
+ [653,] "Lausanne"     "Oron"        
+ [654,] "Lausanne"     "Payerne"     
+ [655,] "Lausanne"     "Paysd'enhaut"
+ [656,] "Lausanne"     "Rolle"       
+ [657,] "Lausanne"     "Vevey"       
+ [658,] "Lausanne"     "Yverdon"     
+ [659,] "Lausanne"     "Conthey"     
+ [660,] "Lausanne"     "Entremont"   
+ [661,] "Lausanne"     "Herens"      
+ [662,] "Lausanne"     "Martigwy"    
+ [663,] "Lausanne"     "Monthey"     
+ [664,] "Lausanne"     "St Maurice"  
+ [665,] "Lausanne"     "Sierre"      
+ [666,] "Lausanne"     "Sion"        
+ [667,] "Lausanne"     "Boudry"      
+ [668,] "Lausanne"     "La Chauxdfnd"
+ [669,] "Lausanne"     "Le Locle"    
+ [670,] "Lausanne"     "Neuchatel"   
+ [671,] "Lausanne"     "Val de Ruz"  
+ [672,] "Lausanne"     "ValdeTravers"
+ [673,] "Lausanne"     "V. De Geneve"
+ [674,] "Lausanne"     "Rive Droite" 
+ [675,] "Lausanne"     "Rive Gauche" 
+ [676,] "La Vallee"    "Lavaux"      
+ [677,] "La Vallee"    "Morges"      
+ [678,] "La Vallee"    "Moudon"      
+ [679,] "La Vallee"    "Nyone"       
+ [680,] "La Vallee"    "Orbe"        
+ [681,] "La Vallee"    "Oron"        
+ [682,] "La Vallee"    "Payerne"     
+ [683,] "La Vallee"    "Paysd'enhaut"
+ [684,] "La Vallee"    "Rolle"       
+ [685,] "La Vallee"    "Vevey"       
+ [686,] "La Vallee"    "Yverdon"     
+ [687,] "La Vallee"    "Conthey"     
+ [688,] "La Vallee"    "Entremont"   
+ [689,] "La Vallee"    "Herens"      
+ [690,] "La Vallee"    "Martigwy"    
+ [691,] "La Vallee"    "Monthey"     
+ [692,] "La Vallee"    "St Maurice"  
+ [693,] "La Vallee"    "Sierre"      
+ [694,] "La Vallee"    "Sion"        
+ [695,] "La Vallee"    "Boudry"      
+ [696,] "La Vallee"    "La Chauxdfnd"
+ [697,] "La Vallee"    "Le Locle"    
+ [698,] "La Vallee"    "Neuchatel"   
+ [699,] "La Vallee"    "Val de Ruz"  
+ [700,] "La Vallee"    "ValdeTravers"
+ [701,] "La Vallee"    "V. De Geneve"
+ [702,] "La Vallee"    "Rive Droite" 
+ [703,] "La Vallee"    "Rive Gauche" 
+ [704,] "Lavaux"       "Morges"      
+ [705,] "Lavaux"       "Moudon"      
+ [706,] "Lavaux"       "Nyone"       
+ [707,] "Lavaux"       "Orbe"        
+ [708,] "Lavaux"       "Oron"        
+ [709,] "Lavaux"       "Payerne"     
+ [710,] "Lavaux"       "Paysd'enhaut"
+ [711,] "Lavaux"       "Rolle"       
+ [712,] "Lavaux"       "Vevey"       
+ [713,] "Lavaux"       "Yverdon"     
+ [714,] "Lavaux"       "Conthey"     
+ [715,] "Lavaux"       "Entremont"   
+ [716,] "Lavaux"       "Herens"      
+ [717,] "Lavaux"       "Martigwy"    
+ [718,] "Lavaux"       "Monthey"     
+ [719,] "Lavaux"       "St Maurice"  
+ [720,] "Lavaux"       "Sierre"      
+ [721,] "Lavaux"       "Sion"        
+ [722,] "Lavaux"       "Boudry"      
+ [723,] "Lavaux"       "La Chauxdfnd"
+ [724,] "Lavaux"       "Le Locle"    
+ [725,] "Lavaux"       "Neuchatel"   
+ [726,] "Lavaux"       "Val de Ruz"  
+ [727,] "Lavaux"       "ValdeTravers"
+ [728,] "Lavaux"       "V. De Geneve"
+ [729,] "Lavaux"       "Rive Droite" 
+ [730,] "Lavaux"       "Rive Gauche" 
+ [731,] "Morges"       "Moudon"      
+ [732,] "Morges"       "Nyone"       
+ [733,] "Morges"       "Orbe"        
+ [734,] "Morges"       "Oron"        
+ [735,] "Morges"       "Payerne"     
+ [736,] "Morges"       "Paysd'enhaut"
+ [737,] "Morges"       "Rolle"       
+ [738,] "Morges"       "Vevey"       
+ [739,] "Morges"       "Yverdon"     
+ [740,] "Morges"       "Conthey"     
+ [741,] "Morges"       "Entremont"   
+ [742,] "Morges"       "Herens"      
+ [743,] "Morges"       "Martigwy"    
+ [744,] "Morges"       "Monthey"     
+ [745,] "Morges"       "St Maurice"  
+ [746,] "Morges"       "Sierre"      
+ [747,] "Morges"       "Sion"        
+ [748,] "Morges"       "Boudry"      
+ [749,] "Morges"       "La Chauxdfnd"
+ [750,] "Morges"       "Le Locle"    
+ [751,] "Morges"       "Neuchatel"   
+ [752,] "Morges"       "Val de Ruz"  
+ [753,] "Morges"       "ValdeTravers"
+ [754,] "Morges"       "V. De Geneve"
+ [755,] "Morges"       "Rive Droite" 
+ [756,] "Morges"       "Rive Gauche" 
+ [757,] "Moudon"       "Nyone"       
+ [758,] "Moudon"       "Orbe"        
+ [759,] "Moudon"       "Oron"        
+ [760,] "Moudon"       "Payerne"     
+ [761,] "Moudon"       "Paysd'enhaut"
+ [762,] "Moudon"       "Rolle"       
+ [763,] "Moudon"       "Vevey"       
+ [764,] "Moudon"       "Yverdon"     
+ [765,] "Moudon"       "Conthey"     
+ [766,] "Moudon"       "Entremont"   
+ [767,] "Moudon"       "Herens"      
+ [768,] "Moudon"       "Martigwy"    
+ [769,] "Moudon"       "Monthey"     
+ [770,] "Moudon"       "St Maurice"  
+ [771,] "Moudon"       "Sierre"      
+ [772,] "Moudon"       "Sion"        
+ [773,] "Moudon"       "Boudry"      
+ [774,] "Moudon"       "La Chauxdfnd"
+ [775,] "Moudon"       "Le Locle"    
+ [776,] "Moudon"       "Neuchatel"   
+ [777,] "Moudon"       "Val de Ruz"  
+ [778,] "Moudon"       "ValdeTravers"
+ [779,] "Moudon"       "V. De Geneve"
+ [780,] "Moudon"       "Rive Droite" 
+ [781,] "Moudon"       "Rive Gauche" 
+ [782,] "Nyone"        "Orbe"        
+ [783,] "Nyone"        "Oron"        
+ [784,] "Nyone"        "Payerne"     
+ [785,] "Nyone"        "Paysd'enhaut"
+ [786,] "Nyone"        "Rolle"       
+ [787,] "Nyone"        "Vevey"       
+ [788,] "Nyone"        "Yverdon"     
+ [789,] "Nyone"        "Conthey"     
+ [790,] "Nyone"        "Entremont"   
+ [791,] "Nyone"        "Herens"      
+ [792,] "Nyone"        "Martigwy"    
+ [793,] "Nyone"        "Monthey"     
+ [794,] "Nyone"        "St Maurice"  
+ [795,] "Nyone"        "Sierre"      
+ [796,] "Nyone"        "Sion"        
+ [797,] "Nyone"        "Boudry"      
+ [798,] "Nyone"        "La Chauxdfnd"
+ [799,] "Nyone"        "Le Locle"    
+ [800,] "Nyone"        "Neuchatel"   
+ [801,] "Nyone"        "Val de Ruz"  
+ [802,] "Nyone"        "ValdeTravers"
+ [803,] "Nyone"        "V. De Geneve"
+ [804,] "Nyone"        "Rive Droite" 
+ [805,] "Nyone"        "Rive Gauche" 
+ [806,] "Orbe"         "Oron"        
+ [807,] "Orbe"         "Payerne"     
+ [808,] "Orbe"         "Paysd'enhaut"
+ [809,] "Orbe"         "Rolle"       
+ [810,] "Orbe"         "Vevey"       
+ [811,] "Orbe"         "Yverdon"     
+ [812,] "Orbe"         "Conthey"     
+ [813,] "Orbe"         "Entremont"   
+ [814,] "Orbe"         "Herens"      
+ [815,] "Orbe"         "Martigwy"    
+ [816,] "Orbe"         "Monthey"     
+ [817,] "Orbe"         "St Maurice"  
+ [818,] "Orbe"         "Sierre"      
+ [819,] "Orbe"         "Sion"        
+ [820,] "Orbe"         "Boudry"      
+ [821,] "Orbe"         "La Chauxdfnd"
+ [822,] "Orbe"         "Le Locle"    
+ [823,] "Orbe"         "Neuchatel"   
+ [824,] "Orbe"         "Val de Ruz"  
+ [825,] "Orbe"         "ValdeTravers"
+ [826,] "Orbe"         "V. De Geneve"
+ [827,] "Orbe"         "Rive Droite" 
+ [828,] "Orbe"         "Rive Gauche" 
+ [829,] "Oron"         "Payerne"     
+ [830,] "Oron"         "Paysd'enhaut"
+ [831,] "Oron"         "Rolle"       
+ [832,] "Oron"         "Vevey"       
+ [833,] "Oron"         "Yverdon"     
+ [834,] "Oron"         "Conthey"     
+ [835,] "Oron"         "Entremont"   
+ [836,] "Oron"         "Herens"      
+ [837,] "Oron"         "Martigwy"    
+ [838,] "Oron"         "Monthey"     
+ [839,] "Oron"         "St Maurice"  
+ [840,] "Oron"         "Sierre"      
+ [841,] "Oron"         "Sion"        
+ [842,] "Oron"         "Boudry"      
+ [843,] "Oron"         "La Chauxdfnd"
+ [844,] "Oron"         "Le Locle"    
+ [845,] "Oron"         "Neuchatel"   
+ [846,] "Oron"         "Val de Ruz"  
+ [847,] "Oron"         "ValdeTravers"
+ [848,] "Oron"         "V. De Geneve"
+ [849,] "Oron"         "Rive Droite" 
+ [850,] "Oron"         "Rive Gauche" 
+ [851,] "Payerne"      "Paysd'enhaut"
+ [852,] "Payerne"      "Rolle"       
+ [853,] "Payerne"      "Vevey"       
+ [854,] "Payerne"      "Yverdon"     
+ [855,] "Payerne"      "Conthey"     
+ [856,] "Payerne"      "Entremont"   
+ [857,] "Payerne"      "Herens"      
+ [858,] "Payerne"      "Martigwy"    
+ [859,] "Payerne"      "Monthey"     
+ [860,] "Payerne"      "St Maurice"  
+ [861,] "Payerne"      "Sierre"      
+ [862,] "Payerne"      "Sion"        
+ [863,] "Payerne"      "Boudry"      
+ [864,] "Payerne"      "La Chauxdfnd"
+ [865,] "Payerne"      "Le Locle"    
+ [866,] "Payerne"      "Neuchatel"   
+ [867,] "Payerne"      "Val de Ruz"  
+ [868,] "Payerne"      "ValdeTravers"
+ [869,] "Payerne"      "V. De Geneve"
+ [870,] "Payerne"      "Rive Droite" 
+ [871,] "Payerne"      "Rive Gauche" 
+ [872,] "Paysd'enhaut" "Rolle"       
+ [873,] "Paysd'enhaut" "Vevey"       
+ [874,] "Paysd'enhaut" "Yverdon"     
+ [875,] "Paysd'enhaut" "Conthey"     
+ [876,] "Paysd'enhaut" "Entremont"   
+ [877,] "Paysd'enhaut" "Herens"      
+ [878,] "Paysd'enhaut" "Martigwy"    
+ [879,] "Paysd'enhaut" "Monthey"     
+ [880,] "Paysd'enhaut" "St Maurice"  
+ [881,] "Paysd'enhaut" "Sierre"      
+ [882,] "Paysd'enhaut" "Sion"        
+ [883,] "Paysd'enhaut" "Boudry"      
+ [884,] "Paysd'enhaut" "La Chauxdfnd"
+ [885,] "Paysd'enhaut" "Le Locle"    
+ [886,] "Paysd'enhaut" "Neuchatel"   
+ [887,] "Paysd'enhaut" "Val de Ruz"  
+ [888,] "Paysd'enhaut" "ValdeTravers"
+ [889,] "Paysd'enhaut" "V. De Geneve"
+ [890,] "Paysd'enhaut" "Rive Droite" 
+ [891,] "Paysd'enhaut" "Rive Gauche" 
+ [892,] "Rolle"        "Vevey"       
+ [893,] "Rolle"        "Yverdon"     
+ [894,] "Rolle"        "Conthey"     
+ [895,] "Rolle"        "Entremont"   
+ [896,] "Rolle"        "Herens"      
+ [897,] "Rolle"        "Martigwy"    
+ [898,] "Rolle"        "Monthey"     
+ [899,] "Rolle"        "St Maurice"  
+ [900,] "Rolle"        "Sierre"      
+ [901,] "Rolle"        "Sion"        
+ [902,] "Rolle"        "Boudry"      
+ [903,] "Rolle"        "La Chauxdfnd"
+ [904,] "Rolle"        "Le Locle"    
+ [905,] "Rolle"        "Neuchatel"   
+ [906,] "Rolle"        "Val de Ruz"  
+ [907,] "Rolle"        "ValdeTravers"
+ [908,] "Rolle"        "V. De Geneve"
+ [909,] "Rolle"        "Rive Droite" 
+ [910,] "Rolle"        "Rive Gauche" 
+ [911,] "Vevey"        "Yverdon"     
+ [912,] "Vevey"        "Conthey"     
+ [913,] "Vevey"        "Entremont"   
+ [914,] "Vevey"        "Herens"      
+ [915,] "Vevey"        "Martigwy"    
+ [916,] "Vevey"        "Monthey"     
+ [917,] "Vevey"        "St Maurice"  
+ [918,] "Vevey"        "Sierre"      
+ [919,] "Vevey"        "Sion"        
+ [920,] "Vevey"        "Boudry"      
+ [921,] "Vevey"        "La Chauxdfnd"
+ [922,] "Vevey"        "Le Locle"    
+ [923,] "Vevey"        "Neuchatel"   
+ [924,] "Vevey"        "Val de Ruz"  
+ [925,] "Vevey"        "ValdeTravers"
+ [926,] "Vevey"        "V. De Geneve"
+ [927,] "Vevey"        "Rive Droite" 
+ [928,] "Vevey"        "Rive Gauche" 
+ [929,] "Yverdon"      "Conthey"     
+ [930,] "Yverdon"      "Entremont"   
+ [931,] "Yverdon"      "Herens"      
+ [932,] "Yverdon"      "Martigwy"    
+ [933,] "Yverdon"      "Monthey"     
+ [934,] "Yverdon"      "St Maurice"  
+ [935,] "Yverdon"      "Sierre"      
+ [936,] "Yverdon"      "Sion"        
+ [937,] "Yverdon"      "Boudry"      
+ [938,] "Yverdon"      "La Chauxdfnd"
+ [939,] "Yverdon"      "Le Locle"    
+ [940,] "Yverdon"      "Neuchatel"   
+ [941,] "Yverdon"      "Val de Ruz"  
+ [942,] "Yverdon"      "ValdeTravers"
+ [943,] "Yverdon"      "V. De Geneve"
+ [944,] "Yverdon"      "Rive Droite" 
+ [945,] "Yverdon"      "Rive Gauche" 
+ [946,] "Conthey"      "Entremont"   
+ [947,] "Conthey"      "Herens"      
+ [948,] "Conthey"      "Martigwy"    
+ [949,] "Conthey"      "Monthey"     
+ [950,] "Conthey"      "St Maurice"  
+ [951,] "Conthey"      "Sierre"      
+ [952,] "Conthey"      "Sion"        
+ [953,] "Conthey"      "Boudry"      
+ [954,] "Conthey"      "La Chauxdfnd"
+ [955,] "Conthey"      "Le Locle"    
+ [956,] "Conthey"      "Neuchatel"   
+ [957,] "Conthey"      "Val de Ruz"  
+ [958,] "Conthey"      "ValdeTravers"
+ [959,] "Conthey"      "V. De Geneve"
+ [960,] "Conthey"      "Rive Droite" 
+ [961,] "Conthey"      "Rive Gauche" 
+ [962,] "Entremont"    "Herens"      
+ [963,] "Entremont"    "Martigwy"    
+ [964,] "Entremont"    "Monthey"     
+ [965,] "Entremont"    "St Maurice"  
+ [966,] "Entremont"    "Sierre"      
+ [967,] "Entremont"    "Sion"        
+ [968,] "Entremont"    "Boudry"      
+ [969,] "Entremont"    "La Chauxdfnd"
+ [970,] "Entremont"    "Le Locle"    
+ [971,] "Entremont"    "Neuchatel"   
+ [972,] "Entremont"    "Val de Ruz"  
+ [973,] "Entremont"    "ValdeTravers"
+ [974,] "Entremont"    "V. De Geneve"
+ [975,] "Entremont"    "Rive Droite" 
+ [976,] "Entremont"    "Rive Gauche" 
+ [977,] "Herens"       "Martigwy"    
+ [978,] "Herens"       "Monthey"     
+ [979,] "Herens"       "St Maurice"  
+ [980,] "Herens"       "Sierre"      
+ [981,] "Herens"       "Sion"        
+ [982,] "Herens"       "Boudry"      
+ [983,] "Herens"       "La Chauxdfnd"
+ [984,] "Herens"       "Le Locle"    
+ [985,] "Herens"       "Neuchatel"   
+ [986,] "Herens"       "Val de Ruz"  
+ [987,] "Herens"       "ValdeTravers"
+ [988,] "Herens"       "V. De Geneve"
+ [989,] "Herens"       "Rive Droite" 
+ [990,] "Herens"       "Rive Gauche" 
+ [991,] "Martigwy"     "Monthey"     
+ [992,] "Martigwy"     "St Maurice"  
+ [993,] "Martigwy"     "Sierre"      
+ [994,] "Martigwy"     "Sion"        
+ [995,] "Martigwy"     "Boudry"      
+ [996,] "Martigwy"     "La Chauxdfnd"
+ [997,] "Martigwy"     "Le Locle"    
+ [998,] "Martigwy"     "Neuchatel"   
+ [999,] "Martigwy"     "Val de Ruz"  
+[1000,] "Martigwy"     "ValdeTravers"
+[1001,] "Martigwy"     "V. De Geneve"
+[1002,] "Martigwy"     "Rive Droite" 
+[1003,] "Martigwy"     "Rive Gauche" 
+[1004,] "Monthey"      "St Maurice"  
+[1005,] "Monthey"      "Sierre"      
+[1006,] "Monthey"      "Sion"        
+[1007,] "Monthey"      "Boudry"      
+[1008,] "Monthey"      "La Chauxdfnd"
+[1009,] "Monthey"      "Le Locle"    
+[1010,] "Monthey"      "Neuchatel"   
+[1011,] "Monthey"      "Val de Ruz"  
+[1012,] "Monthey"      "ValdeTravers"
+[1013,] "Monthey"      "V. De Geneve"
+[1014,] "Monthey"      "Rive Droite" 
+[1015,] "Monthey"      "Rive Gauche" 
+[1016,] "St Maurice"   "Sierre"      
+[1017,] "St Maurice"   "Sion"        
+[1018,] "St Maurice"   "Boudry"      
+[1019,] "St Maurice"   "La Chauxdfnd"
+[1020,] "St Maurice"   "Le Locle"    
+[1021,] "St Maurice"   "Neuchatel"   
+[1022,] "St Maurice"   "Val de Ruz"  
+[1023,] "St Maurice"   "ValdeTravers"
+[1024,] "St Maurice"   "V. De Geneve"
+[1025,] "St Maurice"   "Rive Droite" 
+[1026,] "St Maurice"   "Rive Gauche" 
+[1027,] "Sierre"       "Sion"        
+[1028,] "Sierre"       "Boudry"      
+[1029,] "Sierre"       "La Chauxdfnd"
+[1030,] "Sierre"       "Le Locle"    
+[1031,] "Sierre"       "Neuchatel"   
+[1032,] "Sierre"       "Val de Ruz"  
+[1033,] "Sierre"       "ValdeTravers"
+[1034,] "Sierre"       "V. De Geneve"
+[1035,] "Sierre"       "Rive Droite" 
+[1036,] "Sierre"       "Rive Gauche" 
+[1037,] "Sion"         "Boudry"      
+[1038,] "Sion"         "La Chauxdfnd"
+[1039,] "Sion"         "Le Locle"    
+[1040,] "Sion"         "Neuchatel"   
+[1041,] "Sion"         "Val de Ruz"  
+[1042,] "Sion"         "ValdeTravers"
+[1043,] "Sion"         "V. De Geneve"
+[1044,] "Sion"         "Rive Droite" 
+[1045,] "Sion"         "Rive Gauche" 
+[1046,] "Boudry"       "La Chauxdfnd"
+[1047,] "Boudry"       "Le Locle"    
+[1048,] "Boudry"       "Neuchatel"   
+[1049,] "Boudry"       "Val de Ruz"  
+[1050,] "Boudry"       "ValdeTravers"
+[1051,] "Boudry"       "V. De Geneve"
+[1052,] "Boudry"       "Rive Droite" 
+[1053,] "Boudry"       "Rive Gauche" 
+[1054,] "La Chauxdfnd" "Le Locle"    
+[1055,] "La Chauxdfnd" "Neuchatel"   
+[1056,] "La Chauxdfnd" "Val de Ruz"  
+[1057,] "La Chauxdfnd" "ValdeTravers"
+[1058,] "La Chauxdfnd" "V. De Geneve"
+[1059,] "La Chauxdfnd" "Rive Droite" 
+[1060,] "La Chauxdfnd" "Rive Gauche" 
+[1061,] "Le Locle"     "Neuchatel"   
+[1062,] "Le Locle"     "Val de Ruz"  
+[1063,] "Le Locle"     "ValdeTravers"
+[1064,] "Le Locle"     "V. De Geneve"
+[1065,] "Le Locle"     "Rive Droite" 
+[1066,] "Le Locle"     "Rive Gauche" 
+[1067,] "Neuchatel"    "Val de Ruz"  
+[1068,] "Neuchatel"    "ValdeTravers"
+[1069,] "Neuchatel"    "V. De Geneve"
+[1070,] "Neuchatel"    "Rive Droite" 
+[1071,] "Neuchatel"    "Rive Gauche" 
+[1072,] "Val de Ruz"   "ValdeTravers"
+[1073,] "Val de Ruz"   "V. De Geneve"
+[1074,] "Val de Ruz"   "Rive Droite" 
+[1075,] "Val de Ruz"   "Rive Gauche" 
+[1076,] "ValdeTravers" "V. De Geneve"
+[1077,] "ValdeTravers" "Rive Droite" 
+[1078,] "ValdeTravers" "Rive Gauche" 
+[1079,] "V. De Geneve" "Rive Droite" 
+[1080,] "V. De Geneve" "Rive Gauche" 
+[1081,] "Rive Droite"  "Rive Gauche" 
+> edges(gg$cor) <- NULL
+> 
+> 
+> cleanEx(); ..nameEx <- "edges-lk"
+> 
+> ### * edges-lk
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: edges
+> ### Title: Get edges
+> ### Aliases: edges
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "excluded---ggobiDataset-gu"
+> 
+> ### * excluded---ggobiDataset-gu
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "excluded<-.ggobiDataset"
+> ### Title: Set excluded status
+> ### Aliases: excluded<-.ggobiDataset excluded<-
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "excluded-ggobiDataset-3e"
+> 
+> ### * excluded-ggobiDataset-3e
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: excluded.ggobiDataset
+> ### Title: Get excluded status
+> ### Aliases: excluded.ggobiDataset excluded
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "get--ggobiDataset-1f"
+> 
+> ### * get--ggobiDataset-1f
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "[.ggobiDataset"
+> ### Title: Subsettting
+> ### Aliases: [.ggobiDataset [[.ggobiDataset $.ggobiDataset
+> ### Keywords: manip
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> x <- g$mtcars
+> x[1:5, 1:5]
+   mpg cyl disp  hp drat
+1 21.0   6  160 110 3.90
+2 21.0   6  160 110 3.90
+3 22.8   4  108  93 3.85
+4 21.4   6  258 110 3.08
+5 18.7   8  360 175 3.15
+> x[[1]]
+ [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
+[16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
+[31] 15.0 21.4
+> x$cyl
+ [1] 6 6 4 6 8 6 8 4 4 6 6 8 8 8 8 8 8 4 4 4 4 8 8 8 8 4 4 4 8 6 8 4
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-8s"
+> 
+> ### * ggobi-8s
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "$.ggobi"
+> ### Title: Get ggobi data.
+> ### Aliases: $.ggobi [.ggobi
+> ### Keywords: manip
+> 
+> ### ** Examples
+> g <- ggobi(ChickWeight)
+> g["cars"] <- mtcars
+> g[1:2]
+[[1]]
+    weight Time Chick Diet
+1       42    0     1    1
+2       51    2     1    1
+3       59    4     1    1
+4       64    6     1    1
+5       76    8     1    1
+6       93   10     1    1
+7      106   12     1    1
+8      125   14     1    1
+9      149   16     1    1
+10     171   18     1    1
+11     199   20     1    1
+12     205   21     1    1
+13      40    0     2    1
+14      49    2     2    1
+15      58    4     2    1
+16      72    6     2    1
+17      84    8     2    1
+18     103   10     2    1
+19     122   12     2    1
+20     138   14     2    1
+21     162   16     2    1
+22     187   18     2    1
+23     209   20     2    1
+24     215   21     2    1
+25      43    0     3    1
+26      39    2     3    1
+27      55    4     3    1
+28      67    6     3    1
+29      84    8     3    1
+30      99   10     3    1
+31     115   12     3    1
+32     138   14     3    1
+33     163   16     3    1
+34     187   18     3    1
+35     198   20     3    1
+36     202   21     3    1
+37      42    0     4    1
+38      49    2     4    1
+39      56    4     4    1
+40      67    6     4    1
+41      74    8     4    1
+42      87   10     4    1
+43     102   12     4    1
+44     108   14     4    1
+45     136   16     4    1
+46     154   18     4    1
+47     160   20     4    1
+48     157   21     4    1
+49      41    0     5    1
+50      42    2     5    1
+51      48    4     5    1
+52      60    6     5    1
+53      79    8     5    1
+54     106   10     5    1
+55     141   12     5    1
+56     164   14     5    1
+57     197   16     5    1
+58     199   18     5    1
+59     220   20     5    1
+60     223   21     5    1
+61      41    0     6    1
+62      49    2     6    1
+63      59    4     6    1
+64      74    6     6    1
+65      97    8     6    1
+66     124   10     6    1
+67     141   12     6    1
+68     148   14     6    1
+69     155   16     6    1
+70     160   18     6    1
+71     160   20     6    1
+72     157   21     6    1
+73      41    0     7    1
+74      49    2     7    1
+75      57    4     7    1
+76      71    6     7    1
+77      89    8     7    1
+78     112   10     7    1
+79     146   12     7    1
+80     174   14     7    1
+81     218   16     7    1
+82     250   18     7    1
+83     288   20     7    1
+84     305   21     7    1
+85      42    0     8    1
+86      50    2     8    1
+87      61    4     8    1
+88      71    6     8    1
+89      84    8     8    1
+90      93   10     8    1
+91     110   12     8    1
+92     116   14     8    1
+93     126   16     8    1
+94     134   18     8    1
+95     125   20     8    1
+96      42    0     9    1
+97      51    2     9    1
+98      59    4     9    1
+99      68    6     9    1
+100     85    8     9    1
+101     96   10     9    1
+102     90   12     9    1
+103     92   14     9    1
+104     93   16     9    1
+105    100   18     9    1
+106    100   20     9    1
+107     98   21     9    1
+108     41    0    10    1
+109     44    2    10    1
+110     52    4    10    1
+111     63    6    10    1
+112     74    8    10    1
+113     81   10    10    1
+114     89   12    10    1
+115     96   14    10    1
+116    101   16    10    1
+117    112   18    10    1
+118    120   20    10    1
+119    124   21    10    1
+120     43    0    11    1
+121     51    2    11    1
+122     63    4    11    1
+123     84    6    11    1
+124    112    8    11    1
+125    139   10    11    1
+126    168   12    11    1
+127    177   14    11    1
+128    182   16    11    1
+129    184   18    11    1
+130    181   20    11    1
+131    175   21    11    1
+132     41    0    12    1
+133     49    2    12    1
+134     56    4    12    1
+135     62    6    12    1
+136     72    8    12    1
+137     88   10    12    1
+138    119   12    12    1
+139    135   14    12    1
+140    162   16    12    1
+141    185   18    12    1
+142    195   20    12    1
+143    205   21    12    1
+144     41    0    13    1
+145     48    2    13    1
+146     53    4    13    1
+147     60    6    13    1
+148     65    8    13    1
+149     67   10    13    1
+150     71   12    13    1
+151     70   14    13    1
+152     71   16    13    1
+153     81   18    13    1
+154     91   20    13    1
+155     96   21    13    1
+156     41    0    14    1
+157     49    2    14    1
+158     62    4    14    1
+159     79    6    14    1
+160    101    8    14    1
+161    128   10    14    1
+162    164   12    14    1
+163    192   14    14    1
+164    227   16    14    1
+165    248   18    14    1
+166    259   20    14    1
+167    266   21    14    1
+168     41    0    15    1
+169     49    2    15    1
+170     56    4    15    1
+171     64    6    15    1
+172     68    8    15    1
+173     68   10    15    1
+174     67   12    15    1
+175     68   14    15    1
+176     41    0    16    1
+177     45    2    16    1
+178     49    4    16    1
+179     51    6    16    1
+180     57    8    16    1
+181     51   10    16    1
+182     54   12    16    1
+183     42    0    17    1
+184     51    2    17    1
+185     61    4    17    1
+186     72    6    17    1
+187     83    8    17    1
+188     89   10    17    1
+189     98   12    17    1
+190    103   14    17    1
+191    113   16    17    1
+192    123   18    17    1
+193    133   20    17    1
+194    142   21    17    1
+195     39    0    18    1
+196     35    2    18    1
+197     43    0    19    1
+198     48    2    19    1
+199     55    4    19    1
+200     62    6    19    1
+201     65    8    19    1
+202     71   10    19    1
+203     82   12    19    1
+204     88   14    19    1
+205    106   16    19    1
+206    120   18    19    1
+207    144   20    19    1
+208    157   21    19    1
+209     41    0    20    1
+210     47    2    20    1
+211     54    4    20    1
+212     58    6    20    1
+213     65    8    20    1
+214     73   10    20    1
+215     77   12    20    1
+216     89   14    20    1
+217     98   16    20    1
+218    107   18    20    1
+219    115   20    20    1
+220    117   21    20    1
+221     40    0    21    2
+222     50    2    21    2
+223     62    4    21    2
+224     86    6    21    2
+225    125    8    21    2
+226    163   10    21    2
+227    217   12    21    2
+228    240   14    21    2
+229    275   16    21    2
+230    307   18    21    2
+231    318   20    21    2
+232    331   21    21    2
+233     41    0    22    2
+234     55    2    22    2
+235     64    4    22    2
+236     77    6    22    2
+237     90    8    22    2
+238     95   10    22    2
+239    108   12    22    2
+240    111   14    22    2
+241    131   16    22    2
+242    148   18    22    2
+243    164   20    22    2
+244    167   21    22    2
+245     43    0    23    2
+246     52    2    23    2
+247     61    4    23    2
+248     73    6    23    2
+249     90    8    23    2
+250    103   10    23    2
+251    127   12    23    2
+252    135   14    23    2
+253    145   16    23    2
+254    163   18    23    2
+255    170   20    23    2
+256    175   21    23    2
+257     42    0    24    2
+258     52    2    24    2
+259     58    4    24    2
+260     74    6    24    2
+261     66    8    24    2
+262     68   10    24    2
+263     70   12    24    2
+264     71   14    24    2
+265     72   16    24    2
+266     72   18    24    2
+267     76   20    24    2
+268     74   21    24    2
+269     40    0    25    2
+270     49    2    25    2
+271     62    4    25    2
+272     78    6    25    2
+273    102    8    25    2
+274    124   10    25    2
+275    146   12    25    2
+276    164   14    25    2
+277    197   16    25    2
+278    231   18    25    2
+279    259   20    25    2
+280    265   21    25    2
+281     42    0    26    2
+282     48    2    26    2
+283     57    4    26    2
+284     74    6    26    2
+285     93    8    26    2
+286    114   10    26    2
+287    136   12    26    2
+288    147   14    26    2
+289    169   16    26    2
+290    205   18    26    2
+291    236   20    26    2
+292    251   21    26    2
+293     39    0    27    2
+294     46    2    27    2
+295     58    4    27    2
+296     73    6    27    2
+297     87    8    27    2
+298    100   10    27    2
+299    115   12    27    2
+300    123   14    27    2
+301    144   16    27    2
+302    163   18    27    2
+303    185   20    27    2
+304    192   21    27    2
+305     39    0    28    2
+306     46    2    28    2
+307     58    4    28    2
+308     73    6    28    2
+309     92    8    28    2
+310    114   10    28    2
+311    145   12    28    2
+312    156   14    28    2
+313    184   16    28    2
+314    207   18    28    2
+315    212   20    28    2
+316    233   21    28    2
+317     39    0    29    2
+318     48    2    29    2
+319     59    4    29    2
+320     74    6    29    2
+321     87    8    29    2
+322    106   10    29    2
+323    134   12    29    2
+324    150   14    29    2
+325    187   16    29    2
+326    230   18    29    2
+327    279   20    29    2
+328    309   21    29    2
+329     42    0    30    2
+330     48    2    30    2
+331     59    4    30    2
+332     72    6    30    2
+333     85    8    30    2
+334     98   10    30    2
+335    115   12    30    2
+336    122   14    30    2
+337    143   16    30    2
+338    151   18    30    2
+339    157   20    30    2
+340    150   21    30    2
+341     42    0    31    3
+342     53    2    31    3
+343     62    4    31    3
+344     73    6    31    3
+345     85    8    31    3
+346    102   10    31    3
+347    123   12    31    3
+348    138   14    31    3
+349    170   16    31    3
+350    204   18    31    3
+351    235   20    31    3
+352    256   21    31    3
+353     41    0    32    3
+354     49    2    32    3
+355     65    4    32    3
+356     82    6    32    3
+357    107    8    32    3
+358    129   10    32    3
+359    159   12    32    3
+360    179   14    32    3
+361    221   16    32    3
+362    263   18    32    3
+363    291   20    32    3
+364    305   21    32    3
+365     39    0    33    3
+366     50    2    33    3
+367     63    4    33    3
+368     77    6    33    3
+369     96    8    33    3
+370    111   10    33    3
+371    137   12    33    3
+372    144   14    33    3
+373    151   16    33    3
+374    146   18    33    3
+375    156   20    33    3
+376    147   21    33    3
+377     41    0    34    3
+378     49    2    34    3
+379     63    4    34    3
+380     85    6    34    3
+381    107    8    34    3
+382    134   10    34    3
+383    164   12    34    3
+384    186   14    34    3
+385    235   16    34    3
+386    294   18    34    3
+387    327   20    34    3
+388    341   21    34    3
+389     41    0    35    3
+390     53    2    35    3
+391     64    4    35    3
+392     87    6    35    3
+393    123    8    35    3
+394    158   10    35    3
+395    201   12    35    3
+396    238   14    35    3
+397    287   16    35    3
+398    332   18    35    3
+399    361   20    35    3
+400    373   21    35    3
+401     39    0    36    3
+402     48    2    36    3
+403     61    4    36    3
+404     76    6    36    3
+405     98    8    36    3
+406    116   10    36    3
+407    145   12    36    3
+408    166   14    36    3
+409    198   16    36    3
+410    227   18    36    3
+411    225   20    36    3
+412    220   21    36    3
+413     41    0    37    3
+414     48    2    37    3
+415     56    4    37    3
+416     68    6    37    3
+417     80    8    37    3
+418     83   10    37    3
+419    103   12    37    3
+420    112   14    37    3
+421    135   16    37    3
+422    157   18    37    3
+423    169   20    37    3
+424    178   21    37    3
+425     41    0    38    3
+426     49    2    38    3
+427     61    4    38    3
+428     74    6    38    3
+429     98    8    38    3
+430    109   10    38    3
+431    128   12    38    3
+432    154   14    38    3
+433    192   16    38    3
+434    232   18    38    3
+435    280   20    38    3
+436    290   21    38    3
+437     42    0    39    3
+438     50    2    39    3
+439     61    4    39    3
+440     78    6    39    3
+441     89    8    39    3
+442    109   10    39    3
+443    130   12    39    3
+444    146   14    39    3
+445    170   16    39    3
+446    214   18    39    3
+447    250   20    39    3
+448    272   21    39    3
+449     41    0    40    3
+450     55    2    40    3
+451     66    4    40    3
+452     79    6    40    3
+453    101    8    40    3
+454    120   10    40    3
+455    154   12    40    3
+456    182   14    40    3
+457    215   16    40    3
+458    262   18    40    3
+459    295   20    40    3
+460    321   21    40    3
+461     42    0    41    4
+462     51    2    41    4
+463     66    4    41    4
+464     85    6    41    4
+465    103    8    41    4
+466    124   10    41    4
+467    155   12    41    4
+468    153   14    41    4
+469    175   16    41    4
+470    184   18    41    4
+471    199   20    41    4
+472    204   21    41    4
+473     42    0    42    4
+474     49    2    42    4
+475     63    4    42    4
+476     84    6    42    4
+477    103    8    42    4
+478    126   10    42    4
+479    160   12    42    4
+480    174   14    42    4
+481    204   16    42    4
+482    234   18    42    4
+483    269   20    42    4
+484    281   21    42    4
+485     42    0    43    4
+486     55    2    43    4
+487     69    4    43    4
+488     96    6    43    4
+489    131    8    43    4
+490    157   10    43    4
+491    184   12    43    4
+492    188   14    43    4
+493    197   16    43    4
+494    198   18    43    4
+495    199   20    43    4
+496    200   21    43    4
+497     42    0    44    4
+498     51    2    44    4
+499     65    4    44    4
+500     86    6    44    4
+501    103    8    44    4
+502    118   10    44    4
+503    127   12    44    4
+504    138   14    44    4
+505    145   16    44    4
+506    146   18    44    4
+507     41    0    45    4
+508     50    2    45    4
+509     61    4    45    4
+510     78    6    45    4
+511     98    8    45    4
+512    117   10    45    4
+513    135   12    45    4
+514    141   14    45    4
+515    147   16    45    4
+516    174   18    45    4
+517    197   20    45    4
+518    196   21    45    4
+519     40    0    46    4
+520     52    2    46    4
+521     62    4    46    4
+522     82    6    46    4
+523    101    8    46    4
+524    120   10    46    4
+525    144   12    46    4
+526    156   14    46    4
+527    173   16    46    4
+528    210   18    46    4
+529    231   20    46    4
+530    238   21    46    4
+531     41    0    47    4
+532     53    2    47    4
+533     66    4    47    4
+534     79    6    47    4
+535    100    8    47    4
+536    123   10    47    4
+537    148   12    47    4
+538    157   14    47    4
+539    168   16    47    4
+540    185   18    47    4
+541    210   20    47    4
+542    205   21    47    4
+543     39    0    48    4
+544     50    2    48    4
+545     62    4    48    4
+546     80    6    48    4
+547    104    8    48    4
+548    125   10    48    4
+549    154   12    48    4
+550    170   14    48    4
+551    222   16    48    4
+552    261   18    48    4
+553    303   20    48    4
+554    322   21    48    4
+555     40    0    49    4
+556     53    2    49    4
+557     64    4    49    4
+558     85    6    49    4
+559    108    8    49    4
+560    128   10    49    4
+561    152   12    49    4
+562    166   14    49    4
+563    184   16    49    4
+564    203   18    49    4
+565    233   20    49    4
+566    237   21    49    4
+567     41    0    50    4
+568     54    2    50    4
+569     67    4    50    4
+570     84    6    50    4
+571    105    8    50    4
+572    122   10    50    4
+573    155   12    50    4
+574    175   14    50    4
+575    205   16    50    4
+576    234   18    50    4
+577    264   20    50    4
+578    264   21    50    4
+
+[[2]]
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+12 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+13 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+14 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+24 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+27 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+
+> g["ChickWeight"]
+    weight Time Chick Diet
+1       42    0     1    1
+2       51    2     1    1
+3       59    4     1    1
+4       64    6     1    1
+5       76    8     1    1
+6       93   10     1    1
+7      106   12     1    1
+8      125   14     1    1
+9      149   16     1    1
+10     171   18     1    1
+11     199   20     1    1
+12     205   21     1    1
+13      40    0     2    1
+14      49    2     2    1
+15      58    4     2    1
+16      72    6     2    1
+17      84    8     2    1
+18     103   10     2    1
+19     122   12     2    1
+20     138   14     2    1
+21     162   16     2    1
+22     187   18     2    1
+23     209   20     2    1
+24     215   21     2    1
+25      43    0     3    1
+26      39    2     3    1
+27      55    4     3    1
+28      67    6     3    1
+29      84    8     3    1
+30      99   10     3    1
+31     115   12     3    1
+32     138   14     3    1
+33     163   16     3    1
+34     187   18     3    1
+35     198   20     3    1
+36     202   21     3    1
+37      42    0     4    1
+38      49    2     4    1
+39      56    4     4    1
+40      67    6     4    1
+41      74    8     4    1
+42      87   10     4    1
+43     102   12     4    1
+44     108   14     4    1
+45     136   16     4    1
+46     154   18     4    1
+47     160   20     4    1
+48     157   21     4    1
+49      41    0     5    1
+50      42    2     5    1
+51      48    4     5    1
+52      60    6     5    1
+53      79    8     5    1
+54     106   10     5    1
+55     141   12     5    1
+56     164   14     5    1
+57     197   16     5    1
+58     199   18     5    1
+59     220   20     5    1
+60     223   21     5    1
+61      41    0     6    1
+62      49    2     6    1
+63      59    4     6    1
+64      74    6     6    1
+65      97    8     6    1
+66     124   10     6    1
+67     141   12     6    1
+68     148   14     6    1
+69     155   16     6    1
+70     160   18     6    1
+71     160   20     6    1
+72     157   21     6    1
+73      41    0     7    1
+74      49    2     7    1
+75      57    4     7    1
+76      71    6     7    1
+77      89    8     7    1
+78     112   10     7    1
+79     146   12     7    1
+80     174   14     7    1
+81     218   16     7    1
+82     250   18     7    1
+83     288   20     7    1
+84     305   21     7    1
+85      42    0     8    1
+86      50    2     8    1
+87      61    4     8    1
+88      71    6     8    1
+89      84    8     8    1
+90      93   10     8    1
+91     110   12     8    1
+92     116   14     8    1
+93     126   16     8    1
+94     134   18     8    1
+95     125   20     8    1
+96      42    0     9    1
+97      51    2     9    1
+98      59    4     9    1
+99      68    6     9    1
+100     85    8     9    1
+101     96   10     9    1
+102     90   12     9    1
+103     92   14     9    1
+104     93   16     9    1
+105    100   18     9    1
+106    100   20     9    1
+107     98   21     9    1
+108     41    0    10    1
+109     44    2    10    1
+110     52    4    10    1
+111     63    6    10    1
+112     74    8    10    1
+113     81   10    10    1
+114     89   12    10    1
+115     96   14    10    1
+116    101   16    10    1
+117    112   18    10    1
+118    120   20    10    1
+119    124   21    10    1
+120     43    0    11    1
+121     51    2    11    1
+122     63    4    11    1
+123     84    6    11    1
+124    112    8    11    1
+125    139   10    11    1
+126    168   12    11    1
+127    177   14    11    1
+128    182   16    11    1
+129    184   18    11    1
+130    181   20    11    1
+131    175   21    11    1
+132     41    0    12    1
+133     49    2    12    1
+134     56    4    12    1
+135     62    6    12    1
+136     72    8    12    1
+137     88   10    12    1
+138    119   12    12    1
+139    135   14    12    1
+140    162   16    12    1
+141    185   18    12    1
+142    195   20    12    1
+143    205   21    12    1
+144     41    0    13    1
+145     48    2    13    1
+146     53    4    13    1
+147     60    6    13    1
+148     65    8    13    1
+149     67   10    13    1
+150     71   12    13    1
+151     70   14    13    1
+152     71   16    13    1
+153     81   18    13    1
+154     91   20    13    1
+155     96   21    13    1
+156     41    0    14    1
+157     49    2    14    1
+158     62    4    14    1
+159     79    6    14    1
+160    101    8    14    1
+161    128   10    14    1
+162    164   12    14    1
+163    192   14    14    1
+164    227   16    14    1
+165    248   18    14    1
+166    259   20    14    1
+167    266   21    14    1
+168     41    0    15    1
+169     49    2    15    1
+170     56    4    15    1
+171     64    6    15    1
+172     68    8    15    1
+173     68   10    15    1
+174     67   12    15    1
+175     68   14    15    1
+176     41    0    16    1
+177     45    2    16    1
+178     49    4    16    1
+179     51    6    16    1
+180     57    8    16    1
+181     51   10    16    1
+182     54   12    16    1
+183     42    0    17    1
+184     51    2    17    1
+185     61    4    17    1
+186     72    6    17    1
+187     83    8    17    1
+188     89   10    17    1
+189     98   12    17    1
+190    103   14    17    1
+191    113   16    17    1
+192    123   18    17    1
+193    133   20    17    1
+194    142   21    17    1
+195     39    0    18    1
+196     35    2    18    1
+197     43    0    19    1
+198     48    2    19    1
+199     55    4    19    1
+200     62    6    19    1
+201     65    8    19    1
+202     71   10    19    1
+203     82   12    19    1
+204     88   14    19    1
+205    106   16    19    1
+206    120   18    19    1
+207    144   20    19    1
+208    157   21    19    1
+209     41    0    20    1
+210     47    2    20    1
+211     54    4    20    1
+212     58    6    20    1
+213     65    8    20    1
+214     73   10    20    1
+215     77   12    20    1
+216     89   14    20    1
+217     98   16    20    1
+218    107   18    20    1
+219    115   20    20    1
+220    117   21    20    1
+221     40    0    21    2
+222     50    2    21    2
+223     62    4    21    2
+224     86    6    21    2
+225    125    8    21    2
+226    163   10    21    2
+227    217   12    21    2
+228    240   14    21    2
+229    275   16    21    2
+230    307   18    21    2
+231    318   20    21    2
+232    331   21    21    2
+233     41    0    22    2
+234     55    2    22    2
+235     64    4    22    2
+236     77    6    22    2
+237     90    8    22    2
+238     95   10    22    2
+239    108   12    22    2
+240    111   14    22    2
+241    131   16    22    2
+242    148   18    22    2
+243    164   20    22    2
+244    167   21    22    2
+245     43    0    23    2
+246     52    2    23    2
+247     61    4    23    2
+248     73    6    23    2
+249     90    8    23    2
+250    103   10    23    2
+251    127   12    23    2
+252    135   14    23    2
+253    145   16    23    2
+254    163   18    23    2
+255    170   20    23    2
+256    175   21    23    2
+257     42    0    24    2
+258     52    2    24    2
+259     58    4    24    2
+260     74    6    24    2
+261     66    8    24    2
+262     68   10    24    2
+263     70   12    24    2
+264     71   14    24    2
+265     72   16    24    2
+266     72   18    24    2
+267     76   20    24    2
+268     74   21    24    2
+269     40    0    25    2
+270     49    2    25    2
+271     62    4    25    2
+272     78    6    25    2
+273    102    8    25    2
+274    124   10    25    2
+275    146   12    25    2
+276    164   14    25    2
+277    197   16    25    2
+278    231   18    25    2
+279    259   20    25    2
+280    265   21    25    2
+281     42    0    26    2
+282     48    2    26    2
+283     57    4    26    2
+284     74    6    26    2
+285     93    8    26    2
+286    114   10    26    2
+287    136   12    26    2
+288    147   14    26    2
+289    169   16    26    2
+290    205   18    26    2
+291    236   20    26    2
+292    251   21    26    2
+293     39    0    27    2
+294     46    2    27    2
+295     58    4    27    2
+296     73    6    27    2
+297     87    8    27    2
+298    100   10    27    2
+299    115   12    27    2
+300    123   14    27    2
+301    144   16    27    2
+302    163   18    27    2
+303    185   20    27    2
+304    192   21    27    2
+305     39    0    28    2
+306     46    2    28    2
+307     58    4    28    2
+308     73    6    28    2
+309     92    8    28    2
+310    114   10    28    2
+311    145   12    28    2
+312    156   14    28    2
+313    184   16    28    2
+314    207   18    28    2
+315    212   20    28    2
+316    233   21    28    2
+317     39    0    29    2
+318     48    2    29    2
+319     59    4    29    2
+320     74    6    29    2
+321     87    8    29    2
+322    106   10    29    2
+323    134   12    29    2
+324    150   14    29    2
+325    187   16    29    2
+326    230   18    29    2
+327    279   20    29    2
+328    309   21    29    2
+329     42    0    30    2
+330     48    2    30    2
+331     59    4    30    2
+332     72    6    30    2
+333     85    8    30    2
+334     98   10    30    2
+335    115   12    30    2
+336    122   14    30    2
+337    143   16    30    2
+338    151   18    30    2
+339    157   20    30    2
+340    150   21    30    2
+341     42    0    31    3
+342     53    2    31    3
+343     62    4    31    3
+344     73    6    31    3
+345     85    8    31    3
+346    102   10    31    3
+347    123   12    31    3
+348    138   14    31    3
+349    170   16    31    3
+350    204   18    31    3
+351    235   20    31    3
+352    256   21    31    3
+353     41    0    32    3
+354     49    2    32    3
+355     65    4    32    3
+356     82    6    32    3
+357    107    8    32    3
+358    129   10    32    3
+359    159   12    32    3
+360    179   14    32    3
+361    221   16    32    3
+362    263   18    32    3
+363    291   20    32    3
+364    305   21    32    3
+365     39    0    33    3
+366     50    2    33    3
+367     63    4    33    3
+368     77    6    33    3
+369     96    8    33    3
+370    111   10    33    3
+371    137   12    33    3
+372    144   14    33    3
+373    151   16    33    3
+374    146   18    33    3
+375    156   20    33    3
+376    147   21    33    3
+377     41    0    34    3
+378     49    2    34    3
+379     63    4    34    3
+380     85    6    34    3
+381    107    8    34    3
+382    134   10    34    3
+383    164   12    34    3
+384    186   14    34    3
+385    235   16    34    3
+386    294   18    34    3
+387    327   20    34    3
+388    341   21    34    3
+389     41    0    35    3
+390     53    2    35    3
+391     64    4    35    3
+392     87    6    35    3
+393    123    8    35    3
+394    158   10    35    3
+395    201   12    35    3
+396    238   14    35    3
+397    287   16    35    3
+398    332   18    35    3
+399    361   20    35    3
+400    373   21    35    3
+401     39    0    36    3
+402     48    2    36    3
+403     61    4    36    3
+404     76    6    36    3
+405     98    8    36    3
+406    116   10    36    3
+407    145   12    36    3
+408    166   14    36    3
+409    198   16    36    3
+410    227   18    36    3
+411    225   20    36    3
+412    220   21    36    3
+413     41    0    37    3
+414     48    2    37    3
+415     56    4    37    3
+416     68    6    37    3
+417     80    8    37    3
+418     83   10    37    3
+419    103   12    37    3
+420    112   14    37    3
+421    135   16    37    3
+422    157   18    37    3
+423    169   20    37    3
+424    178   21    37    3
+425     41    0    38    3
+426     49    2    38    3
+427     61    4    38    3
+428     74    6    38    3
+429     98    8    38    3
+430    109   10    38    3
+431    128   12    38    3
+432    154   14    38    3
+433    192   16    38    3
+434    232   18    38    3
+435    280   20    38    3
+436    290   21    38    3
+437     42    0    39    3
+438     50    2    39    3
+439     61    4    39    3
+440     78    6    39    3
+441     89    8    39    3
+442    109   10    39    3
+443    130   12    39    3
+444    146   14    39    3
+445    170   16    39    3
+446    214   18    39    3
+447    250   20    39    3
+448    272   21    39    3
+449     41    0    40    3
+450     55    2    40    3
+451     66    4    40    3
+452     79    6    40    3
+453    101    8    40    3
+454    120   10    40    3
+455    154   12    40    3
+456    182   14    40    3
+457    215   16    40    3
+458    262   18    40    3
+459    295   20    40    3
+460    321   21    40    3
+461     42    0    41    4
+462     51    2    41    4
+463     66    4    41    4
+464     85    6    41    4
+465    103    8    41    4
+466    124   10    41    4
+467    155   12    41    4
+468    153   14    41    4
+469    175   16    41    4
+470    184   18    41    4
+471    199   20    41    4
+472    204   21    41    4
+473     42    0    42    4
+474     49    2    42    4
+475     63    4    42    4
+476     84    6    42    4
+477    103    8    42    4
+478    126   10    42    4
+479    160   12    42    4
+480    174   14    42    4
+481    204   16    42    4
+482    234   18    42    4
+483    269   20    42    4
+484    281   21    42    4
+485     42    0    43    4
+486     55    2    43    4
+487     69    4    43    4
+488     96    6    43    4
+489    131    8    43    4
+490    157   10    43    4
+491    184   12    43    4
+492    188   14    43    4
+493    197   16    43    4
+494    198   18    43    4
+495    199   20    43    4
+496    200   21    43    4
+497     42    0    44    4
+498     51    2    44    4
+499     65    4    44    4
+500     86    6    44    4
+501    103    8    44    4
+502    118   10    44    4
+503    127   12    44    4
+504    138   14    44    4
+505    145   16    44    4
+506    146   18    44    4
+507     41    0    45    4
+508     50    2    45    4
+509     61    4    45    4
+510     78    6    45    4
+511     98    8    45    4
+512    117   10    45    4
+513    135   12    45    4
+514    141   14    45    4
+515    147   16    45    4
+516    174   18    45    4
+517    197   20    45    4
+518    196   21    45    4
+519     40    0    46    4
+520     52    2    46    4
+521     62    4    46    4
+522     82    6    46    4
+523    101    8    46    4
+524    120   10    46    4
+525    144   12    46    4
+526    156   14    46    4
+527    173   16    46    4
+528    210   18    46    4
+529    231   20    46    4
+530    238   21    46    4
+531     41    0    47    4
+532     53    2    47    4
+533     66    4    47    4
+534     79    6    47    4
+535    100    8    47    4
+536    123   10    47    4
+537    148   12    47    4
+538    157   14    47    4
+539    168   16    47    4
+540    185   18    47    4
+541    210   20    47    4
+542    205   21    47    4
+543     39    0    48    4
+544     50    2    48    4
+545     62    4    48    4
+546     80    6    48    4
+547    104    8    48    4
+548    125   10    48    4
+549    154   12    48    4
+550    170   14    48    4
+551    222   16    48    4
+552    261   18    48    4
+553    303   20    48    4
+554    322   21    48    4
+555     40    0    49    4
+556     53    2    49    4
+557     64    4    49    4
+558     85    6    49    4
+559    108    8    49    4
+560    128   10    49    4
+561    152   12    49    4
+562    166   14    49    4
+563    184   16    49    4
+564    203   18    49    4
+565    233   20    49    4
+566    237   21    49    4
+567     41    0    50    4
+568     54    2    50    4
+569     67    4    50    4
+570     84    6    50    4
+571    105    8    50    4
+572    122   10    50    4
+573    155   12    50    4
+574    175   14    50    4
+575    205   16    50    4
+576    234   18    50    4
+577    264   20    50    4
+578    264   21    50    4
+> g["cars"]
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+12 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+13 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+14 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+24 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+27 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+> g$cars
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+12 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+13 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+14 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+24 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+27 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-check-structs-qq"
+> 
+> ### * ggobi-check-structs-qq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_check_structs
+> ### Title: Check structs
+> ### Aliases: ggobi_check_structs
+> ### Keywords: programming internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-count-bo"
+> 
+> ### * ggobi-count-bo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_count
+> ### Title: Get number of GGobis
+> ### Aliases: ggobi_count
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> ggobi_count()
+[1] 5
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-data-set-variables-ad"
+> 
+> ### * ggobi-data-set-variables-ad
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_data_set_variables
+> ### Title: Set variable values
+> ### Aliases: ggobi_data_set_variables
+> ### Keywords: manip internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-find-file-bc"
+> 
+> ### * ggobi-find-file-bc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi.find.file
+> ### Title: Find GGobi file.
+> ### Aliases: ggobi.find.file
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> ggobi.find.file("data","tips.xml")
+[1] "/usr/local/share/ggobi/data/tips.xml"
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-g8"
+> 
+> ### * ggobi-g8
+> 
+> flush(stderr()); flush(stdout())
+Reading csv data
+Finished parsing
+> 
+> ### Name: ggobi
+> ### Title: New ggobi
+> ### Aliases: ggobi
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> ggobi(ggobi.find.file("data", "flea.csv"))
+> ggobi(ggobi.find.file("data", "flea.xml"))
+> ggobi(mtcars)
+> mtcarsg <- ggobi_get()$mtcars
+> glyph_colour(mtcarsg)
+D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+> glyph_colour(mtcarsg) <- ifelse(mtcarsg$cyl < 4, 1, 2)
+> glyph_size(mtcarsg) <- mtcarsg$cyl
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-get-2m"
+> 
+> ### * ggobi-get-2m
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_get
+> ### Title: Get GGobi
+> ### Aliases: ggobi_get
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> ggobi(mtcars)
+> ggobi(Nile)
+> ggobi_get(1)
+$Filename
+[1] "R data frame mtcars"
+
+$"Data mode"
+  
+0 
+
+$"Data dimensions"
+     nrow ncol
+[1,]   32   11
+
+> ggobi_get(1:2)
+[[1]]
+$Filename
+[1] "R data frame mtcars"
+
+$"Data mode"
+  
+0 
+
+$"Data dimensions"
+     nrow ncol
+[1,]   32   11
+
+
+[[2]]
+$Filename
+[1] "R data frame mtcars"
+
+$"Data mode"
+  
+0 
+
+$"Data dimensions"
+     nrow ncol
+[1,]   32   11
+
+
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-longitudinal-2e"
+> 
+> ### * ggobi-longitudinal-2e
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_longitudinal
+> ### Title: Create longitudinal dataset.
+> ### Aliases: ggobi_longitudinal
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> data(Oxboys, package="nlme")
+> ggobi_longitudinal(Oxboys, "Occasion", "Subject")
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-set-data-file-be"
+> 
+> ### * ggobi-set-data-file-be
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_set_data_file
+> ### Title: Set data file.
+> ### Aliases: ggobi_set_data_file
+> ### Keywords: manip internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-set-data-frame-k0"
+> 
+> ### * ggobi-set-data-frame-k0
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_set_data_frame
+> ### Title: Set data frame.
+> ### Aliases: ggobi_set_data_frame
+> ### Keywords: manip internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-symbol-34"
+> 
+> ### * ggobi-symbol-34
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: .ggobi.symbol
+> ### Title: Ggobi symbol
+> ### Aliases: .ggobi.symbol
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ggobi-version-ao"
+> 
+> ### * ggobi-version-ao
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ggobi_version
+> ### Title: Get version
+> ### Aliases: ggobi_version
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> ggobi_version()
+$date
+[1] "March 13 2006"
+
+$version
+major minor patch 
+    2     1     1 
+
+$"version string"
+[1] "2.1.1"
+
+> 
+> 
+> cleanEx(); ..nameEx <- "glyph-colour---ggobiDataset-nv"
+> 
+> ### * glyph-colour---ggobiDataset-nv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "glyph_colour<-.ggobiDataset"
+> ### Title: Set glyph colour
+> ### Aliases: glyph_colour<-.ggobiDataset glyph_colour<- glyph_color<-
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "glyph-colour-ggobiDataset-bd"
+> 
+> ### * glyph-colour-ggobiDataset-bd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: glyph_colour.ggobiDataset
+> ### Title: Get glyph colour
+> ### Aliases: glyph_colour.ggobiDataset glyph_colour glyph_color
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "glyph-size---ggobiDataset-9g"
+> 
+> ### * glyph-size---ggobiDataset-9g
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "glyph_size<-.ggobiDataset"
+> ### Title: Set glyph size
+> ### Aliases: glyph_size<-.ggobiDataset glyph_size<-
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "glyph-size-ggobiDataset-kk"
+> 
+> ### * glyph-size-ggobiDataset-kk
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: glyph_size.ggobiDataset
+> ### Title: Get glyph size
+> ### Aliases: glyph_size.ggobiDataset glyph_size
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "glyph-type---ggobiDataset-5b"
+> 
+> ### * glyph-type---ggobiDataset-5b
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "glyph_type<-.ggobiDataset"
+> ### Title: Set glyph type
+> ### Aliases: glyph_type<-.ggobiDataset glyph_type<-
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "glyph-type-ggobiDataset-21"
+> 
+> ### * glyph-type-ggobiDataset-21
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: glyph_type.ggobiDataset
+> ### Title: Get glyph type.
+> ### Aliases: glyph_type.ggobiDataset glyph_type
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ids---ggobiDataset-gv"
+> 
+> ### * ids---ggobiDataset-gv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "ids<-.ggobiDataset"
+> ### Title: Set row ids
+> ### Aliases: ids<-.ggobiDataset ids<-
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ids-ggobiDataset-7d"
+> 
+> ### * ids-ggobiDataset-7d
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ids.ggobiDataset
+> ### Title: Row ids
+> ### Aliases: ids.ggobiDataset ids
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "mapGlyphType-5p"
+> 
+> ### * mapGlyphType-5p
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mapGlyphType
+> ### Title: Map glyph type.
+> ### Aliases: mapGlyphType
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "names---ggobiDataset-1c"
+> 
+> ### * names---ggobiDataset-1c
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "names<-.ggobiDataset"
+> ### Title: Set column names
+> ### Aliases: names<-.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "names-ggobi-3e"
+> 
+> ### * names-ggobi-3e
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: names.ggobi
+> ### Title: GGobi names
+> ### Aliases: names.ggobi
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> names(g)
+[1] "mtcars"
+> 
+> 
+> cleanEx(); ..nameEx <- "names-ggobiDataset-va"
+> 
+> ### * names-ggobiDataset-va
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: names.ggobiDataset
+> ### Title: ggobiDataset column names
+> ### Aliases: names.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "ncol-ggobiDataset-32"
+> 
+> ### * ncol-ggobiDataset-32
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: ncol.ggobiDataset
+> ### Title: ggobiDataset columns
+> ### Aliases: ncol.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "nrow-ggobiDataset-zq"
+> 
+> ### * nrow-ggobiDataset-zq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nrow.ggobiDataset
+> ### Title: ggobiDataset rows
+> ### Aliases: nrow.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "print-ggobi-eg"
+> 
+> ### * print-ggobi-eg
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: print.ggobi
+> ### Title: Print ggobi
+> ### Aliases: print.ggobi
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "print-ggobiDataset-37"
+> 
+> ### * print-ggobiDataset-37
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: print.ggobiDataset
+> ### Title: Print ggobiDataset
+> ### Aliases: print.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "rownames---ggobiDataset-f9"
+> 
+> ### * rownames---ggobiDataset-f9
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "rownames<-.ggobiDataset"
+> ### Title: Set row names
+> ### Aliases: rownames<-.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "rownames-ggobiDataset-ex"
+> 
+> ### * rownames-ggobiDataset-ex
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rownames.ggobiDataset
+> ### Title: Get row names
+> ### Aliases: rownames.ggobiDataset
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "selected-ggobiDataset-dj"
+> 
+> ### * selected-ggobiDataset-dj
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: selected.ggobiDataset
+> ### Title: Get selection status
+> ### Aliases: selected.ggobiDataset selected
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "set--ggobi-7u"
+> 
+> ### * set--ggobi-7u
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "[<-.ggobi"
+> ### Title: [<-.ggobi
+> ### Aliases: [<-.ggobi $<-.ggobi
+> ### Keywords: manip
+> 
+> ### ** Examples
+> g <- ggobi()
+> g["a"] <- mtcars
+> g$b <- mtcars
+> 
+> 
+> cleanEx(); ..nameEx <- "set--ggobiDataset-av"
+> 
+> ### * set--ggobiDataset-av
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "[<-.ggobiDataset"
+> ### Title: Assignments for ggobi datasets
+> ### Aliases: [<-.ggobiDataset
+> ### Keywords: manip internal
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> x <- g["mtcars"]
+> x[1:5, 1:5]
+   mpg cyl disp  hp drat
+1 21.0   6  160 110 3.90
+2 21.0   6  160 110 3.90
+3 22.8   4  108  93 3.85
+4 21.4   6  258 110 3.08
+5 18.7   8  360 175 3.15
+> x[1:5, 1] <- 1:5
+> x[1:5, 1:5]
+  mpg cyl disp  hp drat
+1   1   6  160 110 3.90
+2   2   6  160 110 3.90
+3   3   4  108  93 3.85
+4   4   6  258 110 3.08
+5   5   8  360 175 3.15
+> 
+> 
+> cleanEx(); ..nameEx <- "shadowed---ggobiDataset-04"
+> 
+> ### * shadowed---ggobiDataset-04
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: "shadowed<-.ggobiDataset"
+> ### Title: Set shadowed status
+> ### Aliases: shadowed<-.ggobiDataset shadowed<-
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "shadowed-ggobiDataset-ee"
+> 
+> ### * shadowed-ggobiDataset-ee
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: shadowed.ggobiDataset
+> ### Title: Get shadowed status
+> ### Aliases: shadowed.ggobiDataset shadowed
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "summary-ggobi-b6"
+> 
+> ### * summary-ggobi-b6
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: summary.ggobi
+> ### Title: GGobi summary
+> ### Aliases: summary.ggobi
+> ### Keywords: dynamic
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> summary(g)
+$Filename
+[1] "R data frame mtcars"
+
+$"Data mode"
+  
+0 
+
+$"Data dimensions"
+     nrow ncol
+[1,]   32   11
+
+> 
+> 
+> cleanEx(); ..nameEx <- "summary-ggobiDataset-2o"
+> 
+> ### * summary-ggobiDataset-2o
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: summary.ggobiDataset
+> ### Title: Summarise ggobiDataset.
+> ### Aliases: summary.ggobiDataset
+> ### Keywords: attribute
+> 
+> ### ** Examples
+> 
+> 
+> 
+> cleanEx(); ..nameEx <- "valid-ggobi-mk"
+> 
+> ### * valid-ggobi-mk
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: valid_ggobi
+> ### Title: Determines whether a reference to an internal ggobi object is
+> ###   valid
+> ### Aliases: valid_ggobi
+> ### Keywords: dynamic internal
+> 
+> ### ** Examples
+> g <- ggobi(mtcars)
+> valid_ggobi(g)
+[1] TRUE
+
+** (..Rcheck:25000): CRITICAL **: Incorrect reference to ggobid.
+> close(g)
+> valid_ggobi(g) 
+[1] FALSE
+> 
+> 
+> cleanEx(); ..nameEx <- "variable-index-h9"
+> 
+> ### * variable-index-h9
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: variable_index
+> ### Title: Variable index
+> ### Aliases: variable_index
+> ### Keywords: attribute internal
+> 
+> ### ** Examples
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
+Time elapsed:  4.74 0.93 48.21 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

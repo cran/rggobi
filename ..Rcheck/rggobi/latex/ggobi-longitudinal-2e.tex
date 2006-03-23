@@ -1,0 +1,29 @@
+\HeaderA{ggobi\_longitudinal}{Create longitudinal dataset.}{ggobi.Rul.longitudinal}
+\keyword{dynamic}{ggobi\_longitudinal}
+\begin{Description}\relax
+Instantiate new ggobi with a longitudinal data set.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}ggobi_longitudinal(data, time = "Time", obsUnit = "ID")\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{data}] data frame
+\item[\code{time}] time variable
+\item[\code{obsUnit}] id variable
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+@arguments data frame
+@arguments time variable
+@arguments id variable
+@keyword dynamic
+\end{Details}
+\begin{Author}\relax
+Hadley Wickham <h.wickham@gmail.com>
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}data(Oxboys, package="nlme")
+ggobi_longitudinal(Oxboys, "Occasion", "Subject")\end{ExampleCode}
+\end{Examples}
+

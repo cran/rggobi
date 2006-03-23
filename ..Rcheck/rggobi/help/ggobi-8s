@@ -1,0 +1,38 @@
+"$.ggobi"               package:rggobi               R Documentation
+
+_G_e_t _g_g_o_b_i _d_a_t_a.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Conveniently retrieve ggobi dataset.
+
+_U_s_a_g_e:
+
+     "$.ggobi"(x, i)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: GGobi object
+
+       i: name of dataset to retrive
+
+_D_e_t_a_i_l_s:
+
+     It is convenient to be able to refer to and operate on a ggobi
+     dataset as if it were a regular R dataset.  This function allows
+     one to get an 'ggobiDataset' object that represents a particular
+     dataset.
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
+     g <- ggobi(ChickWeight)
+     g["cars"] <- mtcars
+     g[1:2]
+     g["ChickWeight"]
+     g["cars"]
+     g$cars
+

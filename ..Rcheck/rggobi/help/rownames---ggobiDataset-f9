@@ -1,0 +1,26 @@
+"rownames<-.ggobiDataset"       package:rggobi       R Documentation
+
+_S_e_t _r_o_w _n_a_m_e_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Set row names for a ggobiDataset
+
+_U_s_a_g_e:
+
+     "rownames<-.ggobiDataset"(x, value)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: ggobiDataset
+
+   value: new names
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+

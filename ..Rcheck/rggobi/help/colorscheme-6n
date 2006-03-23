@@ -1,0 +1,27 @@
+colorscheme              package:rggobi              R Documentation
+
+_G_e_t _a_c_t_i_v_e _c_o_l_o_u_r _s_c_h_e_m_e
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Get name of the active colour scheme
+
+_U_s_a_g_e:
+
+     colorscheme(x)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: GGobi object
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
+     g <- ggobi(mtcars)
+     colorscheme(g)
+

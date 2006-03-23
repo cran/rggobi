@@ -1,0 +1,27 @@
+clean.ggobi              package:rggobi              R Documentation
+
+_C_l_e_a_n _g_g_o_b_i
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Clean arguments for ggobi
+
+_U_s_a_g_e:
+
+     clean.ggobi(x)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: vector
+
+_D_e_t_a_i_l_s:
+
+     Arguments for ggobi need to be in specific format. This function
+     helps ensure that.
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+

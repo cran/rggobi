@@ -1,0 +1,32 @@
+ggobi_set_data_frame         package:rggobi         R Documentation
+
+_S_e_t _d_a_t_a _f_r_a_m_e.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Add data.frame to ggobi instance.
+
+_U_s_a_g_e:
+
+     ggobi_set_data_frame(data, name = deparse(sys.call()[[2]]), description = paste("R data frame", name), id = rownames(data), .gobi = ggobi_get())
+
+_A_r_g_u_m_e_n_t_s:
+
+    data: data frame to add
+
+    name: data set name (appears on tabs in ggobi)
+
+description: description of data frame
+
+      id: rownames
+
+   .gobi: ggobi instance
+
+_D_e_t_a_i_l_s:
+
+_A_u_t_h_o_r(_s):
+
+     Hadley Wickham <h.wickham@gmail.com>
+
+_E_x_a_m_p_l_e_s:
+
