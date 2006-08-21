@@ -19,8 +19,10 @@ RS_INTERNAL_GGOBI(identifyHandler)(void *user_data, gint k, splotd *sp, GtkWidge
 USER_OBJECT_
 RS_GGOBI(setIdentifyHandler)(USER_OBJECT_ func, USER_OBJECT_ ggobiId)
 {
-  ggobid *gg = GGOBI_GGOBI(toGGobi(ggobiId));
+  ggobid *gg = toGGobi(ggobiId);
   USER_OBJECT_ ans = NULL_USER_OBJECT;
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
+  
 
   if(gg == NULL) {
       PROBLEM "Invalid ggobi identifier specified."
@@ -66,7 +68,7 @@ RS_INTERNAL_GGOBI(identifyHandler)(void *user_data, gint k, splotd *sp, GtkWidge
   SETCAR(CDR(e), tmp = NEW_INTEGER(1));
   INTEGER_DATA(tmp)[0] = k;
 
-  SETCAR(CDR(CDR(e)), RS_displayInstance(sp->displayptr, gg, -1));
+  SETCAR(CDR(CDR(e)), RS_displayInstance(sp->displayptr));
 
   eval(e, R_GlobalEnv); 
 

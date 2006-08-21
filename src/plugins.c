@@ -5,7 +5,8 @@ USER_OBJECT_
 RS_GGOBI(getPlugins)(USER_OBJECT_ gobiId)
 {
 
-  ggobid *gg = GGOBI_GGOBI(toGGobi(gobiId));
+  ggobid *gg = toGGobi(gobiId);
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
   USER_OBJECT_ ans, names;
   GList *tmp;
   gint n, i;

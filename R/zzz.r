@@ -26,19 +26,38 @@ ggobi_check_structs <- function() {
 
 	ok <- ours == theirs[which]
 	if(!all(ok)) {
-		warning("Some structs have different size: ", paste(names(ours)[!ok], collapse=", "), ". You may have an incompatible version of GGobi installed.")
+		warning("Some structs have different size: ", 
+      paste(paste(names(ours)[!ok], "(", ours[!ok], "!=", theirs[which][!ok], ")"), collapse=", "), 
+      ". You may have an incompatible version of GGobi installed.", .call=FALSE)
 		return(ok)
 	}
-
+  
 	TRUE
 }
 
+.check_versions <- function()
+{
+  versions <- c(rggobi = installed.packages()["rggobi", "Version"], 
+    ggobi = ggobi_version()$"version string")
+  ver_comp <- compareVersion(versions["rggobi"], versions["ggobi"])
+  if (ver_comp != 0) {
+    if (ver_comp < 0)
+      versions <- rev(versions)
+    warning("Your ", names(versions)[1], " (", versions[1], ") is newer than your ", 
+      names(versions)[2], " version (", versions[2], "). Please try to update your ", 
+      names(versions)[2], ".")
+  }
+  ver_comp == 0
+}
 
 .onLoad <- function(libname, pkgname) {
-	library(methods)
-	library.dynam("rggobi", pkgname, libname)
+#	library(methods)
+	result <- try(library.dynam("rggobi", pkgname, libname))
+  if (inherits(result, "try-error"))
+    stop("Could not load the rggobi library - please ensure GGobi is on the library path")
 
 	ggobi_check_structs()
-
+  .check_versions()
+  
 	TRUE
 }

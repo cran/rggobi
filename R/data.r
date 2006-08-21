@@ -1,25 +1,25 @@
-setOldClass("ggobiDataset")
+setOldClass("GGobiData")
 
 # Set data
 # ===================================================================
 
-# [<-.ggobi
+# [<-.GGobi
 # Add data to ggobi instance.
 # 
 # This function allows you to add (and eventually) replace
-# ggobi to a ggobi instance.  
+# GGobiData objects in a GGobi instance.  
 # 
 # @arguments ggobi instance
 # @arguments name of data frame
 # @arguments data.frame, or string to path of file to load
-# @alias $<-.ggobi
-# @returns ggobiDataset
+# @alias $<-.GGobi
+# @alias [[<-.GGobi
 # @keyword manip 
 #X g <- ggobi()
 #X g["a"] <- mtcars
 #X g$b <- mtcars
-"[<-.ggobi" <- function(x, i, value) {
-	if (inherits(value, "ggobiDataset")) return(x)
+"[<-.GGobi" <- function(x, i, value) {
+	if (inherits(value, "GGobiData")) return(x)
 	if (length(i) != 1) stop("You may only add or replace one dataset at a time")
 	replace <- (i %in% names(x))
 	if (replace) {
@@ -34,7 +34,7 @@ setOldClass("ggobiDataset")
 	}
 	x
 }
-"$<-.ggobi" <- function(x, i, value) {
+"[[<-.GGobi" <- "$<-.GGobi" <- function(x, i, value) {
   x[i] <- value
   x
 }
@@ -45,7 +45,7 @@ setOldClass("ggobiDataset")
 # @arguments mode of file
 # @arguments add?
 # @arguments ggobi instance
-# @returns ggobiDataset
+# @returns GGobiData
 # @keyword manip 
 # @keyword internal
 ggobi_set_data_file <- function(file, mode = "unknown", add = TRUE, .gobi = ggobi_get()) {
@@ -66,7 +66,7 @@ ggobi_set_data_file <- function(file, mode = "unknown", add = TRUE, .gobi = ggob
 # @arguments description of data frame
 # @arguments rownames
 # @arguments ggobi instance
-# @returns ggobiDataset
+# @returns GGobiData
 # @keyword manip 
 # @keyword internal
 ggobi_set_data_frame <- function(data, name = deparse(sys.call()[[2]]), description = paste("R data frame", name), id = rownames(data), .gobi = ggobi_get()) {
@@ -84,29 +84,6 @@ ggobi_set_data_frame <- function(data, name = deparse(sys.call()[[2]]), descript
 	.data
 }
 
-# Add variable
-# Add variable to a ggobiDataset
-# 
-# @alias addVariable
-# @arguments ggobiDataset
-# @arguments values to add
-# @arguments name of column to add
-# @keyword manip 
-addVariable.ggobiDataset <- function(x, vals, name, ...) {
-	if (!(is.factor(vals) || is.numeric(vals))) stop("Variable must be a factor or numeric")
-	if (length(vals) != nrow(x)) stop("Variable must be same length as existing data set")
-
-	levels <- NULL
-	values <- NULL
-
-	if(is.factor(vals)) {
-		levels <- summary(vals[!is.na(vals)])
-		values <- sort(unique(as.integer(vals)))
-	}
-
-	.GGobiCall("addVariable", as.numeric(vals), as.character(name), levels, values, x)
-}
-addVariable <- function(x, ...) UseMethod("addVariable", x)
 
 # Get data
 # ===================================================================
@@ -116,23 +93,21 @@ addVariable <- function(x, ...) UseMethod("addVariable", x)
 #
 # It is convenient to be able to refer to and operate on a ggobi 
 # dataset as if it were a regular R dataset.  This function allows one to
-# get an \code{ggobiDataset} object that represents a particular 
+# get an \code{GGobiData} object that represents a particular 
 # dataset. 
 # 
 # @arguments GGobi object
 # @arguments name of dataset to retrive
 # @keyword manip 
-# @alias [.ggobi
+# @alias [[.GGobi
+# @alias $.GGobi
 #X g <- ggobi(ChickWeight)
 #X g["cars"] <- mtcars
 #X g[1:2]
 #X g["ChickWeight"]
 #X g["cars"]
 #X g$cars
-"$.ggobi" <- function(x, i) {
-  x[i]
-}
-"[.ggobi" <- function(x, i, ..., drop=TRUE) {
+"[.GGobi" <- function(x, i, ..., drop=TRUE) {
 	d <- dataset(clean.ggobi(i), .gobi = x)
 	if (drop && length(d) == 1 ) {
 		d[[1]]
@@ -140,31 +115,31 @@ addVariable <- function(x, ...) UseMethod("addVariable", x)
 		d
 	}
 }
+"[[.GGobi" <- "$.GGobi" <- function(x, i) {
+  x[i]
+}
+
+# Generic method for getting dataset
+# @keyword internal 
+dataset <- function(x, .gobi = ggobi_get()) UseMethod("dataset", x)
 
 # Get ggobi dataset.
 # Get an object representing an internal ggobi dataset
 #
 # It is convenient to be able to refer to and operate on a ggobi 
 # dataset as if it were a regular R dataset.  This function allows one to
-# get an \code{ggobiDataset} object that represents a particular 
+# get an \code{GGobiData} object that represents a particular 
 # dataset. 
 # 
 # @arguments which dataset to retrieve, an integer for positional matching or a character to match by name
 # @arguments GGobi instance
-# @value A list of \code{ggobiDataset} objects
-# @seealso \code{link{.ggobi}} 
+# @value A list of \code{GGobiData} objects
+# @seealso \code{\link{$.GGobiData}} for user level selection of datasets
 # @keyword manip 
 # @keyword internal
-dataset <- function(which, .gobi = ggobi_get()) {
-	if (is.character(which)) {
-		id <- match(which, names(.gobi))
-		if (any(is.na(id))) {
-			stop(paste("Unrecognized dataset name", which[is.na(id)]))
-		}
-		which <- id
-	}
-
-	refs <- .GGobiCall("getDataset", as.integer(which-1), .gobi=.gobi)
+# @alias dataset.character
+dataset.numeric <- function(x, .gobi = ggobi_get()) {
+	refs <- .GGobiCall("getDataset", as.integer(x-1), .gobi=.gobi)
 
 	refs <- lapply(refs, function(x) {
 		if(is.null(x)) return() 
@@ -175,3 +150,22 @@ dataset <- function(which, .gobi = ggobi_get()) {
 
 	refs
 }
+dataset.character <- function(x, .gobi = ggobi_get()) {
+	id <- match(x, names(.gobi))
+	if (any(is.na(id))) {
+		stop(paste("Unrecognized dataset name", x[is.na(id)]))
+	}
+	
+	dataset(id, .gobi)
+}
+
+# Write xml
+# Write GGobi xml for specific dataset to filename
+#
+# @arguments GGobiData object
+# @arguments path to write file to
+# @keyword manip
+# ggobi_data_write_xml <- function (gd, filename) {
+# 	refs <- lapply(.data, dataset, .gobi)
+# 	.GGobiCall("writeDatasetsXML", gd, as.character(filename))
+# }

@@ -1,16 +1,18 @@
+ggobi <- function(data=NULL, ...) UseMethod("ggobi", data)
+
 # New ggobi
 # Creates a new ggobi instance
 # 
 # This function creates a new instance of GGobi with or without new data.  Use 
 # this function whenever you want to create a new GGobi indepdent of the 
 # others---they will not share linked plots.  If you want to add
-# another dataset to an existing ggobi, please see \code{\link{[<-.ggobi}}
+# another dataset to an existing ggobi, please see \code{\link{[<-.GGobi}}
 # 
 # There are currently three basic types of functions that you
 # can use with rggobi:
 # 
 # \itemize{
-#   \item Data getting and setting: see \code{\link{[.ggobi}}, and \code{\link{[.ggobiDataset}}
+#   \item Data getting and setting: see \code{\link{[.GGobi}}, and \code{\link{[.GGobiData}}
 #   \item "Automatic" brushing: see \code{\link{glyph_colour}}, 
 #     \code{\link{glyph_size}},  \code{\link{glyph_type}},
 #     \code{\link{shadowed}},    \code{\link{excluded}}, and the associated
@@ -20,8 +22,8 @@
 # }
 # 
 # You will generally spend most of your time working with 
-# \code{ggobDataset}s, you retrieve using \code{\link{$.ggobiDataset}}, 
-# \code{\link{[.ggobiDataset}}, or \code{\link{[[.ggobiDataset}}.
+# \code{ggobdata}s, you retrieve using \code{\link{$.GGobiData}}, 
+# \code{\link{[.GGobiData}}, or \code{\link{[[.GGobiData}}.
 # Most of the time these will operate like normal R datasets while
 # pointing to the data in GGobi so that all changes are kept in sync.  
 # If you need to force a ggobiDaataset to be an R \code{data.frame} use
@@ -34,21 +36,22 @@
 # @value A ggobi object 
 # @keyword dynamic 
 # @alias rggobi
-#X ggobi(ggobi.find.file("data", "flea.csv"))
-#X ggobi(ggobi.find.file("data", "flea.xml"))
+# @alias ggobi
+#X ggobi(ggobi_find_file("data", "flea.csv"))
+#X ggobi(ggobi_find_file("data", "flea.xml"))
 #X ggobi(mtcars)
 #X mtcarsg <- ggobi_get()$mtcars
 #X glyph_colour(mtcarsg)
 #X glyph_colour(mtcarsg) <- ifelse(mtcarsg$cyl < 4, 1, 2)
 #X glyph_size(mtcarsg) <- mtcarsg$cyl
-ggobi <- function(data, args=character(0), mode=character(0), name = deparse(sys.call()[[2]]), ...) {
+ggobi.default <- function(data, args=character(0), mode=character(0), name = deparse(sys.call()[[2]]), ...) {
 	
 	filename <- character(0)
 	if(!missing(data) && is.character(data) && file.exists(data)) {
 		filename <- path.expand(data)
 	}
 
-	args <- c(getwd(), "--keepalive", as.character(args), as.character(mode), filename)
+	args <- c(file.path(getwd(),"rggobi"), "--keepalive", as.character(args), as.character(mode), filename)
   
 	ok <- .Call(.ggobi.symbol("init"), args, TRUE, PACKAGE = "rggobi")
 
@@ -68,7 +71,7 @@ ggobi <- function(data, args=character(0), mode=character(0), name = deparse(sys
 # @keyword dynamic 
 #X g <- ggobi(mtcars)
 #X names(g)
-names.ggobi <- function(x) {
+names.GGobi <- function(x) {
  .GGobiCall("getDatasetNames", .gobi=x)
 }
 
@@ -94,10 +97,10 @@ clean.ggobi <- function(x) {
 # Prints summary of ggobi object by instance
 # 
 # @arguments ggobi object
-# @seealso \code{\link{summary.ggobi}}
+# @seealso \code{\link{summary.GGobi}}
 # @keyword dynamic 
 # @keyword internal 
-print.ggobi <- function(x, ...) {
+print.GGobi <- function(x, ...) {
 	print(summary(x))
 }
 
@@ -108,7 +111,7 @@ print.ggobi <- function(x, ...) {
 # @keyword dynamic 
 #X g <- ggobi(mtcars)
 #X summary(g)
-summary.ggobi <- function(object, ...) {
+summary.GGobi <- function(object, ...) {
   ans <- .GGobiCall("getDescription", .gobi = object)
 	if (is.null(ans)) return("Nothing known about this GGobi instance")
 	
@@ -128,12 +131,11 @@ summary.ggobi <- function(object, ...) {
 # @arguments ggobi object to close 
 # @arguments ignored and for compatability generic function.
 # @keyword dynamic 
-#
 #X g1 <- ggobi(mtcars)
 #X g2 <- ggobi(mtcars)
 #X close(g2)
 #X close(ggobi_get())
-close.ggobi <- function(con, ...) {
+close.GGobi <- function(con, ...) {
   ok <- .GGobiCall("close", .gobi = con)
   invisible(ok)
 }
@@ -165,7 +167,6 @@ ggobi_count <- function() {
 # @arguments numeric vector indicating which ggobi instances to retrieve.  Use default if none specified
 # @returns list of ggobi instances
 # @keyword dynamic 
-#
 #X ggobi(mtcars)
 #X ggobi(Nile)
 #X ggobi_get(1)
@@ -188,7 +189,6 @@ ggobi_get <- function(id = ggobi_count(), drop=TRUE) {
 # @value a vector of 3 integers containing the major, minor and patch-level numbers.
 # @value a string version of the major, minor and patch-level numbers,
 # @keyword dynamic 
-#
 #X ggobi_version()
 ggobi_version <- function() {
 	info <- .GGobiCall("getVersionInfo", .gobi=NULL)
@@ -204,8 +204,8 @@ ggobi_version <- function() {
 # @arguments bits of the path to join together
 # @keyword dynamic 
 # @keyword internal 
-#X ggobi.find.file("data","tips.xml")
-ggobi.find.file <- function(..., check = F) {
+#X ggobi_find_file("data","tips.xml")
+ggobi_find_file <- function(..., check = F) {
 	file <- .GGobiCall("ggobi_find_data_file", file.path(...))
 	if(check && !file.exists(file)) stop("Cannot find file ", file)
 	

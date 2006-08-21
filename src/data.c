@@ -9,9 +9,10 @@ USER_OBJECT_
 RS_GGOBI(setFile)(USER_OBJECT_ fileName, USER_OBJECT_ smode, USER_OBJECT_ add, USER_OBJECT_ gobiId)
 {
  DataMode mode;
- ggobid *gg = GGOBI_GGOBI(toGGobi(gobiId));
+ ggobid *gg = toGGobi(gobiId);
  USER_OBJECT_ ans = NEW_INTEGER(1);
  gchar *modeName = NULL;
+ g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
 
  if(IS_CHARACTER(smode))
 	 modeName = CHAR_DEREF(STRING_ELT(smode, 0));
@@ -33,7 +34,7 @@ RS_GGOBI(setFile)(USER_OBJECT_ fileName, USER_OBJECT_ smode, USER_OBJECT_ add, U
 USER_OBJECT_
 RS_GGOBI(getNumDatasets)(USER_OBJECT_ gobiID)
 {
- ggobid *gg  = GGOBI_GGOBI(toGGobi(gobiID));
+ ggobid *gg  = toGGobi(gobiID);
  USER_OBJECT_  ans = NEW_INTEGER(1);
     if(gg != NULL)
       INTEGER_DATA(ans)[0] = g_slist_length(gg->d);
@@ -49,12 +50,17 @@ USER_OBJECT_
 RS_GGOBI(getDatasetNames)(USER_OBJECT_ gobiId)
 {
   USER_OBJECT_ ans;
-  ggobid *gg = GGOBI_GGOBI(toGGobi(gobiId));  
+  ggobid *gg = toGGobi(gobiId);
   int i;
   GGobiData *d;
-  GSList *tmp = gg->d;
-  int n = g_slist_length(gg->d);
-
+  GSList *tmp;
+  int n;
+  
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);  
+  
+  tmp = gg->d;
+  n = g_slist_length(gg->d);
+  
   PROTECT(ans = NEW_CHARACTER(n));
   for(i = 0; i < n ; i++) {
     d =(GGobiData *) tmp->data;
@@ -77,7 +83,8 @@ RS_GGOBI(getData)(USER_OBJECT_ datasetId)
 
  ans = NULL_USER_OBJECT;
 
- d = GGOBI_DATA(toData(datasetId));
+ d = toData(datasetId);
+  g_return_val_if_fail(GGOBI_IS_DATA(d), NULL_USER_OBJECT);
  if (!d) return(NULL_USER_OBJECT);
 
  nr = d->nrows;
@@ -119,7 +126,7 @@ USER_OBJECT_
 RS_GGOBI(getDataset)(USER_OBJECT_ which, USER_OBJECT_ gobiID)
 {
   int i, n;
-  ggobid *gg  = GGOBI_GGOBI(toGGobi(gobiID));
+  ggobid *gg  = toGGobi(gobiID);
   USER_OBJECT_ ans = NULL_USER_OBJECT;
   if(gg == NULL)
     return(ans);
@@ -130,7 +137,7 @@ RS_GGOBI(getDataset)(USER_OBJECT_ which, USER_OBJECT_ gobiID)
     int val = INTEGER_DATA(which)[i];
     GGobiData *d = (GGobiData *) g_slist_nth_data(gg->d, val);
     if(d) {
-      SET_VECTOR_ELT(ans, i, RS_datasetInstance(d, gg));
+      SET_VECTOR_ELT(ans, i, RS_datasetInstance(d));
     }
   }
   UNPROTECT(1);

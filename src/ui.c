@@ -3,7 +3,7 @@
 /**
   This returns a raw pointer to the Gtk window object
   associated with the given display, which is given
-  as an S object of class ggobiDisplay.
+  as an S object of class GGobiDisplay.
  */
 USER_OBJECT_
 RS_GGOBI(getDisplayWindow)(USER_OBJECT_ display)
@@ -20,7 +20,7 @@ RS_GGOBI(getDisplayWindow)(USER_OBJECT_ display)
 
 /**
   Extracts a list of the splotd objects from the given displayd
-  given as an S object of class ggobiDisplay.
+  given as an S object of class GGobiDisplay.
   This returns the splotd objects as simple external pointers and 
   does not put a class on them.
  */
@@ -57,8 +57,9 @@ RS_GGOBI(getDisplayPlotWidgets)(USER_OBJECT_ display)
 
 USER_OBJECT_
 RS_GGOBI(getMainMenubar)(USER_OBJECT_ gobi) {
-  ggobid *gg = GGOBI_GGOBI(toGGobi(gobi));
+  ggobid *gg = toGGobi(gobi);
   USER_OBJECT_ ans = NULL_USER_OBJECT;
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
   if(gg)
     ans = toRPointer(gg->main_menubar, "GtkWidget");
   return(ans);
@@ -66,18 +67,19 @@ RS_GGOBI(getMainMenubar)(USER_OBJECT_ gobi) {
 
 USER_OBJECT_
 RS_GGOBI(getDisplayMenubar)(USER_OBJECT_ display, USER_OBJECT_ gobiId) {
-  displayd *dpy =  GetDisplay(display, gobiId, NULL);
+  displayd *dpy =  toDisplay(display);
   USER_OBJECT_ ans = NULL_USER_OBJECT;
-  if(dpy)
-    ans = toRPointer(dpy->menubar, "GtkWidget");
+  g_return_val_if_fail(GGOBI_IS_DISPLAY(dpy), NULL_USER_OBJECT);
+  ans = toRPointer(dpy->menubar, "GtkWidget");
   return(ans);
 }
 
 USER_OBJECT_
 RS_GGOBI(getMainWindow)(USER_OBJECT_ gobiId)
 {
-  ggobid *gg = GGOBI_GGOBI(toGGobi(gobiId));
+  ggobid *gg = toGGobi(gobiId);
   USER_OBJECT_ ans;
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
 
   ans = toRPointer(gg->main_window, "GtkWindow");
 

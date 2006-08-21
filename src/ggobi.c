@@ -15,8 +15,8 @@ extern __declspec(dllimport) void (*R_tcldo)();
 
 #include "R_ext/RS.h"
 
-extern void RS_GGOBI(event_handle)(void *data);
-void RS_GGOBI(limited_event_handle)(gint max);
+void RS_INTERNAL_GGOBI(event_handle)(void *data);
+void RS_INTERNAL_GGOBI(limited_event_handle)(gint max);
 
 /*XXX used to be R_IsNaNorNA, but no longer available for us.
       R_finite() excludes infinite values also. This is probably okay for now.
@@ -69,8 +69,12 @@ RS_GGOBI(init)(USER_OBJECT_ args, USER_OBJECT_ createInstance)
      c_args[i] = CHAR_DEREF(STRING_ELT(args, i));
    }
    if(LOGICAL_DATA(createInstance)[0]) {
+     ggobid *gg;
      which = GGOBI(main)(n, c_args, false);
-     ans = RS_ggobiInstance(ggobi_get(which-1));
+     gg = ggobi_get(which-1);
+     gtk_action_set_visible(gtk_ui_manager_get_action(gg->main_menu_manager, 
+      "/menubar/File/Quit"), false);
+     ans = RS_ggobiInstance(gg);
    } else {
       ggobiInit(&n, &c_args);
       ans = NEW_LOGICAL(1);
@@ -81,13 +85,14 @@ RS_GGOBI(init)(USER_OBJECT_ args, USER_OBJECT_ createInstance)
 #ifdef G_OS_WIN32 
    R_tcldo = R_gtk_handle_events;
 #else
+  if (!gdk_display)
+    error("GDK display not found - please make sure X11 is running");
   addInputHandler (R_InputHandlers, ConnectionNumber(gdk_display),
-                   RS_GGOBI(event_handle), -1);
+                   RS_INTERNAL_GGOBI(event_handle), -1);
 #endif
 
-	//registerErrorHandlers();
   GGobi_setMissingValueIdentifier(isMissingValue);
-	
+
   gdk_flush();    
 
   return(ans);
@@ -129,16 +134,16 @@ RS_GGOBI(getGGobi)(USER_OBJECT_ which)
    work correctly.
  */
 void
-RS_GGOBI(event_handle)(void *data)
+RS_INTERNAL_GGOBI(event_handle)(void *data)
 {
-  RS_GGOBI(limited_event_handle)(-1);
+  RS_INTERNAL_GGOBI(limited_event_handle)(-1);
 }
 
 /**
   Process max number of events and then terminate.
  */
 void
-RS_GGOBI(limited_event_handle)(gint max) {
+RS_INTERNAL_GGOBI(limited_event_handle)(gint max) {
   gint ctr = 0;
   gboolean block =  (max > -1);
 
@@ -178,19 +183,21 @@ RS_GGOBI(blockingLoop)(void)
 
 USER_OBJECT_
 RS_ggobiInstance(ggobid *gg) {
-	return(toRPointer(gg, "ggobi"));
+	return(toRPointer(gg, "GGobi"));
 }
 
 USER_OBJECT_
 RS_GGOBI(getDescription)(USER_OBJECT_ ggobiId)
 {
- ggobid *gg = GGOBI_GGOBI(toGGobi(ggobiId));
+ ggobid *gg = toGGobi(ggobiId);
  GGobiData *d;
  gint numSlots = 3, numDatasets, i;
  DataMode mode;
  USER_OBJECT_ ans, names, tmp;
  const gchar *tmpname;
 
+ g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
+ 
  if(gg == NULL) {
      RS_throwError("Invalid reference to GGobi instance");
  }
@@ -249,12 +256,12 @@ RS_GGOBI(isValid)(USER_OBJECT_ gobi)
 ggobid *
 toGGobi(USER_OBJECT_ s_ggobi)
 {
- if(inherits(s_ggobi, "ggobi")) {
+  if(inherits(s_ggobi, "GGobi")) {
     ggobid *gg;
     gg = ValidateGGobiRef(getPtrValue(s_ggobi), false);
     return(gg);
- }
-
+  }
+  g_critical("A GGobi R object must inherit from class 'GGobiGGobi'");
   return(NULL);
 }
 
@@ -267,8 +274,9 @@ RS_GGOBI(getNumGGobiInstances)(glong *ans)
 USER_OBJECT_
 RS_GGOBI(close)(USER_OBJECT_ gobi)
 {
-  ggobid *gg = GGOBI_GGOBI(toGGobi(gobi));
+  ggobid *gg = toGGobi(gobi);
   USER_OBJECT_ ans = NEW_LOGICAL(1);
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
   if(gg) {
     LOGICAL_DATA(ans)[0] = GGOBI(close)(gg, true);
     gdk_flush();
@@ -282,18 +290,18 @@ RS_GGOBI(close)(USER_OBJECT_ gobi)
   which is called when a window is deleted or explicitly
   closed.
  */
-void
+/*void
 quit_ggobi(ggobid *gg)
 {
   GGOBI(close)(gg, true);
-}
+}*/
 
 #ifdef G_OS_WIN32
 
 void
 R_gtk_handle_events()
 {
-  RS_GGOBI(limited_event_handle)(-1);
+  RS_INTERNAL_GGOBI(limited_event_handle)(-1);
 }
 #endif
 

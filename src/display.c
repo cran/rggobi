@@ -6,92 +6,7 @@
 #include "vars.h"
 
 USER_OBJECT_
-RS_GGOBI(newScatterplot)(USER_OBJECT_ variables, USER_OBJECT_ datasetId)
-{
- ggobid *gg;
- GGobiData *d;
- USER_OBJECT_ ans;
- displayd *display;
-
-  d = GGOBI_DATA(toData(datasetId));
-  gg = d->gg;
-
- display = GGOBI(newScatterplot)(INTEGER_DATA(variables)[0],
-                                 INTEGER_DATA(variables)[1],
-                                 d, gg);
- display_add(display, gg);  
- ans = RS_displayInstance(display, gg, -1);
-
- return (ans);
-}
-
-
-USER_OBJECT_
-RS_GGOBI(newParcoords)(USER_OBJECT_ variables, USER_OBJECT_ datasetId)
-{
- ggobid *gg;
- GGobiData *d; 
- displayd *display;
- USER_OBJECT_ ans;
- gint *ids, n, i;
-
-  d = GGOBI_DATA(toData(datasetId));
-  gg = d->gg;
- 
- n  = GET_LENGTH(variables);
-/*XXX make certain to free this. */
- ids = g_malloc0(n * sizeof (gint));
- for(i = 0; i < n; i++) 
-   ids[i] = INTEGER_DATA(variables)[i];
-
- display = GGOBI(newParCoords)(ids, n, d, gg);
- display_add(display, gg);  
- ans = RS_displayInstance(display, gg, -1);
-
- return (ans);
-}
-
-
-/*
-  Assumes the variables are specified in
-
- We want to add a general version that takes
- pairs of variables and generates the corresponding 
- plot for each of these pairs and then adds them to the
- scatter matrix.
-
- */
-USER_OBJECT_
-RS_GGOBI(newScatmat)(USER_OBJECT_ x, USER_OBJECT_ y, USER_OBJECT_ datasetId)
-{
-  ggobid *gg;
-  GGobiData *d;
-  displayd *display;
-  USER_OBJECT_ ans;
-  gint *rowIds, *colIds, nr, nc, i;
-
-  d = GGOBI_DATA(toData(datasetId));
-  gg = d->gg;
-
-  nr = GET_LENGTH(x);
-  nc = GET_LENGTH(y);
- 
-  rowIds = g_malloc0 (nr * sizeof (gint));
-  colIds = g_malloc0 (nc * sizeof (gint));
-  for (i = 0; i < nr; i++) 
-    rowIds[i] = INTEGER_DATA(x)[i];
-
-  for (i = 0; i < nc; i++) 
-    colIds[i] = INTEGER_DATA(y)[i];
-
-  display = GGOBI(newScatmat)(rowIds, colIds, nr, nc, d, gg);
-  display_add(display, gg);  
-  ans = RS_displayInstance(display, gg, -1);
-
-  return(ans);
-}
-USER_OBJECT_
-RS_GGOBI(createPlot)(USER_OBJECT_ stype, USER_OBJECT_ svars, USER_OBJECT_ datasetId)
+RS_GGOBI(createDisplay)(USER_OBJECT_ stype, USER_OBJECT_ svars, USER_OBJECT_ datasetId)
 {
   GGobiData *d;
   ggobid *gg;
@@ -99,10 +14,11 @@ RS_GGOBI(createPlot)(USER_OBJECT_ stype, USER_OBJECT_ svars, USER_OBJECT_ datase
   GType type;
   GGobiExtendedDisplayClass *klass;
 
-  d = GGOBI_DATA(toData(datasetId));
+  d = toData(datasetId);
+  g_return_val_if_fail(GGOBI_IS_DATA(d), NULL_USER_OBJECT);
   gg = d->gg;
 
-  type = (GType) NUMERIC_DATA(stype)[0];
+  type = g_type_from_name(asCString(stype));
   klass = GGOBI_EXTENDED_DISPLAY_CLASS(g_type_class_peek(type));
 
   if(!klass) {
@@ -115,68 +31,21 @@ RS_GGOBI(createPlot)(USER_OBJECT_ stype, USER_OBJECT_ svars, USER_OBJECT_ datase
      nvars = GET_LENGTH(svars);
      vars = g_malloc(sizeof(gint)*nvars);
      for(i = 0; i < nvars; i++)
-       vars[i] = INTEGER_DATA(svars)[i] - 1;
+       vars[i] = INTEGER_DATA(svars)[i];
      display = klass->createWithVars(false, nvars, vars, d, gg);
   } else if(klass->create)
      display = klass->create(false, NULL, d, gg);
 
   if(!display) {
-        PROBLEM "Couldn't create the display"
-	ERROR;
+    PROBLEM "Couldn't create the display"
+    ERROR;
   }
 
   display_add(display, gg);
 
-  return(RS_displayInstance(display, gg, -1));
-}
-
-USER_OBJECT_
-RS_GGOBI(createDisplay)(USER_OBJECT_ smissing, USER_OBJECT_ dataset)
-{
-  ggobid *gg;
-  GGobiData *data = NULL;
-  displayd *dpy;
-  USER_OBJECT_ ans;
-
-
-  data = GGOBI_DATA(toData(dataset));
-  gg = data->gg;
-
-  dpy = g_object_new(GGOBI_TYPE_EMBEDDED_DISPLAY, NULL);
-  display_set_values(dpy, data, gg);
-
-  display_add(dpy, gg);
-
-  ans = toRPointer(dpy, "GGobiDisplay");
-
-  return(ans);
-}
-
-USER_OBJECT_
-RS_GGOBI(setDisplayWidth)(USER_OBJECT_ newDims, USER_OBJECT_ displayId, USER_OBJECT_ ggobiID)
-{
- ggobid *gg; 
- displayd *dpy; 
- USER_OBJECT_ ans = NULL_USER_OBJECT;
-
- gg = GGOBI_GGOBI(toGGobi(ggobiID));
- dpy = GGOBI(getDisplay)(INTEGER_DATA(displayId)[0], gg);
-
- if(GGOBI_IS_WINDOW_DISPLAY(dpy)) {
-	windowDisplayd *wdpy = GGOBI_WINDOW_DISPLAY(dpy);
-    ans = NEW_INTEGER(2);
-    g_object_get(wdpy->window, "width", INTEGER_DATA(ans), "height", INTEGER_DATA(ans)+1, NULL);
-
-   if(GET_LENGTH(newDims)) {
-     gtk_widget_set_size_request(wdpy->window, INTEGER_DATA(newDims)[0], INTEGER_DATA(newDims)[1]);
-     gdk_flush();
-   }
- } else {
-   PROBLEM  "the specified ggobi display is not sizeable (it is embedded!)"
-   ERROR;
- }
-
- return(ans);
+  gdk_flush();
+  
+  return(RS_displayInstance(display));
 }
 
 /**
@@ -189,53 +58,30 @@ RS_GGOBI(setDisplayWidth)(USER_OBJECT_ newDims, USER_OBJECT_ displayId, USER_OBJ
 USER_OBJECT_
 RS_GGOBI(updateDisplay)(USER_OBJECT_ dpy, USER_OBJECT_ ggobiId)
 {
- USER_OBJECT_  ans = NEW_LOGICAL(1);
+  USER_OBJECT_ ans = NEW_LOGICAL(1);
   ggobid *gg;
   displayd *display;  
 
-  if((display = GetDisplay(dpy, ggobiId, &gg))) {
-      /*    ruler_ranges_set(display, sp, gg); */
-    display_tailpipe(display, FULL,  gg);
-    /*    displays_plot(NULL, FULL,  gg); */
-
-    /*
-      varpanel_refresh (display, gg);
-    */
-
-    gdk_flush();
-    LOGICAL_DATA(ans)[0] = TRUE;
-  }
+  gg = toGGobi(ggobiId);
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
+  display = toDisplay(dpy);
+  g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+  
+  display_tailpipe(display, FULL,  gg);
+  
+  LOGICAL_DATA(ans)[0] = TRUE;
   return(ans);
 }
 
-
-/*
-  Returns a string identifying the 
-  type of plots contained within a particular displayd
-  object.
-  (Note that this is not useful for programmatically created
-   plots with non-homegeneous types.)
- */
-SEXP
-RS_GGOBI(getDisplayType)(SEXP dpy, SEXP ggobiId)
+/* Ideally the GGobi would be a property of the display, allowing access
+  with RGtk2, but this is not so... */
+USER_OBJECT_
+RS_GGOBI(getGGobiForDisplay)(USER_OBJECT_ s_display)
 {
-  displayd *display;
-  const char *tmp;
-  SEXP ans, names;
-
-  display = GetDisplay(dpy, ggobiId, NULL);
-   
-  if(display) {
-     tmp = ggobi_display_title_label(display);
-     PROTECT(ans = NEW_CHARACTER(1));
-     PROTECT(names = NEW_CHARACTER(1));
-     SET_STRING_ELT(ans, 0, COPY_TO_USER_STRING(tmp));
-     //SET_STRING_ELT(names, 0, COPY_TO_USER_STRING(getDisplayTypeName(display)));
-     UNPROTECT(1);
-  } else 
-    ans = NULL_USER_OBJECT;
-
- return(ans);
+  displayd *display = toDisplay(s_display);
+  g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+  
+  return RS_ggobiInstance(display->ggobi);
 }
 
 /*
@@ -244,42 +90,36 @@ RS_GGOBI(getDisplayType)(SEXP dpy, SEXP ggobiId)
  */
 
 USER_OBJECT_
-RS_GGOBI(getNumPlotsInDisplay)(USER_OBJECT_ dpy, USER_OBJECT_ ggobiId)
+RS_GGOBI(getNumPlotsInDisplay)(USER_OBJECT_ dpy)
 {
   displayd *display;
-
+  gint len;
+  
   USER_OBJECT_ ans = NEW_INTEGER(1);
-  display = GetDisplay(dpy, ggobiId, NULL);
-  if(display) {
-   int len;
-      len = g_list_length(display->splots);
-      INTEGER_DATA(ans)[0] = len;
-  }
+  display = toDisplay(dpy);
+	g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+  len = g_list_length(display->splots);
+  INTEGER_DATA(ans)[0] = len;
 
- return(ans);
+  return(ans);
 }
 
 USER_OBJECT_
-RS_GGOBI(getDisplayOptions)(USER_OBJECT_ which, USER_OBJECT_ ggobiId)
+RS_GGOBI(getDisplayOptions)(USER_OBJECT_ which)
 {
-  ggobid *gg = GGOBI_GGOBI(toGGobi(ggobiId));
   USER_OBJECT_ ans, names;
   gint NumOptions = 8;
-  gint displayNum;
   DisplayOptions *options;
-
-  if(gg == NULL)
-    return(NULL_USER_OBJECT);
   
-  displayNum = INTEGER_DATA(which)[0];
-
-  options = GGOBI(getDisplayOptions)(displayNum, gg);
-  if (options == NULL) {
-    char error_buf[400];
-    sprintf(error_buf,
-	    "No display numbered %d", displayNum);
-    Rf_error(error_buf);  
+  if (GET_LENGTH(which) == 0)
+    options = GGOBI(getDefaultDisplayOptions)();
+  else {
+    displayd *display = toDisplay(which);
+    g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+    options = &(display->options);
   }
+  
+  g_return_val_if_fail(options != NULL, NULL_USER_OBJECT);
 
   PROTECT(ans = NEW_LOGICAL(NumOptions));
   PROTECT(names = NEW_CHARACTER(NumOptions));
@@ -328,38 +168,25 @@ RS_GGOBI(getDisplayOptions)(USER_OBJECT_ which, USER_OBJECT_ ggobiId)
 
  */
 USER_OBJECT_
-RS_GGOBI(setDisplayOptions)(USER_OBJECT_ which, USER_OBJECT_ values,
-                              USER_OBJECT_ ggobiId)
+RS_GGOBI(setDisplayOptions)(USER_OBJECT_ which, USER_OBJECT_ values)
 {
-  ggobid *gg = NULL;
-  gint displayNum, i;
+  gint i;
   DisplayOptions *options;
+  displayd *display = NULL;
   int apply = 0;
 
-  if(GET_LENGTH(ggobiId) == 0) {
-	  /* XXX */
+  g_return_val_if_fail(GET_LENGTH(values) == 8, NULL_USER_OBJECT);
+  
+  if(GET_LENGTH(which) == 0) {
      options = GGOBI(getDefaultDisplayOptions)();
   } else {
-     gg = GGOBI_GGOBI(toGGobi(ggobiId));
-     displayNum = INTEGER_DATA(which)[0];
-     options = GGOBI(getDisplayOptions)(displayNum, gg);
-
-     if(options == NULL) {
-	     char error_buf[400];
-	     sprintf(error_buf,
-		     "No display numbered %d", displayNum);
-	     Rf_error(error_buf);
-     }
+     display = toDisplay(which);
+     g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+     options = &(display->options);
+     g_return_val_if_fail(options != NULL, NULL_USER_OBJECT);
      apply = 1;
   }
-
-
-  if(GET_LENGTH(values) != 8) {
-    PROBLEM "Incorrect length %d for options", 
-	      GET_LENGTH(values)
-    ERROR;
-  }
-
+  
   i = 0;
   options->points_show_p = LOGICAL_DATA(values)[i++];
   options->axes_show_p = LOGICAL_DATA(values)[i++];
@@ -377,84 +204,234 @@ RS_GGOBI(setDisplayOptions)(USER_OBJECT_ which, USER_OBJECT_ values,
 */
 
   if(apply) {
-     displayd *display = GetDisplay(which, ggobiId, NULL);
-     if(display)
-      set_display_options(display, gg);
+    set_display_options(display, display->ggobi);
   }
 
   return (NULL_USER_OBJECT);
 }
 
-USER_OBJECT_
-RS_GGOBI(getDisplayDataset)(USER_OBJECT_ dpy, USER_OBJECT_ ggobiId)
+static void
+toggle_display_variables(displayd *display, USER_OBJECT_ vars, gboolean active)
 {
- displayd * display;
- ggobid *gg;
- USER_OBJECT_ ans;
+  gint i, j;
+  for (j = 0; j < 3; j++) {
+    USER_OBJECT_ varIds = VECTOR_ELT(vars, j);
+    for (i = 0; i < GET_LENGTH(varIds); i++) {
+      gint var = INTEGER_DATA(varIds)[i];
+      GtkWidget *wid = varpanel_widget_get_nth(j, var, display->d);
+      if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(wid)) == active) {
+        varsel(wid, &display->cpanel, display->current_splot, var, j, 
+          -1, 0, 0, 0, display->d, display->ggobi);
+      }
+    }
+  }
+}
 
-  display = GetDisplay(dpy, ggobiId, &gg);
-  if(display)
-    ans = RS_datasetInstance(display->d, gg);
-  else 
-    ans = NULL_USER_OBJECT;
+USER_OBJECT_
+RS_GGOBI(getDisplayVariables)(USER_OBJECT_ dpy)
+{
+  USER_OBJECT_ buttons, vars, ans;
+  static gchar *button_names[] = { "X", "Y", "Z" };
+  gint i;
+  
+  displayd *display = toDisplay(dpy);
+  
+  /* get the currently plotted variables */
+  gint *plotted_vars = g_new (gint, display->d->ncols);
+  gint nplotted_vars = GGOBI_EXTENDED_DISPLAY_GET_CLASS (display)->plotted_vars_get(
+    display, plotted_vars, display->d, display->ggobi);
+    
+  PROTECT(ans = NEW_LIST(2));
+  buttons = NEW_CHARACTER(nplotted_vars);
+  SET_VECTOR_ELT(ans, 1, buttons);
+  vars = NEW_INTEGER(nplotted_vars);
+  SET_VECTOR_ELT(ans, 0, vars);
+  
+  for (i = 0; i < nplotted_vars; i++) {
+    gint var = plotted_vars[i], j;
+    for (j = 0; j < G_N_ELEMENTS(button_names); j++) {
+      GtkWidget *wid = varpanel_widget_get_nth(j, var, display->d);
+      if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(wid)))
+        SET_STRING_ELT(buttons, i, mkChar(button_names[j]));
+    }
+    INTEGER_DATA(vars)[i] = var;
+  }
+  
+  UNPROTECT(1);
+  g_free(plotted_vars);
+  
   return(ans);
 }
 
-/* Does it make sense to deal with the 'id' since displays can be destroyed? */
+/*
+  Allows the R user to set the variables within a given display
+ */
 USER_OBJECT_
-RS_displayInstance(displayd *display, ggobid *gg, int which)
+RS_GGOBI(setDisplayVariables)(USER_OBJECT_ vars, USER_OBJECT_ varPrev, USER_OBJECT_ dpy)
 {
- USER_OBJECT_ ans, names, tmp;
+  displayd *display;
+  USER_OBJECT_ ans = NULL_USER_OBJECT;
 
-  PROTECT(ans = NEW_LIST(3));
-  PROTECT(names = NEW_CHARACTER(3));
-
-  SET_VECTOR_ELT(ans, 0, tmp = NEW_INTEGER(1));
-  if(which < 0) {
-    GList *l;
-     which = 0;
-     l = gg->displays;
-    while(l) {
-      if(l->data == display) {
-        which++;
-        break;
-      }
-      l = l->next;
-    }
-    if(which >= g_list_length(gg->displays)) {
-      which = -1;
-    }
-  }
-  INTEGER_DATA(tmp)[0] = which;
-  SET_STRING_ELT(names, 0, COPY_TO_USER_STRING("id"));
-
-  SET_VECTOR_ELT(ans, 1, toRPointer(display, "GGobiDisplay"));
-
-  SET_STRING_ELT(names, 1, COPY_TO_USER_STRING("ref"));
+  display = toDisplay(dpy);
+	g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
   
-  SET_VECTOR_ELT(ans, 2, RS_ggobiInstance(gg));
-  SET_STRING_ELT(names, 2, COPY_TO_USER_STRING("ggobi"));
+  /* If any of the requested variables AREN'T selected, select them */
+  toggle_display_variables(display, vars, false);
+  varpanel_refresh(display, display->ggobi);
+  /* If any of the obsolete variables ARE still selected, select (toggle) them */
+  toggle_display_variables(display, varPrev, true);
+  
+  /* refresh everything */
+  varpanel_refresh(display, display->ggobi);
+  display_tailpipe(display, FULL,  display->ggobi);
+  RS_INTERNAL_GGOBI(limited_event_handle)(-1); /* ensure display is redrawn */
+  
+  return(ans);
+}
 
-  PROTECT(tmp = NEW_CHARACTER(1));
-  SET_STRING_ELT(tmp, 0, COPY_TO_USER_STRING("ggobiDisplay"));
-  SET_CLASS(ans, tmp);
-  SET_NAMES(ans, names);
-  UNPROTECT(3);
+USER_OBJECT_
+RS_GGOBI(getDisplayDataset)(USER_OBJECT_ dpy)
+{
+ displayd * display;
+ USER_OBJECT_ ans;
 
+  display = toDisplay(dpy);
+	g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+  ans = RS_datasetInstance(display->d);
+  return(ans);
+}
+
+USER_OBJECT_
+RS_axesValueMatrix(displayd *display) 
+{
+  /* currently only works for Tour2D */
+  int n = display->t2d.nsubset, k, j;
+  vartabled *vt;
+  USER_OBJECT_ matrix;
+  
+  PROTECT(matrix = allocMatrix(REALSXP, n, 4));
+  for (k = 0; k < n; k++) {
+    j = display->t2d.subset_vars.els[k];
+    vt = vartable_element_get (j, display->d);
+    REAL(matrix)[k] = display->t2d.F.vals[0][j]; /* x coeff */
+    REAL(matrix)[k+n] = display->t2d.F.vals[1][j]; /* y coeff */
+    REAL(matrix)[k+2*n] = vt->lim.max - vt->lim.min; /* range */
+    REAL(matrix)[k+3*n] = j+1; /* variable index */
+  }
+  
+  UNPROTECT(1);
+  
+  return(matrix);
+}
+
+void
+RS_INTERNAL_GGOBI(getTourVectorsFromMode)(displayd *display, ProjectionMode mode, 
+  gdouble **x, gdouble **y)
+{
+  tour *t;
+  switch(mode) {
+    case TOUR1D:
+      t = &display->t1d;
+    break;
+    case TOUR2D:
+      t = &display->t2d;
+    break;
+    case TOUR2D3:
+      t = &display->t2d3;
+    break;
+    case COTOUR:
+      t = &display->tcorr1;
+    break;
+    default:
+      g_critical("Specified mode '%s' is not a tour", GGOBI(getPModeName)(mode));
+      return;
+  }
+  
+  *x = t->F.vals[0];
+  *y = NULL;
+  if (mode == COTOUR)
+    *y = display->tcorr2.F.vals[0];
+  else if (mode != TOUR1D)
+    *y = t->F.vals[1];
+}
+
+/* Expects a 2 column matrix with the X and Y coefficients for each var */
+USER_OBJECT_
+RS_GGOBI(setTourProjection)(USER_OBJECT_ s_display, USER_OBJECT_ s_mode_name,
+  USER_OBJECT_ matrix)
+{
+  displayd *display = toDisplay(s_display);
+  ProjectionMode mode = GGOBI(getPModeId)(asCString(s_mode_name));
+  gint k, n;
+  gdouble *x = NULL, *y = NULL;
+  
+  g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+  
+  RS_INTERNAL_GGOBI(getTourVectorsFromMode)(display, mode, &x, &y);
+  g_return_val_if_fail(x != NULL && y != NULL, NULL_USER_OBJECT);
+  
+  n = display->d->ncols;
+  for (k = 0; k < n; k++) {
+    x[k] = REAL(matrix)[k];
+    if (y)
+      y[k] = REAL(matrix)[k+n];
+  }
+  
+  display_tailpipe (display, FULL, display->ggobi);
+  varcircles_refresh (display->d, display->ggobi);
+  
+  return NULL_USER_OBJECT;
+}
+
+USER_OBJECT_
+RS_GGOBI(getTourProjection)(USER_OBJECT_ s_display, USER_OBJECT_ s_mode_name)
+{
+	displayd *display = toDisplay(s_display);
+  ProjectionMode mode = GGOBI(getPModeId)(asCString(s_mode_name));
+  gint k, n;
+  USER_OBJECT_ matrix;
+  gdouble *x = NULL, *y = NULL;
+  
+  g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL_USER_OBJECT);
+  
+  RS_INTERNAL_GGOBI(getTourVectorsFromMode)(display, mode, &x, &y);
+  g_return_val_if_fail(x != NULL && y != NULL, NULL_USER_OBJECT);
+  
+  n = display->d->ncols;
+  PROTECT(matrix = allocMatrix(REALSXP, n, 3));
+  for (k = 0; k < n; k++) {
+    vartabled *vt = vartable_element_get (k, display->d);
+    REAL(matrix)[k] = x[k]; /* x coeff */
+    if (y)
+      REAL(matrix)[k+n] = y[k]; /* y coeff */
+    REAL(matrix)[k+2*n] = vt->lim.max - vt->lim.min; /* range */
+  }
+  
+  UNPROTECT(1);
+  
+  return matrix;
+}
+
+USER_OBJECT_
+RS_displayInstance(displayd *display)
+{
+  USER_OBJECT_ ans;
+  ans = toRPointer(display, "GGobiDisplay");
   return(ans);
 }
 
 USER_OBJECT_ 
 RS_GGOBI(closeDisplay)(USER_OBJECT_ ref, USER_OBJECT_ ggobiId)
 {
-  ggobid *gg = GGOBI_GGOBI(toGGobi(ggobiId));
+  ggobid *gg = toGGobi(ggobiId);
   USER_OBJECT_ ans = NEW_LOGICAL(1);
   displayd *display;
+  g_return_val_if_fail(GGOBI_IS_GGOBI(gg), NULL_USER_OBJECT);
 
   if(!gg)
     return(ans);
 
-  display  = (displayd*) (long) NUMERIC_DATA(ref)[0];
+  display  = (displayd *) R_ExternalPtrAddr(ref); 
   display = ValidateDisplayRef(display, gg, false);
   if(display) {
     display_free(display, true, gg);
@@ -465,55 +442,15 @@ RS_GGOBI(closeDisplay)(USER_OBJECT_ ref, USER_OBJECT_ ggobiId)
   return(ans);
 }
 
-/* This function is of questionable use, since the user will always have
-   a display object before calling any display functions from R. The R wrapper
-   should send just the reference to the C side.
-*/
 displayd *
-GetDisplay(USER_OBJECT_ rdisplay, USER_OBJECT_ ggobiId, ggobid **setgg)
+toDisplay(USER_OBJECT_ rdisplay)
 {
- ggobid *gg;
- displayd *display = NULL;
-
-  gg = GGOBI_GGOBI(toGGobi(ggobiId));
-  if(gg == NULL)
-    return(NULL);
-
-  if(setgg)
-    *setgg = gg;
-
-  if(R_IS(rdisplay, "ggobiDisplay")) {
-    rdisplay = VECTOR_ELT(rdisplay, 1);   
-  } else if(IS_INTEGER(rdisplay)) {
-   display =  GGOBI(getDisplay)(INTEGER_DATA(rdisplay)[0], gg);
-  } 
-
-  if(IS_NUMERIC(rdisplay)) {
-     display  = (displayd*) (long) NUMERIC_DATA(rdisplay)[0];
-  } else if(TYPEOF(rdisplay) == EXTPTRSXP) {
-     display = (displayd *) R_ExternalPtrAddr(rdisplay);    
+  if(inherits(rdisplay, "GGobiDisplay")) {
+    displayd *display = getPtrValue(rdisplay);
+    g_return_val_if_fail(GGOBI_IS_DISPLAY(display), NULL);
+    g_return_val_if_fail(ValidateGGobiRef(display->ggobi, false) != NULL, NULL);
+    return(ValidateDisplayRef(display, display->ggobi, false));
   }
-
-  if(display) {
-    display = ValidateDisplayRef(display, gg, false);
-    if(!display)
-      display = GGOBI(getDisplay)(((long) NUMERIC_DATA(rdisplay)[0] - 1), gg);
-  }
-
- return(display);
-}
-
-/**
- Probably should be deprecated.
- */
-void
-RS_GGOBI(raiseDisplay)(glong *plotId, glong *numEls, glong *raiseOrIcon,
-  glong *up, glong *ggobiId)
-{
-  ggobid *gg = ggobi_get(*ggobiId);
-  gint i;
-
-  for (i = 0; i < *numEls; i++) {
-    plotId[i] = GGOBI(raiseWindow)(plotId[i], raiseOrIcon[0], up[0], gg);
-  }
+  g_critical("An R GGobi display object must inherit from class 'GGobiDisplay'");
+  return(NULL);
 }

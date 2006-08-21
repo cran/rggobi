@@ -8,7 +8,6 @@
 static R_CMethodDef cmethods[] = {
     CENTRY(getNumGGobiInstances, 1),
     CENTRY(flush, 0)
-//    CENTRY(removeVariables)
 
    , {NULL}
 };
@@ -28,7 +27,6 @@ static R_CallMethodDef callMethods[] =
    CENTRY(getActiveColorScheme, 1),
    CENTRY(setActiveColorScheme, 2),
 
-   CENTRY(setDisplayWidth, 3),
    CENTRY(setEdges, 5),
 
    CENTRY(getVariables, 3),
@@ -112,15 +110,10 @@ static R_CallMethodDef callMethods[] =
    CENTRY(setNumberedKeyHandler, 3),
    
    CENTRY(setVariableTypes, 4),
-   CENTRY(setAsTimeVariables, 4)  
-
-#if 0
-   ,
-   CENTRY(updateDisplay, 2),
-   CENTRY(createPlots, 6),
-   CENTRY(setPlotVariables, 4),
-   CENTRY(getDisplayType, 2)
-#endif
+   CENTRY(setAsTimeVariables, 4),
+   
+   CENTRY(getPModeNames, 1),
+   CENTRY(getIModeNames, 1)
 
    , {NULL}
 };
