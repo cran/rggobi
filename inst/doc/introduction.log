@@ -1,4 +1,4 @@
-This is pdfeTeXk, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2006.9.24)  4 DEC 2006 08:58
+This is pdfeTeXk, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2006.9.24)  9 DEC 2006 11:55
 entering extended mode
  file:line:error style messages enabled.
 **\nonstopmode \input /Users/hadley/ggobi/rggobi/inst/doc/introduction.tex
@@ -863,4 +863,4 @@ uesky/cm/cmtt10.pfb>{/opt/local/share/texmf-dist/fonts/enc/dvips/psnfss/8r.enc}
 are/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></opt/local/share/texmf-dis
 t/fonts/type1/urw/palatino/uplb8a.pfb></opt/local/share/texmf-dist/fonts/type1/
 urw/palatino/uplr8a.pfb>
-Output written on introduction.pdf (4 pages, 177699 bytes).
+Output written on introduction.pdf (4 pages, 177697 bytes).
