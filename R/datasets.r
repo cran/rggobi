@@ -18,7 +18,7 @@ print.GGobiData <- function(x, ...) {
 }
 
 # GGobiData dimensions
-# Retrieve the dimension of an ggobi dataset
+# Retrieve the dimension of a GGobiData
 # 
 # @arguments dataset
 # @keyword attribute
@@ -30,7 +30,7 @@ dim.GGobiData <- function(x) {
 }
 
 # GGobiData rows
-# Retrieve the number of row in an ggobi dataset
+# Retrieve the number of row in a GGobiData
 # 
 # @arguments dataset
 # @keyword attribute
@@ -38,7 +38,7 @@ dim.GGobiData <- function(x) {
 nrow.GGobiData <- function(d) dim(d)[2]
 
 # GGobiData columns
-# Retrieve the number of columns in an ggobi dataset
+# Retrieve the number of columns in a GGobiData
 # 
 # @arguments dataset
 # @keyword attribute
@@ -63,7 +63,7 @@ names.GGobiData <- function(x, ...) {
 # @keyword attribute
 # @keyword internal 
 "names<-.GGobiData" <- function(x, value) {
-	.GGobiCall("setVariableNames", as.integer(1:ncol(x) -1 ), as.character(value), x)
+	colnames(x) <- value
 	x
 }
 
@@ -78,7 +78,7 @@ names.GGobiData <- function(x, ...) {
 # @keyword internal 
 variable_index <- function(x, names) {
 	if(length(names) == 0) return(integer(0))
-	if(is.integer(names)) return(names)
+	#if(is.integer(names)) return(as.integer(names - 1))
 	if(is.numeric(names)) return(as.integer(names - 1))
 	if(is.character(names)) return(as.integer(match(names, names(x)) - 1))
 	
@@ -91,7 +91,7 @@ variable_index <- function(x, names) {
 }
 
 # Get row names
-# Get row names for a ggobiDataget
+# Get row names for a GGobiData
 # 
 # @arguments ggobiDataget
 # @arguments new names
@@ -108,19 +108,40 @@ rownames.GGobiData <- function(x) {
 # @arguments new names
 # @keyword attribute
 # @keyword internal 
+#X g <- ggobi(mtcars)
+#X df <- g[1]
+#X rownames(df)
+#X rownames(df) <- tolower(rownames(df))
+#X rownames(df)
 "rownames<-.GGobiData" <- function(x, value) {
-	.GGobiCall("setRowNames", as.character(value), as.integer(1:length(value) - 1), x)
+	dims <- dimnames(x)
+	stopifnot(length(x) == length(dims[1]))
+	dims[1] <- value
+	dimnames(x) <- dims
 	x
 }
 
 # Get dimension names
-# Get row and column names for a ggobiDataget
+# Get row and column names for a GGobiData
 # 
 # @arguments ggobiDataget
 # @keyword attribute
 # @keyword internal 
 dimnames.GGobiData <- function(x) {
   list(rownames.GGobiData(x), names(x))
+}
+
+# Set dim names
+# Set dim names for a GGobiData
+# 
+# @arguments GGobiData
+# @arguments new names
+# @keyword attribute
+# @keyword internal 
+"dimnames<-.GGobiData" <- function(x, value) {
+  .GGobiCall("setRowNames", as.character(value[[1]]), as.integer(1:length(value[[1]]) - 1), x)
+  .GGobiCall("setVariableNames", as.integer(1:ncol(x) -1 ), as.character(value[[2]]), x)
+  x
 }
 
 # Summarise GGobiData.
@@ -204,7 +225,11 @@ summary.GGobiData <- function(object, ...) {
 
 	# figure out if any new columns have been added and add them.
 	
-	data[i, j] <- value
+  if (missing(i))
+    data[,j] <- value
+  else if (missing(j))
+    data[i,] <- value
+  else data[i, j] <- value
 	for(var in unique(j)) {
 		x[[var]] <- data[[var]]
 	}

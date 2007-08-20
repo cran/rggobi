@@ -22,6 +22,7 @@ display <- function(x, ...) UseMethod("display", x)
 # @argments GGobiData object
 # @arguments projection mode to use
 # @arguments variables to display, see \code{\link{variables.GGobiDisplay}} for details
+# @arguments If TRUE, returns widget for use with RGtk2
 # @seealso \code{\link{ggobi_display_types}} for a list of display types
 # @keyword dynamic
 #X g <- ggobi(mtcars)
@@ -34,15 +35,17 @@ display <- function(x, ...) UseMethod("display", x)
 #X display(g[1], "2x1D Tour", list(X=c(1,2,3), Y=c(4,5,6)))
 #X } 
 #X display(g[1], "Scatterplot Matrix")
-display.GGobiData <- function(x, pmode="Scatterplot Display", vars=list(X=names(x)), ...) {
+display.GGobiData <- function(x, pmode="Scatterplot Display", vars=list(X=names(x)), embed=FALSE, ...) 
+{
 	type <- pmodes()[pmode]
 	vars <- variable_index(x, vars)
+  embed <- as.logical(embed)
 
-	d <- .GGobiCall("createDisplay", ggobi_display_make_type(type), vars$X, x)
+	d <- .GGobiCall("createDisplay", ggobi_display_make_type(type), vars$X, x, !embed)
 	if (type != pmode) {
 		pmode(d) <- pmode
 	}
-	variables(d) <- vars
+	#variables(d) <- vars
 	d
 }
 
@@ -73,9 +76,9 @@ variables <- function(x) UseMethod("variables", x)
 # @seealso \code{\link{variables<-.GGobiDisplay}} for examples
 variables.GGobiDisplay <- function(x) {
   vars <- .GGobiCall("getDisplayVariables", x, .gobi=ggobi(x))
-  # convert to names?
-  #vars[[1]] <- colnames(dataset(display))[vars[[1]] + 1]
-  split(vars[[1]]+1, factor(vars[[2]], levels = c("X", "Y", "Z")))
+
+  names(vars[[1]]) <- colnames(dataset(x))[vars[[1]] + 1]
+  split(vars[[1]] + 1, factor(vars[[2]], levels = c("X", "Y", "Z")))
 }
 
 # Set display variables 
@@ -93,14 +96,18 @@ variables.GGobiDisplay <- function(x) {
 # Generally, any invalid choices will be silently ignored.
 # 
 # @arguments GGobiDisplay object
-# @arguments list with x, y and z components
+# @arguments list with X, Y and Z components listing the variable indices to display, either as numeric position or character variable name
 # @keyword dynamic 
 #X g <- ggobi(mtcars)
 #X d <- display(g[1], "Parallel Coordinates Display")
 #X variables(d)
 #X variables(d) <- list(X=1:8)
+#X variables(d) <- list(X=c("mpg", "cyl"))
 #X variables(d)
 "variables<-.GGobiDisplay" <- function(x, value) {
+	stopifnot(is.list(value))
+	names(value) <- toupper(names(value))
+
 	d <- dataset(x)
 	prev_vars <- variable_index(d, variables(x))
 	new_vars <- variable_index(d, value)
