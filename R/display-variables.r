@@ -1,3 +1,4 @@
+# Display construction
 # Create a new display
 # 
 # @keyword internal 
@@ -38,25 +39,27 @@ display <- function(x, ...) UseMethod("display", x)
 display.GGobiData <- function(x, pmode="Scatterplot Display", vars=list(X=names(x)), embed=FALSE, ...) 
 {
 	type <- pmodes()[pmode]
-	vars <- variable_index(x, vars)
+	ivars <- variable_index(x, vars)
   embed <- as.logical(embed)
 
-	d <- .GGobiCall("createDisplay", ggobi_display_make_type(type), vars$X, x, !embed)
+	d <- .GGobiCall("createDisplay", ggobi_display_make_type(type), ivars$X, x, !embed)
 	if (type != pmode) {
 		pmode(d) <- pmode
 	}
-	#variables(d) <- vars
+  variables(d) <- vars
 	d
 }
 
 
 # Get variables
-# 
+# Get variable names from a container
+#
 # @keyword internal 
 variables <- function(x) UseMethod("variables", x)
 
 # Set variables
-# 
+# Set variable names in a container
+#
 # @keyword internal 
 "variables<-" <- function(x, value) UseMethod("variables<-", x)
 
@@ -112,6 +115,10 @@ variables.GGobiDisplay <- function(x) {
 	prev_vars <- variable_index(d, variables(x))
 	new_vars <- variable_index(d, value)
 
+  if (any(is.na(new_vars)))
+    stop("Variable(s) ", paste(value[is.na(new_vars)], collapse=", "), 
+      " not in dataset")
+  
   prev_vars <- mapply(setdiff, prev_vars, new_vars, SIMPLIFY=FALSE)
 
 	.GGobiCall("setDisplayVariables", new_vars, prev_vars, x, .gobi=ggobi(x))

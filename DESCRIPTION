@@ -1,6 +1,6 @@
 Package: rggobi
-Version: 2.1.7
-Date:    2007-09-28
+Version: 2.1.8
+Date:    2008-3-25
 Title:   Interface between R and GGobi
 Author:  Duncan Temple Lang <duncan@research.bell-labs.com>,
 	 Debby Swayne <dfs@research.att.com>,
@@ -15,4 +15,4 @@ License: BSD
 LazyData: true
 URL: http://www.ggobi.org/rggobi
 Acknowledgements: Di Cook, Nicholas Lewin-Koh, Xuejing Chen.
-Packaged: Sat Sep 29 17:35:50 2007; larman
+Packaged: Wed Mar 26 09:18:21 2008; hornik
