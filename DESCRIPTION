@@ -1,12 +1,12 @@
 Package: rggobi
-Version: 2.1.8-4
-Date:    2008-4-04
+Version: 2.1.9
+Date:    2008-5-1
 Title:   Interface between R and GGobi
 Author:  Duncan Temple Lang <duncan@research.bell-labs.com>,
 	 Debby Swayne <dfs@research.att.com>,
 	 Hadley Wickham <hadley@iastate.edu>,
 	 Michael Lawrence <lawremi@iastate.edu>
-Depends: R (>= 2.5.1), RGtk2, utils, methods
+Depends: R (>= 2.5.1), RGtk2, utils
 Suggests: reshape
 SystemRequirements: GGobi
 Maintainer: Hadley Wickham <hadley@iastate.edu>
@@ -15,4 +15,4 @@ License: BSD
 LazyData: true
 URL: http://www.ggobi.org/rggobi
 Acknowledgements: Di Cook, Nicholas Lewin-Koh, Xuejing Chen.
-Packaged: Fri Apr  4 10:09:28 2008; larman
+Packaged: Wed Apr 30 16:39:25 2008; larman
