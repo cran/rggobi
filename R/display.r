@@ -9,7 +9,7 @@ displays <- function(x) UseMethod("displays", x)
 # 
 # A display basically corresponds to a window in GGobi.  A display
 # may contain mutliple plots within it.  For example, the scatterplot
-# matrix contains $p \times p$ plots.
+# matrix contains $p * p$ plots.
 # 
 # Use this function to obtain a reference to a display (they are 
 # numbered in the order they are created) so you can change
@@ -100,8 +100,6 @@ length.GGobiDisplay <- function(x) {
 #X g <- ggobi(mtcars)
 #X ggobi_display_save_picture(displays(g)[[1]], "test.png")
 ggobi_display_save_picture <- function(display=displays(ggobi_get())[[1]], path="ggobi_display.png", filetype="png", plot.only = FALSE) {
-	if (!require("RGtk2")) stop("RGtk2 required to save windows images to disk", .call=FALSE)
-
 	display <- as.RGtkObject(display)	
 	if (plot.only) {
 		disp <- display$getChildren()[[2]]$getChildren()[[3]][["widget"]][["window"]]
