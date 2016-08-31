@@ -1,3 +1,8 @@
+Version 2.1.21
+--------------
+
+* Fix outstanding R CMD check errors.
+
 Version 2.1.20
 --------------
 

@@ -1,8 +1,8 @@
 94e9cdda510007aff84add1b2c8640ae *CHANGELOG
-635c3faff47f6753f5f1fcd212b7d3c5 *DESCRIPTION
-97d0ee1155716470969ebb7a5a7bf61a *LICENSE
-13ab7902c2936c98f2c6b7c1a0fe8f52 *NAMESPACE
-f9310bbf9a79c614fca017aa02941a4c *NEWS
+31b454882ff60a7a52ae78c7f0c82926 *DESCRIPTION
+3b7be12ddf537eb8b937bb5a32f5338c *LICENSE
+cf9388448dddd1537d9807431e601266 *NAMESPACE
+07feedd0473da86def41750321ac4c26 *NEWS
 31e2cd98eeda7f4291283eb65f333fb8 *R/call.r
 e616badb7b504b05dd5e8cf8c396c3c4 *R/colorSchemes.r
 67b755ab164360cf915047e55d9375a0 *R/data.r
@@ -15,7 +15,7 @@ d1cbd23ed6d93fb9c9735cf58d377e43 *R/edges.r
 016431cbe4912215fe3d98a44714ce0b *R/ggobi.r
 5a72bf383dc70b19f9d08ade74c46dbd *R/glyphs.r
 0385a8d7a3ced79fb573291ec9acdff9 *R/gtk.r
-a6789848d379dcf8d65147c2443e08cc *R/longitudinal.r
+ec32a099c3c6a9e48ed9afcebbd8ad6a *R/longitudinal.r
 05d4303c1e82e94d4de96ab0142f006c *R/next-version/PlotDescriptions.S
 db00eef69d6b55608dbd2d436c59f8c7 *R/next-version/brush.S
 bf0d3f8abdb413ea76c7594585a9d6f9 *R/next-version/brush.r
@@ -73,7 +73,7 @@ f30a8d133351067b9900de5617e7d0bd *man/ggobi-data-remove-variable-bv.rd
 7b8f7286efa79ad6191ef53d1faea3c7 *man/ggobi-default-20.rd
 6e41da3b42d33406603dfda5e5887a4c *man/ggobi-display-get-tour-projection-p0.rd
 289a0743a78817861abda9b8493d45d4 *man/ggobi-display-make-type-3r.rd
-f35e4062638be085923402a25acd0c54 *man/ggobi-display-save-picture-bw.rd
+521a7a81ef3e4a9a135cd5a4a86a22d0 *man/ggobi-display-save-picture-bw.rd
 01924bd093248cf37276b5762f1a77c5 *man/ggobi-display-set-tour-projection-2n.rd
 2dd4fbab3817f2c956b11d96c70e76d4 *man/ggobi-display-types-9g.rd
 5fdb5256486f272a53c33be5c25def60 *man/ggobi-find-file-fe.rd
@@ -123,7 +123,7 @@ b15a6fba1207a7edd8f9e2137dd9d5d2 *man/summary-GGobiData-mm.rd
 9c24f1b24c5c87b9940a4b8d482e3f3d *man/variables--1i.rd
 9f20ce466f432a36257e2c4ec505491e *man/variables-2n.rd
 5b9ea364220c39d4add9bade3d83638a *man/variables-GGobiDisplay-si.rd
-16fda3a440044a4820c1cb85606bfc47 *src/Makevars.in
+8714741b29d2bb4b78a671eb5a50f866 *src/Makevars.in
 a072d75110bada2a34f328d6613b3e6c *src/Makevars.win
 dc084c23e20ebc5f9f0fb30598a529fc *src/Makevars.win.in
 be32057fe503d87e729ca93a9a4bf424 *src/RSCommon.h
